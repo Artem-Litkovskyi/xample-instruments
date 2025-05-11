@@ -1,0 +1,13 @@
+.footer {
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--pane);
+}
+
+.footer * {
+    color: white;
+    opacity: 0.5;
+}

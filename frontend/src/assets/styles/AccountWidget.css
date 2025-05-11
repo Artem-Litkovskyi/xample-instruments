@@ -1,0 +1,13 @@
+.account-widget {
+    width: 25%;
+    text-align: right;
+}
+
+.account-widget a {
+    color: white;
+    opacity: 0.5;
+}
+
+.account-widget a + a {
+    margin-left: 25px;
+}
