@@ -1,6 +1,6 @@
 :root {
-  --bg: #303030;
-  --pane: #252525;
+  --color-bg: #303030;
+  --color-pane: #252525;
 }
 
 body {
@@ -12,11 +12,17 @@ body {
 }
 
 .content {
-  padding: 150px 50px;
-  background-color: var(--bg);
+  padding: 50px 10%;
+  background-color: var(--color-bg);
 }
 
-.pane {
+.content-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.content-grid div {
   border-radius: 5px;
 }
 
@@ -33,6 +39,7 @@ button {
   text-decoration: none;
   display: inline-block;
   height: 36px;
+  margin: 0.3em 0;
 }
 
 button.big {
@@ -41,16 +48,37 @@ button.big {
 
 h1 {
   font-size: 2em;
-  margin-block-start: 0;
-  margin-block-end: 1rem;
+  margin-block-start: 0.75rem;
+  margin-block-end: 0.75rem;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-block-start: 0.75rem;
+  margin-block-end: 0.75rem;
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
 
 p {
   font-size: 1em;
-  margin-block-start: 0;
-  margin-block-end: 1.5rem;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
   margin-inline-start: 0;
   margin-inline-end: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 650px) {
+  .content-grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: 1fr;
+  }
 }

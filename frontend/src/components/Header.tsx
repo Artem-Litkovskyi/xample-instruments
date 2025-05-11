@@ -12,7 +12,7 @@ function Header() {
                 <a href="/"> <img src={logo} className="logo" alt="logo" /> </a>
             </div>
 
-            <ul className="navBar">
+            <ul className="nav-bar">
                 <NavLink text="Home" href="/" active/>
                 <NavLink text="Products" href="/products"/>
                 <NavLink text="Support" href="/support"/>

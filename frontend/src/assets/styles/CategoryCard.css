@@ -1,0 +1,8 @@
+.category-card {
+    background-color: white;
+    color: black;
+}
+
+.category-card img {
+    object-fit: contain;
+}

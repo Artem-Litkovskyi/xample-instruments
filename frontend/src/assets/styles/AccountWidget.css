@@ -1,5 +1,5 @@
 .account-widget {
-    width: 25%;
+    display: inline-block;
     text-align: right;
 }
 

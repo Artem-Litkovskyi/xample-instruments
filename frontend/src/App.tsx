@@ -3,6 +3,7 @@ import logo from './assets/vector/logo.svg';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+import CategoryCard from "./components/CategoryCard";
 import './App.css';
 
 function App() {
@@ -13,18 +14,18 @@ function App() {
             <Hero title="Very Long New Plugin Name" subtitle="A new plugin with a very long name" href="" image_url="/logo512.png" />
 
             <div className="content">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
+                <div className="content-grid">
+                    <CategoryCard
+                        title="Discover instruments"
+                        href="/products?instruments"
+                        image_url="/logo512.png"
+                    />
+                    <CategoryCard
+                        title="Discover audio effects"
+                        href="/products?effects"
+                        image_url="/logo512.png"
+                    />
+                </div>
             </div>
 
             <Footer />
