@@ -1,17 +1,19 @@
-import React from 'react';
-import logo from './assets/vector/logo.svg';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
-import CategoryCard from "./components/CategoryCard";
-import './App.css';
+import React from "react";
 
-function App() {
+import HeaderAndFooter from "./HeaderAndFooter";
+import Hero from "../components/Hero";
+import CategoryCard from "../components/CategoryCard";
+
+
+function HomePage() {
     return (
-        <div className="App">
-            <Header />
-
-            <Hero title="Very Long New Plugin Name" subtitle="A new plugin with a very long name" href="" image_url="/logo512.png" />
+        <HeaderAndFooter>
+            <Hero
+                title="Very Long New Plugin Name"
+                subtitle="A new plugin with a very long name"
+                href="/"
+                image_url="/logo512.png"
+            />
 
             <div className="content">
                 <div className="content-grid">
@@ -27,10 +29,9 @@ function App() {
                     />
                 </div>
             </div>
-
-            <Footer />
-        </div>
-    );
+        </HeaderAndFooter>
+    )
 }
 
-export default App;
+
+export default HomePage;

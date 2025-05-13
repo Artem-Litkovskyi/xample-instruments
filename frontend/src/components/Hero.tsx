@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 import '../assets/styles/Hero.css';
 
 
@@ -9,7 +11,9 @@ function Hero(props: { title: string, subtitle: string, href: string, image_url:
             <div>
                 <h1>{props.title}</h1>
                 <p>{props.subtitle}</p>
-                <button>Learn more</button>
+                <Link to={props.href} className="button">
+                    <button>Learn more</button>
+                </Link>
             </div>
         </div>
     )

@@ -9,41 +9,7 @@ body {
   font-family: 'Jockey One', Tahoma, Verdana, sans-serif; font-size: 1.25em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.content {
-  padding: 50px 10%;
-  background-color: var(--color-bg);
-}
-
-.content-grid {
-  display: grid;
-  gap: 25px;
-  grid-template-columns: 1fr 1fr;
-}
-
-.content-grid div {
-  border-radius: 5px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-button {
-  border-radius: 100px;
-  border: none;
-  font-family: inherit; font-size: 1em;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  height: 36px;
-  margin: 0.3em 0;
-}
-
-button.big {
-  height: 40px;
 }
 
 h1 {
@@ -70,9 +36,48 @@ p {
   margin-inline-end: 0;
 }
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
 a {
   color: black;
   text-decoration: none;
+}
+
+a.button {
+  width: min-content;
+}
+
+button {
+  border-radius: 100px;
+  border: none;
+  font-family: inherit; font-size: 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  height: 36px;
+  margin: 0.3em 0;
+}
+
+button.big {
+  height: 40px;
+}
+
+.content {
+  padding: 50px 10%;
+  background-color: var(--color-bg);
+}
+
+.content-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.content-grid div {
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 650px) {

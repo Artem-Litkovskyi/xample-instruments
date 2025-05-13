@@ -1,7 +1,10 @@
 import React from 'react';
-import logo from '../assets/vector/logo.svg';
+import {Link} from "react-router-dom";
+
 import NavLink from './NavLink';
 import AccountWidget from './AccountWidget';
+import logo from '../assets/vector/logo.svg';
+
 import '../assets/styles/Header.css';
 
 
@@ -9,14 +12,16 @@ function Header() {
     return (
         <div className="header">
             <div className="logo-container">
-                <a href="/"> <img src={logo} className="logo" alt="logo" /> </a>
+                <Link to="/"> <img src={logo} alt="logo" /> </Link>
             </div>
 
-            <ul className="nav-bar">
-                <NavLink text="Home" href="/" active/>
-                <NavLink text="Products" href="/products"/>
-                <NavLink text="Support" href="/support"/>
-            </ul>
+            <nav>
+                <ul>
+                    <NavLink text="Home" href="/" active/>
+                    <NavLink text="Products" href="/products"/>
+                    <NavLink text="Support" href="/support"/>
+                </ul>
+            </nav>
 
             <AccountWidget />
         </div>

@@ -1,23 +1,23 @@
-.nav-bar {
+nav ul {
     display: inline-block;
     margin-block-start: 0;
     margin-block-end: 0;
     padding-inline-start: 0;
 }
 
-.nav-bar li {
+nav li {
     display: inline-block;
 }
 
-.nav-bar li + li {
+nav li + li {
     margin-left: 50px;
 }
 
-.nav-bar a {
+nav a {
     color: white;
 }
 
-.nav-bar span {
+nav span {
     display: block;
     background-color: white;
     width: 0;
@@ -25,16 +25,16 @@
     transition: width 0.2s;
 }
 
-.nav-bar span.active {
+nav span.active {
     width: 100%;
 }
 
-.nav-bar li:hover span {
+nav li:hover span {
     width: 100%;
 }
 
 @media screen and (max-width: 800px) {
-    .nav-bar li + li {
+    nav li + li {
         margin-left: 25px;
     }
 }
