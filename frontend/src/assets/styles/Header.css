@@ -21,6 +21,14 @@
     height: 100%;
 }
 
+.header nav a {
+    color: white;
+}
+
+.header nav span {
+    background-color: white;
+}
+
 @media screen and (max-width: 650px) {
     .header {
         padding: 0 5%;

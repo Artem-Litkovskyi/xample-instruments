@@ -1,6 +1,6 @@
 import React from "react";
 
-import NavLink from "./NavLink";
+import NavBar from "./NavBar";
 
 import '../assets/styles/NotFound.css';
 
@@ -9,13 +9,13 @@ function NotFound() {
     return (
         <div className="not-found">
             <h1>404 Not Found</h1>
-            <nav>
-                <ul>
-                    <NavLink text="Home" href="/"/>
-                    <NavLink text="Products" href="/products"/>
-                    <NavLink text="Support" href="/support"/>
-                </ul>
-            </nav>
+            <NavBar
+                navigation={[
+                    {name: "Home", href: "/"},
+                    {name: "Products", href: "/products"},
+                    {name: "Support", href: "/support"},
+                ]}
+            />
         </div>
     )
 }

@@ -7,29 +7,25 @@ nav ul {
 
 nav li {
     display: inline-block;
+    width: min-content;
 }
 
 nav li + li {
     margin-left: 50px;
 }
 
-nav a {
-    color: white;
-}
-
 nav span {
     display: block;
-    background-color: white;
     width: 0;
     height: 0.1em;
     transition: width 0.2s;
 }
 
-nav span.active {
+nav li a.active span {
     width: 100%;
 }
 
-nav li:hover span {
+nav li:hover a span {
     width: 100%;
 }
 

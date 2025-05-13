@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-import NavLink from './NavLink';
+import NavBar from './NavBar';
 import AccountWidget from './AccountWidget';
 import logo from '../assets/vector/logo.svg';
 
@@ -15,13 +15,13 @@ function Header() {
                 <Link to="/"> <img src={logo} alt="logo" /> </Link>
             </div>
 
-            <nav>
-                <ul>
-                    <NavLink text="Home" href="/" active/>
-                    <NavLink text="Products" href="/products"/>
-                    <NavLink text="Support" href="/support"/>
-                </ul>
-            </nav>
+            <NavBar
+                navigation={[
+                    {name: "Home", href: "/"},
+                    {name: "Products", href: "/products"},
+                    {name: "Support", href: "/support"},
+                ]}
+            />
 
             <AccountWidget />
         </div>
