@@ -50,6 +50,10 @@ a.button {
   width: min-content;
 }
 
+hr {
+  border: 1px solid white;
+}
+
 button {
   border-radius: 100px;
   border: none;

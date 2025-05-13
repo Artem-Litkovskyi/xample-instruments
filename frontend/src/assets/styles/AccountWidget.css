@@ -1,5 +1,9 @@
 .account-widget {
-    display: inline-block;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: right;
+    align-items: center;
     text-align: right;
 }
 
@@ -10,4 +14,46 @@
 
 .account-widget a + a {
     margin-left: 25px;
+}
+
+.dropdown button {
+    color: white;
+    opacity: 0.5;
+    background-color: transparent;
+}
+
+.dropdown button:hover {
+    background-color: var(--color-bg);
+}
+
+.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    right: -10px;
+    top: 100%;
+    background-color: black;
+    padding: 0 15px 10px 15px;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+.dropdown.open a, .dropdown.open button {
+    opacity: 1;
+}
+
+.dropdown-content hr:first-child {
+    margin-top: 0;
+}
+
+.dropdown-content a {
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--color-bg);
 }
