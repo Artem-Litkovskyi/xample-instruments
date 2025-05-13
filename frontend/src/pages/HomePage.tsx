@@ -11,7 +11,7 @@ function HomePage() {
             <Hero
                 title="Very Long New Plugin Name"
                 subtitle="A new plugin with a very long name"
-                href="/"
+                href="/product/0"
                 image_url="/logo512.png"
             />
 
@@ -19,12 +19,12 @@ function HomePage() {
                 <div className="content-grid">
                     <CategoryCard
                         title="Discover instruments"
-                        href="/products?instruments"
+                        href="/products/instruments"
                         image_url="/logo512.png"
                     />
                     <CategoryCard
                         title="Discover audio effects"
-                        href="/products?effects"
+                        href="/products/effects"
                         image_url="/logo512.png"
                     />
                 </div>

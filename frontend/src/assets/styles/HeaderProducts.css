@@ -1,0 +1,15 @@
+.header-products {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.header-products nav a {
+    color: black;
+}
+
+.header-products nav a span {
+    background-color: black;
+}

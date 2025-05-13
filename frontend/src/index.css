@@ -65,19 +65,30 @@ button.big {
   height: 40px;
 }
 
+.dock-top {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
 .content {
-  padding: 50px 10%;
+  padding: 75px 10%;
   background-color: var(--color-bg);
 }
 
 .content-grid {
   display: grid;
-  gap: 25px;
+  gap: 50px;
   grid-template-columns: 1fr 1fr;
 }
 
 .content-grid div {
   border-radius: 5px;
+}
+
+.content-grid div img {
+  width: 100%;
+  object-fit: contain;
 }
 
 @media screen and (max-width: 650px) {

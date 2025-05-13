@@ -7,7 +7,6 @@ nav ul {
 
 nav li {
     display: inline-block;
-    width: min-content;
 }
 
 nav li + li {

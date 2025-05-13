@@ -1,0 +1,23 @@
+.product-card {
+    background-color: var(--color-pane);
+}
+
+.product-card h2 {
+    color: white;
+}
+
+.product-card p {
+    color: white;
+    opacity: 0.5;
+}
+
+.product-card div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.product-card button {
+    width: 6em;
+}
