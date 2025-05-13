@@ -11,11 +11,18 @@
     opacity: 0.5;
 }
 
+.product-card span {
+    font-size: 1.5em;
+    color: white;
+}
+
 .product-card div {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
+    margin-bottom: 10px;
 }
 
 .product-card button {

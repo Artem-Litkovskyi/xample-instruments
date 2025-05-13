@@ -19,7 +19,7 @@ function ProductCard(params: {
                 <h2>{params.title}</h2>
                 <p>{params.subtitle}</p>
                 <div>
-                    <h2>${Math.floor(params.price/100)}.{("0" + String(params.price%100)).slice(-2)}</h2>
+                    <span>${Math.floor(params.price/100)}.{("0" + String(params.price%100)).slice(-2)}</span>
                     <Link to={params.buy_href}>
                         <button>Buy</button>
                     </Link>
