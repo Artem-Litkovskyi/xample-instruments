@@ -12,6 +12,15 @@ form div {
     grid-template-columns: auto 60%;
 }
 
+.form-group label {
+    margin-block-start: 0;
+    margin-block-end: 0.5rem;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
 .form-group input {
     border: none;
     border-radius: var(--radius);
@@ -28,15 +37,7 @@ form div {
     border: 2px solid red;
 }
 
-.form-group label {
-    margin-block-start: 0;
-    margin-block-end: 0.5rem;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    grid-column-start: 1;
-    grid-row-start: 1;
-}
-
+/*Validation message*/
 .form-group span {
     text-align: center;
     font-size: 0.75em;
@@ -58,6 +59,7 @@ form div {
     color: red;
 }
 
+/*Bottom text and button*/
 form p {
     flex-shrink: 2;
 }

@@ -1,10 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 
 import HeaderAndFooter from "./HeaderAndFooter";
+import ValidatedInput, {ValidatedInputState} from "../components/ValidatedInput";
 
 
 function SignInPage() {
+    const [fields, setFields] = useState({email:"", password:""});
+    const [formState, setFormState] = useState(ValidatedInputState.Initial);
+
+    const handleChange = (event: any) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setFields(fields => ({...fields, [name]: value}));
+        setFormState(ValidatedInputState.Initial);
+    }
+
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
+        setFormState(ValidatedInputState.Invalid);
+        alert(fields);
+        // TODO: send to server
+    }
+
     return (
         <HeaderAndFooter>
             <div className="content narrow">
@@ -12,20 +30,29 @@ function SignInPage() {
                     <div>
                         <h2>Sign in</h2>
 
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="email">Email:</label>
-                                <input type="text" id="email" name="email"/>
-                            </div>
+                        <form
+                            onSubmit={handleSubmit}
+                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                        >
+                            <ValidatedInput
+                                label="Email:" type="text" id="email" value={fields.email}
+                                onChange={handleChange}
+                                ruleMessage="Wrong email or password"
+                                alwaysShowRule={false}
+                                state={formState}
+                            />
 
-                            <div className="form-group">
-                                <label htmlFor="password">Password:</label>
-                                <input type="password" id="password" name="password"/>
-                            </div>
+                            <ValidatedInput
+                                label="Password:" type="password" id="password" value={fields.password}
+                                onChange={handleChange}
+                                ruleMessage="Wrong email or password"
+                                alwaysShowRule={false}
+                                state={formState}
+                            />
 
                             <div>
                                 <p></p>
-                                <button className="button gray">Sign in</button>
+                                <button type="submit" className="button gray">Sign in</button>
                             </div>
 
                             <hr />

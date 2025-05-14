@@ -40,6 +40,7 @@ function SignUpPage() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         alert(fields);
+        // TODO: send to server
     }
 
     return (
@@ -87,7 +88,7 @@ function SignUpPage() {
 
                             <div>
                                 <p aria-hidden={true}></p>
-                                <button className="button gray">Sign up</button>
+                                <button type="submit" className="button gray">Sign up</button>
                             </div>
 
                             <hr />

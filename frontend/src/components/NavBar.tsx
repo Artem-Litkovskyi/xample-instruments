@@ -15,7 +15,7 @@ function NavBar(props: { navigation: NavBarItem[] }) {
         <nav>
             <ul>
                 {props.navigation.map((item: NavBarItem) => (
-                    <li>
+                    <li key={item.name}>
                         <NavLink
                             to={item.href}
                             className={({isActive}) => isActive ? "active" : undefined}
