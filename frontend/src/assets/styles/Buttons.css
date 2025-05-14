@@ -1,0 +1,51 @@
+/*Button buttons*/
+button {
+    border-radius: 2em;
+    border: none;
+    font-family: inherit; font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    height: 2em;
+    margin: 0.3em 0;
+    padding: 0.25em 1.5em;
+}
+
+button.dark {
+    background-color: black;
+    color: white;
+}
+
+button.light {
+    background-color: white;
+    color: black;
+}
+
+button.gray {
+    background-color: var(--color-bg);
+    color: white;
+}
+
+/*Link buttons*/
+a.button {
+    display: inline-block;
+    width: fit-content;
+    border-radius: 2em;
+    margin: 0.3em 0;
+    padding: 0.25em 1.5em;
+}
+
+a.button.dark {
+    background-color: black;
+    color: white;
+}
+
+a.button.light {
+    background-color: white;
+    color: black;
+}
+
+a.button.gray {
+    background-color: var(--color-bg);
+    color: white;
+}

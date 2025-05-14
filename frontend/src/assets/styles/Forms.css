@@ -1,0 +1,40 @@
+form div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    margin: 10px 0;
+}
+
+form input {
+    width: 60%;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit; font-size: 1em;
+}
+
+form label {
+    margin-block-start: 0;
+    margin-block-end: 0.5rem;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
+form p {
+    flex-shrink: 2;
+}
+
+form a {
+    flex-shrink: 0;
+}
+
+@media screen and (max-width: 650px) {
+    form div.form-group {
+        flex-direction: column;
+    }
+
+    form input, form label {
+        width: 100%;
+    }
+}

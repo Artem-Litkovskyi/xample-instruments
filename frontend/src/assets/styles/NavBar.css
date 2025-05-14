@@ -1,3 +1,7 @@
+nav {
+    text-align: center;
+}
+
 nav ul {
     display: inline-block;
     margin-block-start: 0;

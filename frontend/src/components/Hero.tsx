@@ -11,9 +11,7 @@ function Hero(props: { title: string, subtitle: string, href: string, image_url:
             <div>
                 <h1>{props.title}</h1>
                 <p>{props.subtitle}</p>
-                <Link to={props.href} className="button">
-                    <button>Learn more</button>
-                </Link>
+                <Link to={props.href} className="button dark">Learn more</Link>
             </div>
         </div>
     )

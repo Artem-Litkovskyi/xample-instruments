@@ -5,8 +5,13 @@ import {createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProductsPage from "./pages/ProductsPage";
+import SignInPage from "./pages/SignInPage";
 
 import './index.css';
+import './assets/styles/Buttons.css';
+import './assets/styles/Text.css';
+import './assets/styles/Panels.css';
+import './assets/styles/Forms.css';
 
 
 const router = createBrowserRouter([
@@ -22,6 +27,10 @@ const router = createBrowserRouter([
     {
         path: '/products/:category',
         element: <ProductsPage />,
+    },
+    {
+        path: '/signin',
+        element: <SignInPage />,
     }
 ]);
 

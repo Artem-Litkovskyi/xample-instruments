@@ -27,12 +27,6 @@
     margin-block-end: 0;
 }
 
-.hero button {
-    background: black;
-    color: white;
-    width: 8em;
-}
-
 @media screen and (max-width: 800px) {
     .hero div {
         position: relative;

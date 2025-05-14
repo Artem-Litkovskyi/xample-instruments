@@ -10,22 +10,27 @@ function ProductCard(params: {
     price: number,
     href: string,
     buy_href: string,
-    image_url: string
+    image_url: string,
+    purchased: boolean,
 }) {
     return (
-        <div className="product-card">
-            <Link to={params.href}>
+        <Link to={params.href}>
+            <div className="product-card panel dark">
                 <img src={params.image_url} alt='category' />
-                <h2>{params.title}</h2>
-                <p>{params.subtitle}</p>
                 <div>
-                    <span>${Math.floor(params.price/100)}.{("0" + String(params.price%100)).slice(-2)}</span>
-                    <Link to={params.buy_href}>
-                        <button>Buy</button>
-                    </Link>
+                    <h2>{params.title}</h2>
+                    <p>{params.subtitle}</p>
+                    <div id="price-and-buy">
+                        <span>${Math.floor(params.price/100)}.{("0" + String(params.price%100)).slice(-2)}</span>
+                        {params.purchased ? (
+                            <p>Purchased</p>
+                        ) : (
+                            <Link to={params.buy_href} className="button light">Buy</Link>
+                        )}
+                    </div>
                 </div>
-            </Link>
-        </div>
+            </div>
+        </Link>
     )
 }
 

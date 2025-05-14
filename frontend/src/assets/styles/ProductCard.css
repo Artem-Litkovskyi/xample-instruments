@@ -1,30 +1,25 @@
 .product-card {
-    background-color: var(--color-pane);
-}
-
-.product-card h2 {
-    color: white;
+    background-color: var(--color-panel);
+    height: 100%;
+    text-align: center;
 }
 
 .product-card p {
-    color: white;
     opacity: 0.5;
 }
 
 .product-card span {
     font-size: 1.5em;
-    color: white;
 }
 
-.product-card div {
+div#price-and-buy {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
-    margin-bottom: 10px;
 }
 
-.product-card button {
-    width: 6em;
+div#price-and-buy p {
+    margin: 0;
 }

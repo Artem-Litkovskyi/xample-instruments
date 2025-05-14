@@ -23,7 +23,7 @@ function Header() {
                 ]}
             />
 
-            <AccountWidget loggedIn={true} />
+            <AccountWidget loggedIn={false} />
         </div>
     )
 }

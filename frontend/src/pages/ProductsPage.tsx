@@ -17,6 +17,7 @@ function ProductsPage() {
                         href="/product/0"
                         buy_href="/product/0"
                         image_url="/logo512.png"
+                        purchased={false}
                     />
                     <ProductCard
                         title="Quieth1"
@@ -25,6 +26,7 @@ function ProductsPage() {
                         href="/product/1"
                         buy_href="/product/1"
                         image_url="/logo512.png"
+                        purchased={true}
                     />
                     <ProductCard
                         title="Omniwheel"
@@ -33,6 +35,7 @@ function ProductsPage() {
                         href="/product/2"
                         buy_href="/product/2"
                         image_url="/logo512.png"
+                        purchased={false}
                     />
                 </div>
             </div>

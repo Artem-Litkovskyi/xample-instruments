@@ -1,72 +1,16 @@
 :root {
   --color-bg: #303030;
-  --color-pane: #252525;
+  --color-panel: #252525;
+  --radius: 5px;
 }
 
 body {
   margin: 0;
+  box-sizing: border-box;
   background-color: black;
   font-family: 'Jockey One', Tahoma, Verdana, sans-serif; font-size: 1.25em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
-
-h1 {
-  font-size: 2em;
-  margin-block-start: 0.75rem;
-  margin-block-end: 0.75rem;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-}
-
-h2 {
-  font-size: 1.5em;
-  margin-block-start: 0.75rem;
-  margin-block-end: 0.75rem;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-}
-
-p {
-  font-size: 1em;
-  margin-block-start: 1rem;
-  margin-block-end: 1rem;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-
-a.button {
-  width: min-content;
-}
-
-hr {
-  border: 1px solid white;
-}
-
-button {
-  border-radius: 100px;
-  border: none;
-  font-family: inherit; font-size: 1em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  height: 36px;
-  margin: 0.3em 0;
-}
-
-button.big {
-  height: 40px;
 }
 
 .dock-top {
@@ -80,19 +24,18 @@ button.big {
   background-color: var(--color-bg);
 }
 
+.content.narrow {
+  padding: 75px 20%;
+}
+
 .content-grid {
   display: grid;
   gap: 50px;
   grid-template-columns: 1fr 1fr;
 }
 
-.content-grid div {
-  border-radius: 5px;
-}
-
-.content-grid div img {
-  width: 100%;
-  object-fit: contain;
+hr {
+  border: 1px solid white;
 }
 
 @media screen and (max-width: 650px) {
@@ -100,5 +43,9 @@ button.big {
     display: grid;
     gap: 25px;
     grid-template-columns: 1fr;
+  }
+
+  .content.narrow {
+    padding: 75px 10%;
   }
 }
