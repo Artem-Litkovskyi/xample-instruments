@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProductsPage from "./pages/ProductsPage";
 import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 import './index.css';
 import './assets/styles/Buttons.css';
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     {
         path: '/signin',
         element: <SignInPage />,
+    },
+    {
+        path: '/signup',
+        element: <SignUpPage />,
     }
 ]);
 

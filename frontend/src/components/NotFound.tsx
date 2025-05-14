@@ -7,7 +7,7 @@ import '../assets/styles/NotFound.css';
 
 function NotFound() {
     return (
-        <div className="not-found">
+        <div className="not-found panel light">
             <h1>404 Not Found</h1>
             <NavBar
                 navigation={[

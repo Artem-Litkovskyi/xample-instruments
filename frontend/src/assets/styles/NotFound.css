@@ -1,22 +1,20 @@
 .not-found {
-    background-color: white;
-    border-radius: 5px;
     padding: 50px 10%;
     margin: auto 0;
     text-align: left;
 }
 
+.not-found nav {
+    width: fit-content;
+}
+
 .not-found nav li {
     display: block;
-    width: min-content;
+    width: fit-content;
 }
 
 .not-found nav li + li {
     margin-left: 0;
-}
-
-.not-found nav a {
-    color: black;
 }
 
 .not-found nav span {

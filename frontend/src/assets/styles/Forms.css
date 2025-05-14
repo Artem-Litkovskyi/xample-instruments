@@ -7,18 +7,55 @@ form div {
     margin: 10px 0;
 }
 
-form input {
-    width: 60%;
+.form-group {
+    display: grid;
+    grid-template-columns: auto 60%;
+}
+
+.form-group input {
     border: none;
     border-radius: var(--radius);
     font-family: inherit; font-size: 1em;
+    grid-column-start: 2;
+    grid-row-start: 1;
 }
 
-form label {
+.form-group input.valid {
+    border: 2px solid green;
+}
+
+.form-group input.invalid {
+    border: 2px solid red;
+}
+
+.form-group label {
     margin-block-start: 0;
     margin-block-end: 0.5rem;
     margin-inline-start: 0;
     margin-inline-end: 0;
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
+.form-group span {
+    text-align: center;
+    font-size: 0.75em;
+    margin-top: 5px;
+    color: red;
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.form-group span.rule {
+    opacity: 0.5;
+}
+
+.form-group span.valid {
+    color: green;
+}
+
+.form-group span.invalid {
+    color: red;
 }
 
 form p {
@@ -30,8 +67,20 @@ form a {
 }
 
 @media screen and (max-width: 650px) {
-    form div.form-group {
-        flex-direction: column;
+
+    .form-group {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .form-group input {
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+
+    .form-group span {
+        grid-column-start: 1;
+        grid-row-start: 3;
     }
 
     form input, form label {
