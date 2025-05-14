@@ -6,11 +6,22 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
   box-sizing: border-box;
   background-color: black;
   font-family: 'Jockey One', Tahoma, Verdana, sans-serif; font-size: 1.25em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+#root > div {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .dock-top {
@@ -21,6 +32,7 @@ body {
 
 .content {
   padding: 75px 10%;
+  flex-grow: 1;  /*Make it expand to fill the empty space*/
   background-color: var(--color-bg);
 }
 
