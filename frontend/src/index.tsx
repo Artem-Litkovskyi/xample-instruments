@@ -9,6 +9,7 @@ import ProductsPage from "./pages/ProductsPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import AccountPage from "./pages/AccountPage";
+import AccountSettingsPage from "./pages/AccountSettingsPage";
 
 import './index.css';
 import './assets/styles/Buttons.css';
@@ -50,6 +51,16 @@ const router = createBrowserRouter([
             {
                 path: 'account',
                 element: <AccountPage />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to='settings' replace />,
+                    },
+                    {
+                        path: 'settings',
+                        element: <AccountSettingsPage />,
+                    },
+                ]
             },
         ]
     }

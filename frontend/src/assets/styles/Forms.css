@@ -21,6 +21,7 @@ form div {
     grid-row-start: 1;
 }
 
+/*Validation input styles*/
 .form-group input {
     border: none;
     border-radius: var(--radius);
@@ -66,6 +67,10 @@ form p {
 
 form a {
     flex-shrink: 0;
+}
+
+form hr {
+    margin: 20px 0;
 }
 
 @media screen and (max-width: 650px) {
