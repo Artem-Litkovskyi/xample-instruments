@@ -71,66 +71,64 @@ function AccountSettingsPage() {
 
 
     return (
-        <div className="panel dark">
-            <div>
-                <form
-                    onSubmit={handleSubmit}
-                    onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                >
-                    <h2>Personal information</h2>
+        <div className="panel dark padded">
+            <form
+                onSubmit={handleSubmit}
+                onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+            >
+                <h2>Personal information</h2>
 
-                    <ValidatedInput
-                        label="Username:" type="text" id="username" value={fields.username}
-                        onChange={handleChange} onBlur={handleBlur}
-                        ruleMessage="Username can't be empty"
-                        alwaysShowRule={false}
-                        state={states.username}
-                    />
+                <ValidatedInput
+                    label="Username:" type="text" id="username" value={fields.username}
+                    onChange={handleChange} onBlur={handleBlur}
+                    ruleMessage="Username can't be empty"
+                    alwaysShowRule={false}
+                    state={states.username}
+                />
 
-                    <ValidatedInput
-                        label="Email:" type="text" id="email" value={fields.email}
-                        onChange={handleChange} onBlur={handleBlur}
-                        ruleMessage={emailErrorMessage}
-                        alwaysShowRule={false}
-                        state={states.email}
-                    />
+                <ValidatedInput
+                    label="Email:" type="text" id="email" value={fields.email}
+                    onChange={handleChange} onBlur={handleBlur}
+                    ruleMessage={emailErrorMessage}
+                    alwaysShowRule={false}
+                    state={states.email}
+                />
 
-                    <h2>Change password</h2>
+                <h2>Change password</h2>
 
-                    <ValidatedInput
-                        label="New password:" type="password" id="newPassword" value={fields.newPassword}
-                        onChange={handleChange} onBlur={handleBlur}
-                        ruleMessage="Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)"
-                        alwaysShowRule={true}
-                        state={states.newPassword}
-                    />
+                <ValidatedInput
+                    label="New password:" type="password" id="newPassword" value={fields.newPassword}
+                    onChange={handleChange} onBlur={handleBlur}
+                    ruleMessage="Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)"
+                    alwaysShowRule={true}
+                    state={states.newPassword}
+                />
 
-                    <ValidatedInput
-                        label="Repeat password:" type="password" id="repeatPassword" value={fields.repeatPassword}
-                        onChange={handleChange} onBlur={handleBlur}
-                        ruleMessage="Passwords do not match"
-                        alwaysShowRule={false}
-                        state={states.repeatPassword}
-                    />
+                <ValidatedInput
+                    label="Repeat password:" type="password" id="repeatPassword" value={fields.repeatPassword}
+                    onChange={handleChange} onBlur={handleBlur}
+                    ruleMessage="Passwords do not match"
+                    alwaysShowRule={false}
+                    state={states.repeatPassword}
+                />
 
-                    <hr />
+                <hr />
 
-                    <h2>Confirm changes</h2>
+                <h2>Confirm changes</h2>
 
-                    <ValidatedInput
-                        label="Current password:" type="password" id="password" value={fields.password}
-                        onChange={handleChange}
-                        ruleMessage='Wrong password'
-                        alwaysShowRule={false}
-                        state={states.password}
-                    />
+                <ValidatedInput
+                    label="Current password:" type="password" id="password" value={fields.password}
+                    onChange={handleChange}
+                    ruleMessage='Wrong password'
+                    alwaysShowRule={false}
+                    state={states.password}
+                />
 
-                    <div>
-                        <p aria-hidden={true}></p>
-                        <button type="submit" className="button gray">Save</button>
-                    </div>
-                </form>
-            </div>
+                <div>
+                    <p aria-hidden={true}></p>
+                    <button type="submit" className="button gray">Save</button>
+                </div>
+            </form>
         </div>
     )
 }

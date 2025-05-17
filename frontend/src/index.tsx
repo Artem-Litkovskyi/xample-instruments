@@ -12,6 +12,7 @@ import AccountPage from "./pages/AccountPage";
 import AccountSettingsPage from "./pages/AccountSettingsPage";
 import MyProductsPage from "./pages/MyProductsPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
+import ProductPage from "./pages/ProductPage";
 
 import './index.css';
 import './assets/styles/Buttons.css';
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
                     },
                 ]
             },
+            {
+                path: 'product/:id',
+                element: <ProductPage />,
+            }
         ]
     }
 ]);

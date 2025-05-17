@@ -17,30 +17,28 @@ function OrderHistoryPage() {
     ]
 
     return (
-        <div className="panel dark">
-            <div>
-                <h2>Orders</h2>
+        <div className="panel dark padded">
+            <h2>Orders</h2>
 
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Product</th>
-                        <th>Price</th>
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {licenses.map((item) => (
+                    <tr key={item.orderID}>
+                        <td>{item.date}</td>
+                        <td>{item.product}</td>
+                        <td>${centsToString(item.price)}</td>
                     </tr>
-                    </thead>
-
-                    <tbody>
-                    {licenses.map((item) => (
-                        <tr key={item.orderID}>
-                            <td>{item.date}</td>
-                            <td>{item.product}</td>
-                            <td>${centsToString(item.price)}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
+                ))}
+                </tbody>
+            </table>
         </div>
     )
 }

@@ -12,16 +12,13 @@
     font-size: 1.5em;
 }
 
-.product-card div {
-    padding-top: 0 !important;
-}
-
 div#price-and-buy {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
+    margin-bottom: 20px;
 }
 
 div#price-and-buy p {
