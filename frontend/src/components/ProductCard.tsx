@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import {centsToString} from "../utils/utils";
+
 import '../assets/styles/ProductCard.css';
 
 
@@ -26,7 +28,7 @@ function ProductCard(params: {
                 </Link>
 
                 <div id="price-and-buy">
-                    <span>${Math.floor(params.price/100)}.{("0" + String(params.price%100)).slice(-2)}</span>
+                    <span>${centsToString(params.price)}</span>
                     {params.purchased ? (
                         <p>Purchased</p>
                     ) : (

@@ -6,7 +6,7 @@
     background-color: white;
 }
 
-.panel.light h1, .panel.light h2, .panel.light p, .panel.light span, .panel.light label {
+.panel.light h1, .panel.light h2, .panel.light p, .panel.light span, .panel.light label, .panel.light table {
     color: black;
 }
 
@@ -14,7 +14,7 @@
     background-color: var(--color-panel);
 }
 
-.panel.dark h1, .panel.dark h2, .panel.dark p, .panel.dark span, .panel.dark label {
+.panel.dark h1, .panel.dark h2, .panel.dark p, .panel.dark span, .panel.dark label, .panel.dark table {
     color: white;
 }
 
@@ -27,5 +27,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 0 20px 10px 20px;
 }

@@ -10,12 +10,15 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import AccountPage from "./pages/AccountPage";
 import AccountSettingsPage from "./pages/AccountSettingsPage";
+import MyProductsPage from "./pages/MyProductsPage";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
 
 import './index.css';
 import './assets/styles/Buttons.css';
 import './assets/styles/Text.css';
 import './assets/styles/Panels.css';
 import './assets/styles/Forms.css';
+import './assets/styles/Tables.css';
 
 
 const router = createBrowserRouter([
@@ -59,6 +62,14 @@ const router = createBrowserRouter([
                     {
                         path: 'settings',
                         element: <AccountSettingsPage />,
+                    },
+                    {
+                        path: 'products',
+                        element: <MyProductsPage />,
+                    },
+                    {
+                        path: 'history',
+                        element: <OrderHistoryPage />,
                     },
                 ]
             },

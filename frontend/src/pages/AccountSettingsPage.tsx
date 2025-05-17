@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
 
-import HeaderAndFooter from "./HeaderAndFooter";
 import ValidatedInput, {ValidatedInputState} from "../components/ValidatedInput";
 import {validateUsername, validateEmail, validatePassword} from "../services/UserService";
 
