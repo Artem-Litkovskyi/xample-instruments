@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 
+import Root from "./pages/Root";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProductsPage from "./pages/ProductsPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import AccountPage from "./pages/AccountPage";
 
 import './index.css';
 import './assets/styles/Buttons.css';
@@ -18,24 +20,38 @@ import './assets/styles/Forms.css';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HomePage />,
+        element: <Root />,
         errorElement: <NotFoundPage />,
-    },
-    {
-        path: '/products',
-        element: <Navigate to="/products/all" replace />
-    },
-    {
-        path: '/products/:category',
-        element: <ProductsPage />,
-    },
-    {
-        path: '/signin',
-        element: <SignInPage />,
-    },
-    {
-        path: '/signup',
-        element: <SignUpPage />,
+        children: [
+            {
+                index: true,
+                element: <Navigate to='home' replace />,
+            },
+            {
+                path: 'home',
+                element: <HomePage />,
+            },
+            {
+                path: 'products',
+                element: <Navigate to='all' replace />,
+            },
+            {
+                path: 'products/:category',
+                element: <ProductsPage />,
+            },
+            {
+                path: 'signin',
+                element: <SignInPage />,
+            },
+            {
+                path: 'signup',
+                element: <SignUpPage />,
+            },
+            {
+                path: 'account',
+                element: <AccountPage />,
+            },
+        ]
     }
 ]);
 

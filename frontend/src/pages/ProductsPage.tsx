@@ -1,13 +1,21 @@
 import React from "react";
 
 import HeaderAndFooter from "./HeaderAndFooter";
-import HeaderProducts from "../components/HeaderProducts";
 import ProductCard from "../components/ProductCard";
+import HeaderAdditional from "../components/HeaderAdditional";
 
 
 function ProductsPage() {
     return (
-        <HeaderAndFooter additionalHeader={<HeaderProducts />} >
+        <HeaderAndFooter additionalHeader={
+            <HeaderAdditional
+                navigation={[
+                    {name: "All plug-ins", href: "/products/all"},
+                    {name: "Instruments", href: "/products/instruments"},
+                    {name: "Audio effects", href: "/products/effects"},
+                ]}
+            />
+        } >
             <div className="content">
                 <div className="content-grid">
                     <ProductCard

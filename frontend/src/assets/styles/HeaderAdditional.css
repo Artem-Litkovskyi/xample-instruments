@@ -1,4 +1,4 @@
-.header-products {
+.header-additional {
     height: 60px;
     display: flex;
     justify-content: center;
@@ -6,10 +6,10 @@
     background-color: white;
 }
 
-.header-products nav a {
+.header-additional nav a {
     color: black;
 }
 
-.header-products nav a span {
+.header-additional nav a span {
     background-color: black;
 }

@@ -32,3 +32,4 @@ function NavBar(props: { navigation: NavBarItem[] }) {
 
 
 export default NavBar;
+export type {NavBarItem};

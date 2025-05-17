@@ -26,9 +26,9 @@ function AccountWidget(props: {loggedIn: boolean}) {
                     <button onClick={() => setOpen(!open)}>Username</button>
                     <div className="dropdown-content">
                         <hr />
-                        <Link to="/account/0/settings">Account settings</Link><br />
-                        <Link to="/account/0/products">My products</Link><br />
-                        <Link to="/account/0/history">Order history</Link><br />
+                        <Link to="/account/settings">Account settings</Link><br />
+                        <Link to="/account/products">My products</Link><br />
+                        <Link to="/account/history">Order history</Link><br />
                         <hr />
                         <Link to="/logout">Log out</Link>
                     </div>
