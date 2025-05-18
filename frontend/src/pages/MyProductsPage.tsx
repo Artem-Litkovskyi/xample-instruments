@@ -12,7 +12,7 @@ function MyProductsPage() {
     ]
 
     return (
-        <div className="panel dark padded">
+        <div className='panel dark padded'>
             <h2>Licenses</h2>
 
             <table>

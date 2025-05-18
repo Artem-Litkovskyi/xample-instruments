@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from 'react-router';
 
 import '../assets/styles/NavBar.css';
 
@@ -17,7 +17,7 @@ function NavBar(props: { navigation: NavBarItem[] }) {
                     <li key={item.name}>
                         <NavLink
                             to={item.href}
-                            className={({isActive}) => isActive ? "active" : undefined}
+                            className={({isActive}) => isActive ? 'active' : undefined}
                         >
                             {item.name}
                             <span />

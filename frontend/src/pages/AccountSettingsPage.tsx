@@ -1,16 +1,16 @@
-import {useState} from "react";
+import {useState} from 'react';
 
-import ValidatedInput from "../components/ValidatedInput";
-import {validateUsername, validateEmail, validatePassword} from "../services/UserService";
+import ValidatedInput from '../components/ValidatedInput';
+import {validateUsername, validateEmail, validatePassword} from '../services/UserService';
 
 
 function AccountSettingsPage() {
     const [fields, setFields] = useState({
-        username:"",
-        email:"",
-        newPassword:"",
-        repeatPassword:"",
-        password:"",
+        username:'',
+        email:'',
+        newPassword:'',
+        repeatPassword:'',
+        password:'',
     });
 
     const [states, setStates] = useState({
@@ -37,7 +37,7 @@ function AccountSettingsPage() {
         const value = event.target.value;
         setFields(fields => ({...fields, [name]: value}));
 
-        if (name !== "newPassword") return;
+        if (name !== 'newPassword') return;
 
         const validationResult = validators[name as keyof typeof states](value);
         if (validationResult !== 0 && states[name as keyof typeof states] === 'initial') return;
@@ -49,13 +49,13 @@ function AccountSettingsPage() {
         const name = event.target.name;
         const value = event.target.value;
 
-        if (name === "newPassword") return;
+        if (name === 'newPassword') return;
 
         const validationResult = validators[name as keyof typeof states](value);
         setStates(states => (
             {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}))
 
-        if (name === "email") {
+        if (name === 'email') {
             if (validationResult === -1) setEmailErrorMessage('Incorrect email address')
             else if (validationResult === -2) setEmailErrorMessage('This email is used by another user')
         }
@@ -71,7 +71,7 @@ function AccountSettingsPage() {
 
 
     return (
-        <div className="panel dark padded">
+        <div className='panel dark padded'>
             <form
                 onSubmit={handleSubmit}
                 onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
@@ -79,7 +79,7 @@ function AccountSettingsPage() {
                 <h2>Personal information</h2>
 
                 <ValidatedInput
-                    label="Username:" type="text" id="username" value={fields.username}
+                    label='Username:' type='text' id='username' value={fields.username}
                     onChange={handleChange} onBlur={handleBlur}
                     ruleMessage="Username can't be empty"
                     alwaysShowRule={false}
@@ -87,7 +87,7 @@ function AccountSettingsPage() {
                 />
 
                 <ValidatedInput
-                    label="Email:" type="text" id="email" value={fields.email}
+                    label='Email:' type='text' id='email' value={fields.email}
                     onChange={handleChange} onBlur={handleBlur}
                     ruleMessage={emailErrorMessage}
                     alwaysShowRule={false}
@@ -97,17 +97,17 @@ function AccountSettingsPage() {
                 <h2>Change password</h2>
 
                 <ValidatedInput
-                    label="New password:" type="password" id="newPassword" value={fields.newPassword}
+                    label='New password:' type='password' id='newPassword' value={fields.newPassword}
                     onChange={handleChange} onBlur={handleBlur}
-                    ruleMessage="Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)"
+                    ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)'
                     alwaysShowRule={true}
                     state={states.newPassword}
                 />
 
                 <ValidatedInput
-                    label="Repeat password:" type="password" id="repeatPassword" value={fields.repeatPassword}
+                    label='Repeat password:' type='password' id='repeatPassword' value={fields.repeatPassword}
                     onChange={handleChange} onBlur={handleBlur}
-                    ruleMessage="Passwords do not match"
+                    ruleMessage='Passwords do not match'
                     alwaysShowRule={false}
                     state={states.repeatPassword}
                 />
@@ -117,7 +117,7 @@ function AccountSettingsPage() {
                 <h2>Confirm changes</h2>
 
                 <ValidatedInput
-                    label="Current password:" type="password" id="password" value={fields.password}
+                    label='Current password:' type='password' id='password' value={fields.password}
                     onChange={handleChange}
                     ruleMessage='Wrong password'
                     alwaysShowRule={false}
@@ -126,7 +126,7 @@ function AccountSettingsPage() {
 
                 <div>
                     <p aria-hidden={true}></p>
-                    <button type="submit" className="button gray">Save</button>
+                    <button type='submit' className='button gray'>Save</button>
                 </div>
             </form>
         </div>

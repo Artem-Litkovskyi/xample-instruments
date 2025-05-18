@@ -1,5 +1,5 @@
-import HeaderAndFooter from "./HeaderAndFooter";
-import {centsToString} from "../utils/utils";
+import HeaderAndFooter from './HeaderAndFooter';
+import {centsToString} from '../utils/utils';
 
 
 function ProductPage() {
@@ -34,15 +34,15 @@ function ProductPage() {
 
     return (
         <HeaderAndFooter>
-            <div className="content">
-                <div className="content-grid">
-                    <div id="product-title-panel" className="panel light">
+            <div className='content'>
+                <div className='content-grid'>
+                    <div id='product-title-panel' className='panel light'>
                         <h1>{productInfo.title}</h1>
                         <p>{productInfo.subtitle}</p>
                         <button className='dark'>Buy Now ${centsToString(productInfo.price)}USD</button>
                     </div>
 
-                    <div id="about-panel" className="panel dark padded">
+                    <div id='about-panel' className='panel dark padded'>
                         <h2>About</h2>
                         <p>{productInfo.about}</p>
 
@@ -58,14 +58,14 @@ function ProductPage() {
                         </ul>
                     </div>
 
-                    <div id="gui-panel" className="panel dark">
+                    <div id='gui-panel' className='panel dark'>
                         <img src={productInfo.image_url} alt='GUI screenshot' />
 
                         <h2>Fjkldfd</h2>
                         <p>fjldkkfjdlkfjdfjlkdjfdlfjdj fkld jfdk jdfl jdjl fjdldjflekjer lfj  fjkd kjwlj</p>
                     </div>
 
-                    <div id="demo-panel" className="panel dark padded">
+                    <div id='demo-panel' className='panel dark padded'>
                         <h2>Try it out!</h2>
                         <p>The {productInfo.title} demo is free but is limited to 20 minutes (per operation), and only includes minimal content. Saving is disabled in the demo.</p>
                         <button className='light'>Download demo</button>

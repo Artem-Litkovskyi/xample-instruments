@@ -1,4 +1,4 @@
-import {Link} from "react-router";
+import {Link} from 'react-router';
 
 import NavBar from './NavBar';
 import AccountWidget from './AccountWidget';
@@ -9,16 +9,16 @@ import '../assets/styles/Header.css';
 
 function Header() {
     return (
-        <div className="header">
-            <div className="logo-container">
-                <Link to="/"> <img src={logo} alt="logo" /> </Link>
+        <div className='header'>
+            <div className='logo-container'>
+                <Link to='/'> <img src={logo} alt='logo' /> </Link>
             </div>
 
             <NavBar
                 navigation={[
-                    {name: "Home", href: "/"},
-                    {name: "Products", href: "/products"},
-                    {name: "Support", href: "/support"},
+                    {name: 'Home', href: '/'},
+                    {name: 'Products', href: '/products'},
+                    {name: 'Support', href: '/support'},
                 ]}
             />
 

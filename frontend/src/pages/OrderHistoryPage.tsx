@@ -1,4 +1,4 @@
-import {centsToString} from "../utils/utils";
+import {centsToString} from '../utils/utils';
 
 
 interface OrderInfo {
@@ -16,7 +16,7 @@ function OrderHistoryPage() {
     ]
 
     return (
-        <div className="panel dark padded">
+        <div className='panel dark padded'>
             <h2>Orders</h2>
 
             <table>

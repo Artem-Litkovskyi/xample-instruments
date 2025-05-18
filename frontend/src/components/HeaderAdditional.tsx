@@ -1,11 +1,11 @@
-import NavBar, { type NavBarItem } from "./NavBar";
+import NavBar, { type NavBarItem } from './NavBar';
 
 import '../assets/styles/HeaderAdditional.css';
 
 
 function HeaderAdditional(props: { navigation: NavBarItem[] }) {
     return (
-        <div className="header-additional">
+        <div className='header-additional'>
             <NavBar navigation={props.navigation} />
         </div>
     )

@@ -1,8 +1,8 @@
-import {useLayoutEffect} from "react";
+import {useLayoutEffect} from 'react';
 import {type PropsWithChildren} from 'react';
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 
 interface HeaderAndFooterProps {
@@ -17,7 +17,7 @@ function HeaderAndFooter(props: PropsWithChildren<HeaderAndFooterProps>) {
 
     return (
         <div>
-            <div className="dock-top">
+            <div className='dock-top'>
                 <Header />
                 {props.additionalHeader}
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 
 export default function ValidatedInput(params: {
@@ -9,7 +9,7 @@ export default function ValidatedInput(params: {
     state: string,  // state: 'initial', 'valid' or 'invalid'
 }) {
     return (
-        <div className="form-group">
+        <div className='form-group'>
             <label htmlFor={params.id}>{params.label}</label>
             
             <input
@@ -18,7 +18,7 @@ export default function ValidatedInput(params: {
             />
 
             {(params.alwaysShowRule || params.state === 'invalid') && (
-                <span className={params.state === 'initial' ? "rule" : params.state}>
+                <span className={params.state === 'initial' ? 'rule' : params.state}>
                     {params.ruleMessage}
                 </span>
             )}

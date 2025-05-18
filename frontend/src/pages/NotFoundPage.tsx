@@ -1,11 +1,11 @@
-import HeaderAndFooter from "./HeaderAndFooter";
-import NotFound from "../components/NotFound";
+import HeaderAndFooter from './HeaderAndFooter';
+import NotFound from '../components/NotFound';
 
 
 function HomePage() {
     return (
         <HeaderAndFooter>
-            <div className="content">
+            <div className='content'>
                 <NotFound />
             </div>
         </HeaderAndFooter>

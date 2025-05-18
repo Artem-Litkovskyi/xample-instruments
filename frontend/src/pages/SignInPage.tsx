@@ -1,12 +1,12 @@
-import {useState} from "react";
-import {Link} from "react-router";
+import {useState} from 'react';
+import {Link} from 'react-router';
 
-import HeaderAndFooter from "./HeaderAndFooter";
-import ValidatedInput from "../components/ValidatedInput";
+import HeaderAndFooter from './HeaderAndFooter';
+import ValidatedInput from '../components/ValidatedInput';
 
 
 function SignInPage() {
-    const [fields, setFields] = useState({email:"", password:""});
+    const [fields, setFields] = useState({email:'', password:''});
     const [formState, setFormState] = useState('initial');
 
     const handleChange = (event: any) => {
@@ -25,8 +25,8 @@ function SignInPage() {
 
     return (
         <HeaderAndFooter>
-            <div className="content narrow">
-                <div className="panel dark padded">
+            <div className='content narrow'>
+                <div className='panel dark padded'>
                     <h2>Sign in</h2>
 
                     <form
@@ -34,31 +34,31 @@ function SignInPage() {
                         onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                     >
                         <ValidatedInput
-                            label="Email:" type="text" id="email" value={fields.email}
+                            label='Email:' type='text' id='email' value={fields.email}
                             onChange={handleChange}
-                            ruleMessage="Wrong email or password"
+                            ruleMessage='Wrong email or password'
                             alwaysShowRule={false}
                             state={formState}
                         />
 
                         <ValidatedInput
-                            label="Password:" type="password" id="password" value={fields.password}
+                            label='Password:' type='password' id='password' value={fields.password}
                             onChange={handleChange}
-                            ruleMessage="Wrong email or password"
+                            ruleMessage='Wrong email or password'
                             alwaysShowRule={false}
                             state={formState}
                         />
 
                         <div>
                             <p></p>
-                            <button type="submit" className="button gray">Sign in</button>
+                            <button type='submit' className='button gray'>Sign in</button>
                         </div>
 
                         <hr />
 
                         <div>
                             <p>Don't have an account?</p>
-                            <Link to="/signup" className="button gray">Sign up</Link>
+                            <Link to='/signup' className='button gray'>Sign up</Link>
                         </div>
                     </form>
                 </div>

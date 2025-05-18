@@ -1,6 +1,6 @@
-import { Link } from "react-router";
+import { Link } from 'react-router';
 
-import {centsToString} from "../utils/utils";
+import {centsToString} from '../utils/utils';
 
 import '../assets/styles/ProductCard.css';
 
@@ -15,7 +15,7 @@ function ProductCard(params: {
     purchased: boolean,
 }) {
     return (
-        <div className="product-card panel dark">
+        <div className='product-card panel dark'>
             <Link to={params.href}>
                 <img src={params.image_url} alt='category' />
             </Link>
@@ -25,12 +25,12 @@ function ProductCard(params: {
                 <p>{params.subtitle}</p>
             </Link>
 
-            <div id="price-and-buy">
+            <div id='price-and-buy'>
                 <span>${centsToString(params.price)}</span>
                 {params.purchased ? (
                     <p>Purchased</p>
                 ) : (
-                    <Link to={params.buy_href} className="button light">Buy</Link>
+                    <Link to={params.buy_href} className='button light'>Buy</Link>
                 )}
             </div>
         </div>

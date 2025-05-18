@@ -2,17 +2,17 @@ import { StrictMode } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 import { createRoot } from 'react-dom/client'
 
-import Root from "./pages/Root";
-import HomePage from "./pages/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import ProductsPage from "./pages/ProductsPage";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-import AccountPage from "./pages/AccountPage";
-import AccountSettingsPage from "./pages/AccountSettingsPage";
-import MyProductsPage from "./pages/MyProductsPage";
-import OrderHistoryPage from "./pages/OrderHistoryPage";
-import ProductPage from "./pages/ProductPage";
+import Root from './pages/Root';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
+import ProductsPage from './pages/ProductsPage';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import AccountPage from './pages/AccountPage';
+import AccountSettingsPage from './pages/AccountSettingsPage';
+import MyProductsPage from './pages/MyProductsPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import ProductPage from './pages/ProductPage';
 
 import './index.css';
 import './assets/styles/Buttons.css';
