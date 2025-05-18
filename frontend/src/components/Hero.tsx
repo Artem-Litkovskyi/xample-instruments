@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import '../assets/styles/Hero.css';
+import '../assets/styles/components/Hero.css';
 
 
 function Hero(props: { title: string, subtitle: string, href: string, image_url: string }) {

@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 import {centsToString} from '../utils/utils';
 
-import '../assets/styles/ProductCard.css';
+import '../assets/styles/components/ProductCard.css';
 
 
 function ProductCard(params: {

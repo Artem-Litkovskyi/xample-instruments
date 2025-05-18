@@ -1,6 +1,6 @@
 import NavBar, { type NavBarItem } from './NavBar';
 
-import '../assets/styles/HeaderAdditional.css';
+import '../assets/styles/components/HeaderAdditional.css';
 
 
 function HeaderAdditional(props: { navigation: NavBarItem[] }) {

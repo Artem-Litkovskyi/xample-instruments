@@ -1,5 +1,5 @@
-import {useLayoutEffect} from 'react';
-import {type PropsWithChildren} from 'react';
+import {type PropsWithChildren, useEffect} from 'react';
+import {useLocation} from 'react-router';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,9 +11,11 @@ interface HeaderAndFooterProps {
 
 
 function HeaderAndFooter(props: PropsWithChildren<HeaderAndFooterProps>) {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    });
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     return (
         <div>

@@ -4,7 +4,7 @@ import NavBar from './NavBar';
 import AccountWidget from './AccountWidget';
 import logo from '../assets/react.svg';
 
-import '../assets/styles/Header.css';
+import '../assets/styles/components/Header.css';
 
 
 function Header() {

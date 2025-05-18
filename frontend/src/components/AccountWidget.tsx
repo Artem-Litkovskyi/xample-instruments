@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router';
 
-import '../assets/styles/AccountWidget.css';
+import '../assets/styles/components/AccountWidget.css';
 
 
 function AccountWidget(props: {loggedIn: boolean}) {

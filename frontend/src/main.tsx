@@ -15,11 +15,11 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 import ProductPage from './pages/ProductPage';
 
 import './index.css';
-import './assets/styles/Buttons.css';
-import './assets/styles/Text.css';
-import './assets/styles/Panels.css';
-import './assets/styles/Forms.css';
-import './assets/styles/Tables.css';
+import './assets/styles/basic/Buttons.css';
+import './assets/styles/basic/Text.css';
+import './assets/styles/basic/Panels.css';
+import './assets/styles/basic/Forms.css';
+import './assets/styles/basic/Tables.css';
 
 
 const router = createBrowserRouter([

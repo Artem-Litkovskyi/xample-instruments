@@ -1,0 +1,20 @@
+.gui-map {
+    position: relative;
+}
+
+.gui-map img {
+    display: block;
+}
+
+.gui-map-area {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.gui-map-area:hover {
+    border: 2px solid red;
+}
+
+.gui-map-area.active {
+    border: 2px solid red;
+}

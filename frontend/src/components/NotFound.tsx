@@ -1,6 +1,6 @@
 import NavBar from './NavBar';
 
-import '../assets/styles/NotFound.css';
+import '../assets/styles/components/NotFound.css';
 
 
 function NotFound() {

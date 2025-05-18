@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import '../assets/styles/CategoryCard.css';
+import '../assets/styles/components/CategoryCard.css';
 
 
 function CategoryCard(params: { title: string, href: string, image_url: string }) {

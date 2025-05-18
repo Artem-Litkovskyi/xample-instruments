@@ -1,4 +1,7 @@
 .product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--color-panel);
     height: 100%;
     text-align: center;

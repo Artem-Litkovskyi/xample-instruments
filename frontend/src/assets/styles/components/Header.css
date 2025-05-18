@@ -10,12 +10,19 @@
 
 .logo-container {
     height: 100%;
+    display: flex;
+    align-items: center;
     text-align: left;
-    padding: 0;
+}
+
+.logo-container a {
+    height: 80%;
+    object-fit: contain;
 }
 
 .logo-container img {
     height: 100%;
+    object-fit: contain;
 }
 
 .header nav a {

@@ -1,7 +1,11 @@
 export function centsToString(cents: number) {
-    return `${Math.floor(cents/100)}.${("0" + String(cents%100)).slice(-2)}`
+    const dollars = Math.floor(cents/100);
+    const remainingCents = Math.floor(cents%100);
+    return `${dollars}.${('0' + String(remainingCents)).slice(-2)}`
 }
 
 export function secondsToString(seconds: number) {
-    return `${Math.floor(seconds/60)}:${("0" + String(seconds%60)).slice(-2)}`
+    const minutes = Math.floor(seconds/60);
+    const remainingSeconds = Math.floor(seconds%60);
+    return `${minutes}:${('0' + String(remainingSeconds)).slice(-2)}`
 }
