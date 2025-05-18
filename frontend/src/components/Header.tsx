@@ -1,9 +1,8 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import {Link} from "react-router";
 
 import NavBar from './NavBar';
 import AccountWidget from './AccountWidget';
-import logo from '../assets/vector/logo.svg';
+import logo from '../assets/react.svg';
 
 import '../assets/styles/Header.css';
 

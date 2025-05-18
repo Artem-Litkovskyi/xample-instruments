@@ -1,5 +1,3 @@
-import React from "react";
-
 import HeaderAndFooter from "./HeaderAndFooter";
 import {centsToString} from "../utils/utils";
 
@@ -49,8 +47,8 @@ function ProductPage() {
                         <p>{productInfo.about}</p>
 
                         <h2>Audio Demos</h2>
-                        <p>audio player</p>
-                        <p>audio player</p>
+                        <p>player</p>
+                        <p>player</p>
 
                         <h2>System Requirements</h2>
                         <ul>

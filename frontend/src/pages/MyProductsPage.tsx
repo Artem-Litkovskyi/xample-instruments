@@ -1,6 +1,3 @@
-import React, {useState} from "react";
-
-
 interface LicenseInfo {
     product: string;
     serial: string;

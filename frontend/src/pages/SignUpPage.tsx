@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {useState} from "react";
+import {Link} from "react-router";
 
 import HeaderAndFooter from "./HeaderAndFooter";
-import ValidatedInput, {ValidatedInputState} from "../components/ValidatedInput";
+import ValidatedInput from "../components/ValidatedInput";
 import {validateUsername, validateEmail, validatePassword} from "../services/UserService";
 
 
@@ -15,10 +15,10 @@ function SignUpPage() {
     });
 
     const [states, setStates] = useState({
-        username:ValidatedInputState.Initial,
-        email:ValidatedInputState.Initial,
-        password:ValidatedInputState.Initial,
-        repeatPassword:ValidatedInputState.Initial
+        username:'initial',
+        email:'initial',
+        password:'initial',
+        repeatPassword:'initial'
     });
 
     const validators = {
@@ -39,9 +39,9 @@ function SignUpPage() {
         if (name !== "password") return;
 
         const validationResult = validators[name as keyof typeof states](value);
-        if (validationResult !== 0 && states[name as keyof typeof states] === ValidatedInputState.Initial) return;
+        if (validationResult !== 0 && states[name as keyof typeof states] === 'initial') return;
         setStates(states => (
-            {...states, [name]: validationResult === 0 ? ValidatedInputState.Valid : ValidatedInputState.Invalid}));
+            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}));
     }
 
     const handleBlur = (event: any) => {
@@ -52,7 +52,7 @@ function SignUpPage() {
 
         const validationResult = validators[name as keyof typeof states](value);
         setStates(states => (
-            {...states, [name]: validationResult === 0 ? ValidatedInputState.Valid : ValidatedInputState.Invalid}))
+            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}))
 
         if (name === "email") {
             if (validationResult === -1) setEmailErrorMessage('Incorrect email address')
@@ -70,59 +70,57 @@ function SignUpPage() {
     return (
         <HeaderAndFooter>
             <div className="content narrow">
-                <div className="panel dark">
-                    <div>
-                        <form
-                            onSubmit={handleSubmit}
-                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        >
-                            <h2>Sign up</h2>
+                <div className="panel dark padded">
+                    <form
+                        onSubmit={handleSubmit}
+                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                    >
+                        <h2>Sign up</h2>
 
-                            <ValidatedInput
-                                label="Username:" type="text" id="username" value={fields.username}
-                                onChange={handleChange} onBlur={handleBlur}
-                                ruleMessage="Username can't be empty"
-                                alwaysShowRule={false}
-                                state={states.username}
-                            />
+                        <ValidatedInput
+                            label="Username:" type="text" id="username" value={fields.username}
+                            onChange={handleChange} onBlur={handleBlur}
+                            ruleMessage="Username can't be empty"
+                            alwaysShowRule={false}
+                            state={states.username}
+                        />
 
-                            <ValidatedInput
-                                label="Email:" type="text" id="email" value={fields.email}
-                                onChange={handleChange} onBlur={handleBlur}
-                                ruleMessage={emailErrorMessage}
-                                alwaysShowRule={false}
-                                state={states.email}
-                            />
+                        <ValidatedInput
+                            label="Email:" type="text" id="email" value={fields.email}
+                            onChange={handleChange} onBlur={handleBlur}
+                            ruleMessage={emailErrorMessage}
+                            alwaysShowRule={false}
+                            state={states.email}
+                        />
 
-                            <ValidatedInput
-                                label="Password:" type="password" id="password" value={fields.password}
-                                onChange={handleChange} onBlur={handleBlur}
-                                ruleMessage="Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)"
-                                alwaysShowRule={true}
-                                state={states.password}
-                            />
+                        <ValidatedInput
+                            label="Password:" type="password" id="password" value={fields.password}
+                            onChange={handleChange} onBlur={handleBlur}
+                            ruleMessage="Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)"
+                            alwaysShowRule={true}
+                            state={states.password}
+                        />
 
-                            <ValidatedInput
-                                label="Repeat password:" type="password" id="repeatPassword" value={fields.repeatPassword}
-                                onChange={handleChange} onBlur={handleBlur}
-                                ruleMessage="Passwords do not match"
-                                alwaysShowRule={false}
-                                state={states.repeatPassword}
-                            />
+                        <ValidatedInput
+                            label="Repeat password:" type="password" id="repeatPassword" value={fields.repeatPassword}
+                            onChange={handleChange} onBlur={handleBlur}
+                            ruleMessage="Passwords do not match"
+                            alwaysShowRule={false}
+                            state={states.repeatPassword}
+                        />
 
-                            <div>
-                                <p aria-hidden={true}></p>
-                                <button type="submit" className="button gray">Sign up</button>
-                            </div>
+                        <div>
+                            <p aria-hidden={true}></p>
+                            <button type="submit" className="button gray">Sign up</button>
+                        </div>
 
-                            <hr />
+                        <hr />
 
-                            <div>
-                                <p>Already have an account?</p>
-                                <Link to="/signin" className="button gray">Sign in</Link>
-                            </div>
-                        </form>
-                    </div>
+                        <div>
+                            <p>Already have an account?</p>
+                            <Link to="/signin" className="button gray">Sign in</Link>
+                        </div>
+                    </form>
                 </div>
             </div>
         </HeaderAndFooter>

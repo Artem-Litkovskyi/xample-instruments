@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import {useState} from "react";
 
-import ValidatedInput, {ValidatedInputState} from "../components/ValidatedInput";
+import ValidatedInput from "../components/ValidatedInput";
 import {validateUsername, validateEmail, validatePassword} from "../services/UserService";
 
 
@@ -14,11 +14,11 @@ function AccountSettingsPage() {
     });
 
     const [states, setStates] = useState({
-        username:ValidatedInputState.Initial,
-        email:ValidatedInputState.Initial,
-        newPassword:ValidatedInputState.Initial,
-        repeatPassword:ValidatedInputState.Initial,
-        password:ValidatedInputState.Initial,
+        username: 'initial',
+        email:'initial',
+        newPassword:'initial',
+        repeatPassword:'initial',
+        password:'initial',
     });
 
     const validators = {
@@ -40,9 +40,9 @@ function AccountSettingsPage() {
         if (name !== "newPassword") return;
 
         const validationResult = validators[name as keyof typeof states](value);
-        if (validationResult !== 0 && states[name as keyof typeof states] === ValidatedInputState.Initial) return;
+        if (validationResult !== 0 && states[name as keyof typeof states] === 'initial') return;
         setStates(states => (
-            {...states, [name]: validationResult === 0 ? ValidatedInputState.Valid : ValidatedInputState.Invalid}));
+            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}));
     }
 
     const handleBlur = (event: any) => {
@@ -53,7 +53,7 @@ function AccountSettingsPage() {
 
         const validationResult = validators[name as keyof typeof states](value);
         setStates(states => (
-            {...states, [name]: validationResult === 0 ? ValidatedInputState.Valid : ValidatedInputState.Invalid}))
+            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}))
 
         if (name === "email") {
             if (validationResult === -1) setEmailErrorMessage('Incorrect email address')
@@ -64,7 +64,7 @@ function AccountSettingsPage() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setStates(states => (
-            {...states, password: ValidatedInputState.Invalid}));
+            {...states, password: 'invalid'}));
         alert(fields);
         // TODO: send to server
     }

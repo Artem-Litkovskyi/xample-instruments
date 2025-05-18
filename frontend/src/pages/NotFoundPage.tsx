@@ -1,5 +1,3 @@
-import React from "react";
-
 import HeaderAndFooter from "./HeaderAndFooter";
 import NotFound from "../components/NotFound";
 

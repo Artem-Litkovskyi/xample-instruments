@@ -1,5 +1,4 @@
-import NavBar, {NavBarItem} from "./NavBar";
-import React from "react";
+import NavBar, { type NavBarItem } from "./NavBar";
 
 import '../assets/styles/HeaderAdditional.css';
 

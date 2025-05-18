@@ -1,5 +1,3 @@
-import React from "react";
-
 import HeaderAndFooter from "./HeaderAndFooter";
 import ProductCard from "../components/ProductCard";
 import HeaderAdditional from "../components/HeaderAdditional";

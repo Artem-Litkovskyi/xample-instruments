@@ -1,0 +1,25 @@
+.audio-player {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border-radius: var(--radius);
+    background-color: black;
+    padding: 5px;
+}
+
+.audio-player > div {
+    width: 100%;
+}
+
+.audio-player > div > div {
+    display: flex;
+}
+
+.audio-player > div > div > input {
+    flex-grow: 1;
+}
+
+.audio-player > div > div > span {
+    display: inline-block;
+    width: 2.5em;
+}

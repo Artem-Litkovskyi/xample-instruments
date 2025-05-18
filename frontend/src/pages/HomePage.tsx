@@ -1,5 +1,3 @@
-import React from "react";
-
 import HeaderAndFooter from "./HeaderAndFooter";
 import Hero from "../components/Hero";
 import CategoryCard from "../components/CategoryCard";
@@ -20,7 +18,7 @@ function HomePage() {
                     <CategoryCard
                         title="Discover instruments"
                         href="/products/instruments"
-                        image_url="/logo512.png"
+                        image_url="logo512.png"
                     />
                     <CategoryCard
                         title="Discover audio effects"

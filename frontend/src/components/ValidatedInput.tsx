@@ -1,18 +1,12 @@
 import React from "react";
 
 
-enum ValidatedInputState {
-    Initial="",
-    Valid="valid",
-    Invalid="invalid",
-}
-
-
-function ValidatedInput(params: {
+export default function ValidatedInput(params: {
     label: string, type: string, id: string, value: string,
     onChange?: React.ChangeEventHandler<HTMLInputElement>,
     onBlur?: React.ChangeEventHandler<HTMLInputElement>,
-    ruleMessage?: string, alwaysShowRule?: boolean, state?: ValidatedInputState,
+    ruleMessage?: string, alwaysShowRule?: boolean,
+    state: string,  // state: 'initial', 'valid' or 'invalid'
 }) {
     return (
         <div className="form-group">
@@ -23,15 +17,11 @@ function ValidatedInput(params: {
                 onChange={params.onChange} onBlur={params.onBlur} className={params.state}
             />
 
-            {(params.alwaysShowRule || params.state === ValidatedInputState.Invalid) && (
-                <span className={params.state === ValidatedInputState.Initial ? "rule" : params.state}>
+            {(params.alwaysShowRule || params.state === 'invalid') && (
+                <span className={params.state === 'initial' ? "rule" : params.state}>
                     {params.ruleMessage}
                 </span>
             )}
         </div>
     )
 }
-
-
-export default ValidatedInput;
-export {ValidatedInputState};

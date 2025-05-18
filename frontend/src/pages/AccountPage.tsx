@@ -1,5 +1,4 @@
-import React from "react";
-import {Outlet} from "react-router-dom";
+import {Outlet} from "react-router";
 
 import HeaderAndFooter from "./HeaderAndFooter";
 import HeaderAdditional from "../components/HeaderAdditional";
