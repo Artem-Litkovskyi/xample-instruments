@@ -30,7 +30,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     // Initial session check
     useEffect(() => {
         fetch("/api/session/", {
-            credentials: "same-origin",
+            credentials: "include",
         })
             .then((res) => res.json())
             .then((data) => {
@@ -44,7 +44,7 @@ export default function AuthProvider(props: PropsWithChildren) {
 
     function getSession() {
         fetch("/api/session/", {
-            credentials: "same-origin",
+            credentials: "include",
         })
             .then((res) => res.json())
             .then((data) => {
@@ -60,7 +60,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     function whoami() {
         fetch("/api/whoami/", {
             headers: { "Content-Type": "application/json" },
-            credentials: "same-origin",
+            credentials: "include",
         })
             .then((res) => res.json())
             .then((data) => {
@@ -79,7 +79,7 @@ export default function AuthProvider(props: PropsWithChildren) {
                 "Content-Type": "application/json",
                 "X-CSRFToken": cookies.get("csrftoken"),
             },
-            credentials: "same-origin",
+            credentials: "include",
             body: JSON.stringify({ username, password }),
         })
             .then(isResponseOk)
@@ -95,7 +95,7 @@ export default function AuthProvider(props: PropsWithChildren) {
 
     function logout() {
         fetch("/api/logout", {
-            credentials: "same-origin",
+            credentials: "include",
         })
             .then(isResponseOk)
             .then((data) => {

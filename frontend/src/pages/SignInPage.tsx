@@ -3,9 +3,12 @@ import {Link} from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
+import { useAuth } from "../contexts/AuthContext";
 
 
 function SignInPage() {
+    const { login } = useAuth();
+
     const [fields, setFields] = useState({email:'', password:''});
     const [formState, setFormState] = useState('initial');
 
@@ -18,9 +21,11 @@ function SignInPage() {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        setFormState('invalid');
-        alert(fields);
-        // TODO: send to server
+        try {
+            login(fields.email, fields.password);
+        } catch (error) {
+            setFormState('invalid');
+        }
     }
 
     return (

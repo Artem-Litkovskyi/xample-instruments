@@ -13,7 +13,7 @@ import AccountSettingsPage from './pages/AccountSettingsPage';
 import MyProductsPage from './pages/MyProductsPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import ProductPage from './pages/ProductPage';
-import AuthProvider from "../contexts/AuthContext.tsx";
+import AuthProvider from "./contexts/AuthContext.tsx";
 
 import './index.css';
 import './assets/styles/basic/Buttons.css';

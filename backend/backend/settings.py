@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # The secret key
 SECRET_KEY = 'django-insecure-3_q$9@2mhq3d^2)n!zp4c#9nup#2jsnnzv7pcb^g%0*r95h-ij'
 DEBUG = True
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "backend"]
 
 
 # Application definition
@@ -39,14 +39,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -128,15 +128,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Security settings
-CSRF_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
 
-# For production set these lines to true
-# CSRF_COOKIE_HTTPONLY = True
-# SESSION_COOKIE_HTTPONLY = True
+
+# CORS
+CORS_ALLOWED_ORIGINS=[
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 
-# Auth
+# Custom user model
 AUTH_USER_MODEL = "api.CustomUser"
