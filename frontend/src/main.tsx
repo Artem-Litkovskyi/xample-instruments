@@ -13,6 +13,7 @@ import AccountSettingsPage from './pages/AccountSettingsPage';
 import MyProductsPage from './pages/MyProductsPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import ProductPage from './pages/ProductPage';
+import AuthProvider from "../contexts/AuthContext.tsx";
 
 import './index.css';
 import './assets/styles/basic/Buttons.css';
@@ -85,6 +86,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
     </StrictMode>,
 )
