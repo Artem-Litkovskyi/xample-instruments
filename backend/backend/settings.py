@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # The secret key
 SECRET_KEY = 'django-insecure-3_q$9@2mhq3d^2)n!zp4c#9nup#2jsnnzv7pcb^g%0*r95h-ij'
 DEBUG = True
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "backend"]
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'backend']
 
 
 # Application definition
@@ -135,17 +135,17 @@ SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
+    'http://localhost:3000',
 ]
 
 
 # CORS
 CORS_ALLOWED_ORIGINS=[
-    "http://localhost:3000",
+    'http://localhost:3000',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
 
 # Custom user model
-AUTH_USER_MODEL = "api.CustomUser"
+AUTH_USER_MODEL = 'api.CustomUser'

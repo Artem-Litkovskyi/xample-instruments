@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect, type PropsWithChildren } from "react";
-import Cookies from "universal-cookie";
+import { createContext, useContext, useState, useEffect, type PropsWithChildren } from 'react';
+import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
@@ -18,7 +18,7 @@ export function useAuth() {
     const context = useContext(AuthContext);
 
     if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
+        throw new Error('useAuth must be used within an AuthProvider');
     }
 
     return context;
@@ -29,22 +29,22 @@ export default function AuthProvider(props: PropsWithChildren) {
 
     // Initial session check
     useEffect(() => {
-        fetch("/api/session/", {
-            credentials: "include",
+        fetch('/api/session/', {
+            credentials: 'include',
         })
             .then((res) => res.json())
             .then((data) => {
                 setIsAuthenticated(data.isAuthenticated);
             })
             .catch((err) => {
-                console.error("Session check failed", err);
+                console.error('Session check failed', err);
                 setIsAuthenticated(false);
             });
     }, []);
 
     function getSession() {
-        fetch("/api/session/", {
-            credentials: "include",
+        fetch('/api/session/', {
+            credentials: 'include',
         })
             .then((res) => res.json())
             .then((data) => {
@@ -52,34 +52,34 @@ export default function AuthProvider(props: PropsWithChildren) {
                 setIsAuthenticated(data.isAuthenticated);
             })
             .catch((err) => {
-                console.log("Get session failed", err);
+                console.log('Get session failed', err);
                 throw err;
             });
     }
 
     function whoami() {
-        fetch("/api/whoami/", {
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
+        fetch('/api/whoami/', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log("You are logged in as: " + data.username);
+                console.log('You are logged in as: ' + data.username);
             })
             .catch((err) => {
-                console.log("Who am I failed", err);
+                console.log('Who am I failed', err);
                 throw err;
             });
     }
 
     function login(username: string, password: string) {
-        fetch("/api/login/", {
-            method: "POST",
+        fetch('/api/login/', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": cookies.get("csrftoken"),
+                'Content-Type': 'application/json',
+                'X-CSRFToken': cookies.get('csrftoken'),
             },
-            credentials: "include",
+            credentials: 'include',
             body: JSON.stringify({ username, password }),
         })
             .then(isResponseOk)
@@ -88,14 +88,14 @@ export default function AuthProvider(props: PropsWithChildren) {
                 setIsAuthenticated(true);
             })
             .catch((err) => {
-                console.log("Log in failed", err);
+                console.log('Log in failed', err);
                 throw err;
             });
     }
 
     function logout() {
-        fetch("/api/logout", {
-            credentials: "include",
+        fetch('/api/logout', {
+            credentials: 'include',
         })
             .then(isResponseOk)
             .then((data) => {
@@ -103,7 +103,7 @@ export default function AuthProvider(props: PropsWithChildren) {
                 setIsAuthenticated(false);
             })
             .catch((err) => {
-                console.log("Log out failed", err);
+                console.log('Log out failed', err);
                 throw err;
             });
     }
