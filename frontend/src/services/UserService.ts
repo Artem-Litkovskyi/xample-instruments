@@ -1,27 +1,23 @@
 export function validateUsername(value: string){
-    if (!(value && value.trim())) return -1;
+    if (!(value && value.trim())) return 'This field can\'t be empty';
 
-    return 0;
+    return '';
 }
 
 
-export function validateEmail(value: string){
+export function validateEmail(value: string) {
     const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-    if (!re.test(value)) return -1;
+    if (!re.test(value)) return 'Invalid email address';
 
-    if (false) {  // TODO: request to server
-        return -2;
-    }
-
-    return 0;
+    return '';
 }
 
 
 export function validatePassword(value: string){
-    const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-    if (!re.test(value)) return -1;
+    if (!re.test(value)) return 'Password is too weak';
 
-    return 0;
+    return '';
 }

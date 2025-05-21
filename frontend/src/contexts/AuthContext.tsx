@@ -11,8 +11,9 @@ interface AuthContextType {
     username: string;
     getSession: () => void;
     whoami: () => void;
-    login: (username: string, password: string) => void;
+    login: (email: string, password: string) => void;
     logout: () => void;
+    signup: (username: string, email: string, password: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -63,7 +64,7 @@ export default function AuthProvider(props: PropsWithChildren) {
             });
     }
 
-    async function login(username: string, password: string) {
+    async function login(email: string, password: string) {
         const response = await fetch('/api/login/', {
             method: 'POST',
             headers: {
@@ -71,42 +72,56 @@ export default function AuthProvider(props: PropsWithChildren) {
                 'X-CSRFToken': cookies.get('csrftoken'),
             },
             credentials: 'include',
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-            throw new ValidationError(data.detail);
+            throw new ValidationError(response.statusText, data.detail);
+        }
+
+        setIsAuthenticated(true);
+        setUsername(data.username);
+    }
+
+    async function logout() {
+        const response = await fetch('/api/logout', {
+            credentials: 'include',
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new ValidationError(response.statusText, data.detail);
+        }
+
+        setIsAuthenticated(false);
+        setUsername('');
+    }
+
+    async function signup(username: string, email: string, password: string) {
+        const response = await fetch('/api/signup/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': cookies.get('csrftoken'),
+            },
+            credentials: 'include',
+            body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new ValidationError(response.statusText, data.detail);
         }
 
         setIsAuthenticated(true);
     }
 
-    function logout() {
-        fetch('/api/logout', {
-            credentials: 'include',
-        })
-            .then(isResponseOk)
-            .then((data) => {
-                console.log(data);
-                setIsAuthenticated(false);
-            })
-            .catch((error) => {
-                throw error;
-            });
-    }
-
-    function isResponseOk(response: Response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-
-        return response;
-    }
-
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, getSession, whoami, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, getSession, whoami, login, logout, signup }}>
             {props.children}
         </AuthContext.Provider>
     );

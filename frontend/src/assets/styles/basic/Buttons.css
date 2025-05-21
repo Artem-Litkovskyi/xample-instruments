@@ -26,6 +26,10 @@ button.gray {
     color: white;
 }
 
+button:disabled, button[disabled] {
+    opacity: 0.5;
+}
+
 /*Link buttons*/
 a.button {
     display: inline-block;

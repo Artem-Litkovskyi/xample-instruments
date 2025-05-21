@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
@@ -11,7 +10,7 @@ function SignInPage() {
     const { login } = useAuth();
 
     const [fields, setFields] = useState({ email:'', password:'' });
-    const [formState, setFormState] = useState('initial');
+    const [error, setError] = useState('');
     const [fetchError, setFetchError] = useState('');
 
 
@@ -19,7 +18,7 @@ function SignInPage() {
         const name = event.target.name;
         const value = event.target.value;
         setFields(prev => ({...prev, [name]: value}));
-        setFormState('initial');
+        setError('');
     }
 
     async function handleSubmit(event: any) {
@@ -29,13 +28,15 @@ function SignInPage() {
             await login(fields.email, fields.password);
         } catch (error) {
             if (error instanceof ValidationError) {
-                setFormState('invalid');
+                setError('Wrong email or password');
                 return;
             }
 
             setFetchError('Oops, something went wrong...');
             throw error;
         }
+
+        redirect
     }
 
     return (
@@ -51,17 +52,13 @@ function SignInPage() {
                         <ValidatedInput
                             label='Email:' type='text' id='email' value={fields.email}
                             onChange={handleChange}
-                            ruleMessage='Wrong email or password'
-                            alwaysShowRule={false}
-                            state={formState}
+                            errorMessage={error}
                         />
 
                         <ValidatedInput
                             label='Password:' type='password' id='password' value={fields.password}
                             onChange={handleChange}
-                            ruleMessage='Wrong email or password'
-                            alwaysShowRule={false}
-                            state={formState}
+                            errorMessage={error}
                         />
 
                         <div>

@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, redirect } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
 import { validateUsername, validateEmail, validatePassword } from '../services/UserService';
-// import { useAuth } from "../contexts/AuthContext.tsx";
+import ValidationError from "../errors/ValidationError.tsx";
+import { useAuth } from "../contexts/AuthContext.tsx";
 
 
 
 function SignUpPage() {
+    const { signup } = useAuth();
+
     const [fields, setFields] = useState({
         username:'',
         email:'',
@@ -16,56 +19,62 @@ function SignUpPage() {
         repeatPassword:''
     });
 
-    const [states, setStates] = useState({
-        username:'initial',
-        email:'initial',
-        password:'initial',
-        repeatPassword:'initial'
+    const [errors, setErrors] = useState({
+        username:'',
+        email:'',
+        password:'',
+        repeatPassword:''
     });
 
     const validators = {
         username:validateUsername,
         email:validateEmail,
         password:validatePassword,
-        repeatPassword:(value: string) => value === fields.password ? 0 : -1,
+        repeatPassword:(value: string) => value === fields.password ? '' : 'Passwords do not match',
     };
 
-    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [fetchError, setFetchError] = useState('');
 
 
     const handleChange = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
-        setFields(fields => ({...fields, [name]: value}));
-
-        if (name !== 'password') return;
-
-        const validationResult = validators[name as keyof typeof states](value);
-        if (validationResult !== 0 && states[name as keyof typeof states] === 'initial') return;
-        setStates(states => (
-            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}));
+        setFields(prev => ({...prev, [name]: value}));
     }
 
     const handleBlur = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
 
-        if (name === 'password') return;
-
-        const validationResult = validators[name as keyof typeof states](value);
-        setStates(states => (
-            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}))
-
-        if (name === 'email') {
-            if (validationResult === -1) setEmailErrorMessage('Incorrect email address')
-            else if (validationResult === -2) setEmailErrorMessage('This email is used by another user')
-        }
+        const validationResult = validators[name as keyof typeof validators](value);
+        setErrors(prev => ({...prev, [name]: validationResult}))
     }
 
-    const handleSubmit = (event: any) => {
+    async function handleSubmit(event: any) {
         event.preventDefault();
-        alert(fields);
-        // TODO: send to server
+
+        try {
+            await signup(fields.username, fields.email, fields.password);
+        } catch (error) {
+            if (error instanceof ValidationError) {
+                setErrors(prev => ({
+                    ...prev,
+                    // @ts-ignore
+                    username: error.detail?.username || '',
+                    // @ts-ignore
+                    email: error.detail?.email || '',
+                    // @ts-ignore
+                    password: error.detail?.password || '',
+                }));
+
+                return;
+            }
+
+            setFetchError('Oops, something went wrong...');
+            throw error;
+        }
+
+        redirect('/signin');
     }
 
 
@@ -82,38 +91,37 @@ function SignUpPage() {
                         <ValidatedInput
                             label='Username:' type='text' id='username' value={fields.username}
                             onChange={handleChange} onBlur={handleBlur}
-                            ruleMessage="Username can't be empty"
-                            alwaysShowRule={false}
-                            state={states.username}
+                            errorMessage={errors.username}
                         />
 
                         <ValidatedInput
                             label='Email:' type='text' id='email' value={fields.email}
                             onChange={handleChange} onBlur={handleBlur}
-                            ruleMessage={emailErrorMessage}
-                            alwaysShowRule={false}
-                            state={states.email}
+                            errorMessage={errors.email}
                         />
 
                         <ValidatedInput
                             label='Password:' type='password' id='password' value={fields.password}
                             onChange={handleChange} onBlur={handleBlur}
-                            ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)'
-                            alwaysShowRule={true}
-                            state={states.password}
+                            ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase and numbers'
+                            errorMessage={errors.password}
                         />
 
                         <ValidatedInput
                             label='Repeat password:' type='password' id='repeatPassword' value={fields.repeatPassword}
                             onChange={handleChange} onBlur={handleBlur}
-                            ruleMessage='Passwords do not match'
-                            alwaysShowRule={false}
-                            state={states.repeatPassword}
+                            errorMessage={errors.repeatPassword}
                         />
 
                         <div>
-                            <p aria-hidden={true}></p>
-                            <button type='submit' className='button gray'>Sign up</button>
+                            <p className='invalid'>{fetchError}</p>
+                            <button
+                                type='submit'
+                                className='button gray'
+                                disabled={!Object.values(errors).every((value) => value === '')}
+                            >
+                                Sign up
+                            </button>
                         </div>
 
                         <hr />

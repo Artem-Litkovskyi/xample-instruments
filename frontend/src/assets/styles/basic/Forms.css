@@ -30,10 +30,6 @@ form div {
     grid-row-start: 1;
 }
 
-.form-group input.valid {
-    border: 2px solid green;
-}
-
 .form-group input.invalid {
     border: 2px solid red;
 }
@@ -44,20 +40,18 @@ form div {
     font-size: 0.75em;
     margin-top: 5px;
     color: red;
+}
+
+.form-group span.invalid {
     grid-column-start: 2;
     grid-row-start: 2;
+    color: red !important;
 }
 
-.form-group .weak {
+.form-group span.rule {
+    grid-column-start: 2;
+    grid-row-start: 3;
     opacity: 0.5;
-}
-
-.form-group .valid {
-    color: green;
-}
-
-.form-group .invalid {
-    color: red;
 }
 
 /*Bottom text and button*/
@@ -85,9 +79,14 @@ form hr {
         grid-row-start: 2;
     }
 
-    .form-group span {
+    .form-group span.invalid {
         grid-column-start: 1;
         grid-row-start: 3;
+    }
+
+    .form-group span.rule {
+        grid-column-start: 1;
+        grid-row-start: 4;
     }
 
     form input, form label {
