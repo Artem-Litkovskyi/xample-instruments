@@ -1,7 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { Link, useParams } from 'react-router';
 import HeaderAndFooter from './HeaderAndFooter';
 import AudioPlayer from '../components/AudioPlayer.tsx';
-import {centsToString} from '../utils/utils';
+import { centsToString } from '../utils/utils';
 
 import '../assets/styles/pages/ProductPage.css';
 import GuiMap from '../components/GuiMap.tsx';
@@ -9,6 +10,8 @@ import GuiMapArea from '../components/GuiMapArea.tsx';
 
 
 function ProductPage() {
+    const params = useParams();
+
     const productInfo = {
         title: 'Liquid Plant',
         subtitle: 'Advanced Hybrid Synthesizer',
@@ -48,7 +51,7 @@ function ProductPage() {
                             <h1>{productInfo.title}</h1>
                             <p>{productInfo.subtitle}</p>
                         </div>
-                        <button className='dark'>Buy Now ${centsToString(productInfo.price)}USD</button>
+                        <Link className='button dark' to={`/buy/${params.id}`}>Buy Now ${centsToString(productInfo.price)}USD</Link>
                     </div>
 
                     <div id='about-panel' className='panel dark padded'>

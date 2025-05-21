@@ -117,7 +117,8 @@ export default function AuthProvider(props: PropsWithChildren) {
             throw new ValidationError(response.statusText, data.detail);
         }
 
-        setIsAuthenticated(true);
+        setIsAuthenticated(false);
+        setUsername('');
     }
 
     return (

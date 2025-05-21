@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
 import { useAuth } from '../contexts/AuthContext.tsx';
 
@@ -8,6 +8,7 @@ import '../assets/styles/components/AccountWidget.css';
 
 function AccountWidget() {
     const { isAuthenticated, username, logout } = useAuth();
+    const location = useLocation();
 
     const widgetRef = useRef<HTMLDivElement | null>(null);
 
@@ -40,13 +41,13 @@ function AccountWidget() {
                         <Link to='/account/products'>My products</Link><br />
                         <Link to='/account/history'>Order history</Link><br />
                         <hr />
-                        <Link to='#' onClick={logout}>Log out</Link>
+                        <Link to='/' onClick={logout}>Log out</Link>
                     </div>
                 </div>
             ) : (
                 <>
-                    <Link to='/signin'>Sign in</Link>
-                    <Link to='/signup'>Sign up</Link>
+                    <Link to='/signin' state={{ returnToUrl: location.pathname }}>Sign in</Link>
+                    <Link to='/signup' state={{ returnToUrl: location.pathname }}>Sign up</Link>
                 </>
             )}
 

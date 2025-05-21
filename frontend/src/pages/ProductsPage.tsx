@@ -17,29 +17,26 @@ function ProductsPage() {
             <div className='content'>
                 <div className='content-grid'>
                     <ProductCard
+                        product_id={0}
                         title='Liquid Plant'
                         subtitle='Advanced Hybrid Synthesizer'
                         price={24900}
-                        href='/product/0'
-                        buy_href='/product/0'
                         image_url='/logo512.png'
                         purchased={false}
                     />
                     <ProductCard
+                        product_id={1}
                         title='Quieth1'
                         subtitle='Virtual Analog Synthesizer'
                         price={15800}
-                        href='/product/1'
-                        buy_href='/product/1'
                         image_url='/logo512.png'
                         purchased={true}
                     />
                     <ProductCard
+                        product_id={2}
                         title='Omniwheel'
                         subtitle='Essential Source of Sonic Inspiration'
                         price={49900}
-                        href='/product/2'
-                        buy_href='/product/2'
                         image_url='/logo512.png'
                         purchased={false}
                     />

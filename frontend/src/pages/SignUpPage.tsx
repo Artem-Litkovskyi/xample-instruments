@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, redirect } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
@@ -8,9 +8,10 @@ import ValidationError from "../errors/ValidationError.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 
 
-
 function SignUpPage() {
     const { signup } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [fields, setFields] = useState({
         username:'',
@@ -74,7 +75,7 @@ function SignUpPage() {
             throw error;
         }
 
-        redirect('/signin');
+        navigate('/signin', { state: { returnToUrl: location?.state?.returnToUrl } });
     }
 
 
@@ -128,7 +129,13 @@ function SignUpPage() {
 
                         <div>
                             <p>Already have an account?</p>
-                            <Link to='/signin' className='button gray'>Sign in</Link>
+                            <Link
+                                to='/signin'
+                                className='button gray'
+                                state={{ returnToUrl: location?.state?.returnToUrl }}
+                            >
+                                Sign in
+                            </Link>
                         </div>
                     </form>
                 </div>
