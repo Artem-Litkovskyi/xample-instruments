@@ -1,9 +1,11 @@
-import {useState} from 'react';
-import {Link} from 'react-router';
+import { useState } from 'react';
+import { Link } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
-import {validateUsername, validateEmail, validatePassword} from '../services/UserService';
+import { validateUsername, validateEmail, validatePassword } from '../services/UserService';
+// import { useAuth } from "../contexts/AuthContext.tsx";
+
 
 
 function SignUpPage() {

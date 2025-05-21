@@ -48,15 +48,15 @@ form div {
     grid-row-start: 2;
 }
 
-.form-group span.rule {
+.form-group .weak {
     opacity: 0.5;
 }
 
-.form-group span.valid {
+.form-group .valid {
     color: green;
 }
 
-.form-group span.invalid {
+.form-group .invalid {
     color: red;
 }
 

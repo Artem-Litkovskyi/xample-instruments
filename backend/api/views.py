@@ -10,7 +10,10 @@ from django.views.decorators.http import require_POST
 def session_view(request):
     if not request.user.is_authenticated:
         return JsonResponse({'isAuthenticated': False})
-    return JsonResponse({'isAuthenticated': True})
+    return JsonResponse({
+        'isAuthenticated': True,
+        'username': request.user.username
+    })
 
 
 def whoami_view(request):

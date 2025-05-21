@@ -1,11 +1,14 @@
 import { createContext, useContext, useState, useEffect, type PropsWithChildren } from 'react';
 import Cookies from 'universal-cookie';
 
+import ValidationError from '../errors/ValidationError.tsx';
+
 const cookies = new Cookies();
 
 
 interface AuthContextType {
     isAuthenticated: boolean;
+    username: string;
     getSession: () => void;
     whoami: () => void;
     login: (username: string, password: string) => void;
@@ -26,20 +29,10 @@ export function useAuth() {
 
 export default function AuthProvider(props: PropsWithChildren) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [username, setUsername] = useState('');
 
-    // Initial session check
     useEffect(() => {
-        fetch('/api/session/', {
-            credentials: 'include',
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setIsAuthenticated(data.isAuthenticated);
-            })
-            .catch((err) => {
-                console.error('Session check failed', err);
-                setIsAuthenticated(false);
-            });
+        getSession();
     }, []);
 
     function getSession() {
@@ -48,12 +41,11 @@ export default function AuthProvider(props: PropsWithChildren) {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 setIsAuthenticated(data.isAuthenticated);
+                setUsername(data.username);
             })
-            .catch((err) => {
-                console.log('Get session failed', err);
-                throw err;
+            .catch((error) => {
+                throw error;
             });
     }
 
@@ -66,14 +58,13 @@ export default function AuthProvider(props: PropsWithChildren) {
             .then((data) => {
                 console.log('You are logged in as: ' + data.username);
             })
-            .catch((err) => {
-                console.log('Who am I failed', err);
-                throw err;
+            .catch((error) => {
+                throw error;
             });
     }
 
-    function login(username: string, password: string) {
-        fetch('/api/login/', {
+    async function login(username: string, password: string) {
+        const response = await fetch('/api/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,16 +72,15 @@ export default function AuthProvider(props: PropsWithChildren) {
             },
             credentials: 'include',
             body: JSON.stringify({ username, password }),
-        })
-            .then(isResponseOk)
-            .then((data) => {
-                console.log(data);
-                setIsAuthenticated(true);
-            })
-            .catch((err) => {
-                console.log('Log in failed', err);
-                throw err;
-            });
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new ValidationError(data.detail);
+        }
+
+        setIsAuthenticated(true);
     }
 
     function logout() {
@@ -102,22 +92,21 @@ export default function AuthProvider(props: PropsWithChildren) {
                 console.log(data);
                 setIsAuthenticated(false);
             })
-            .catch((err) => {
-                console.log('Log out failed', err);
-                throw err;
+            .catch((error) => {
+                throw error;
             });
     }
 
     function isResponseOk(response: Response) {
-        if (response.status >= 200 && response.status <= 299) {
-            return response.json();
-        } else {
+        if (!response.ok) {
             throw Error(response.statusText);
         }
+
+        return response;
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, getSession, whoami, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, getSession, whoami, login, logout }}>
             {props.children}
         </AuthContext.Provider>
     );

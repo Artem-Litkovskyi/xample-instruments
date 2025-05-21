@@ -1,36 +1,46 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router';
 
+import { useAuth } from '../contexts/AuthContext.tsx';
+
 import '../assets/styles/components/AccountWidget.css';
 
 
-function AccountWidget(props: {loggedIn: boolean}) {
-    const ref = useRef<HTMLDivElement | null>(null);
+function AccountWidget() {
+    const { isAuthenticated, username, logout } = useAuth();
+
+    const widgetRef = useRef<HTMLDivElement | null>(null);
 
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
         let handler = ({target}: MouseEvent) => {
-            if (!ref.current?.contains(target as Node)) {
+            if (!widgetRef.current?.contains(target as Node)) {
                 setOpen(false);
             }
         };
 
         document.addEventListener('mousedown', handler);
+
+        return () => {
+            document.removeEventListener('mousedown', handler);
+        }
     })
 
     return (
-        <div className='account-widget' ref={ref}>
-            {props.loggedIn ? (
+        <div className='account-widget' ref={widgetRef}>
+            {isAuthenticated ? (
                 <div className={`dropdown ${open ? 'open' : ''}`}>
-                    <button onClick={() => setOpen(!open)}>Username</button>
+                    <button onClick={() => setOpen(!open)}>
+                        {username}
+                    </button>
                     <div className='dropdown-content'>
                         <hr />
                         <Link to='/account/settings'>Account settings</Link><br />
                         <Link to='/account/products'>My products</Link><br />
                         <Link to='/account/history'>Order history</Link><br />
                         <hr />
-                        <Link to='/logout'>Log out</Link>
+                        <Link to='#' onClick={logout}>Log out</Link>
                     </div>
                 </div>
             ) : (

@@ -8,6 +8,17 @@ export default function ValidatedInput(params: {
     ruleMessage?: string, alwaysShowRule?: boolean,
     state: string,  // state: 'initial', 'valid' or 'invalid'
 }) {
+    const stateToClass = (state: string) => {
+        switch (state) {
+            case 'initial':
+                return 'weak';
+            case 'valid':
+                return 'valid';
+            case 'invalid':
+                return 'invalid';
+        }
+    }
+
     return (
         <div className='form-group'>
             <label htmlFor={params.id}>{params.label}</label>
@@ -18,7 +29,7 @@ export default function ValidatedInput(params: {
             />
 
             {(params.alwaysShowRule || params.state === 'invalid') && (
-                <span className={params.state === 'initial' ? 'rule' : params.state}>
+                <span className={stateToClass(params.state)}>
                     {params.ruleMessage}
                 </span>
             )}

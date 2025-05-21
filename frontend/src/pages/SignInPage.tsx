@@ -3,28 +3,38 @@ import { Link } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from '../contexts/AuthContext';
+import ValidationError from '../errors/ValidationError.tsx';
 
 
 function SignInPage() {
     const { login } = useAuth();
 
-    const [fields, setFields] = useState({email:'', password:''});
+    const [fields, setFields] = useState({ email:'', password:'' });
     const [formState, setFormState] = useState('initial');
+    const [fetchError, setFetchError] = useState('');
+
 
     const handleChange = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
-        setFields(fields => ({...fields, [name]: value}));
+        setFields(prev => ({...prev, [name]: value}));
         setFormState('initial');
     }
 
-    const handleSubmit = (event: any) => {
+    async function handleSubmit(event: any) {
         event.preventDefault();
+
         try {
-            login(fields.email, fields.password);
+            await login(fields.email, fields.password);
         } catch (error) {
-            setFormState('invalid');
+            if (error instanceof ValidationError) {
+                setFormState('invalid');
+                return;
+            }
+
+            setFetchError('Oops, something went wrong...');
+            throw error;
         }
     }
 
@@ -55,7 +65,7 @@ function SignInPage() {
                         />
 
                         <div>
-                            <p></p>
+                            <p className='invalid'>{fetchError}</p>
                             <button type='submit' className='button gray'>Sign in</button>
                         </div>
 
