@@ -43,11 +43,21 @@ body {
 .content-grid {
   display: grid;
   gap: 50px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.content-grid.small {
   grid-template-columns: 1fr 1fr;
 }
 
 hr {
   border: 1px solid white;
+}
+
+@media screen and (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 650px) {

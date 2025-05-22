@@ -14,7 +14,7 @@ function HomePage() {
             />
 
             <div className='content'>
-                <div className='content-grid'>
+                <div className='content-grid small'>
                     <CategoryCard
                         title='Discover instruments'
                         href='/products/instruments'

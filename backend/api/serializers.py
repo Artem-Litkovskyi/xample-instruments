@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
+from .models import *
 
 
 User = get_user_model()
@@ -75,3 +76,9 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class ProductUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['title', 'subtitle', 'description', 'sys_req', 'price', 'file', 'file_demo', 'screenshot']
