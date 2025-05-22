@@ -74,7 +74,7 @@ def logout_view(request):
 @permission_classes([AllowAny])
 @authentication_classes([SessionAuthentication])
 def signup_view(request):
-    serializer = RegisterSerializer(data=request.data)
+    serializer = SignUpSerializer(data=request.data)
     if not serializer.is_valid():
         return Response({'detail': format_serializer_errors(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -109,6 +109,28 @@ def account_update_view(request):
     })
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication])
+def my_products_view(request):
+    licenses = License.objects.filter(user=request.user)
+
+    serializer = LicenseSerializer(licenses, many=True)
+
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication])
+def my_orders_view(request):
+    orders = Order.objects.filter(user=request.user)
+
+    serializer = OrderSerializer(orders, many=True)
+
+    return Response(serializer.data)
+
+
 # --- PRODUCTS ---
 @api_view(['GET'])
 def products_view(request, category=None):
@@ -134,6 +156,7 @@ def products_view(request, category=None):
         }
         for product in products
     ]
+
     return Response(data)
 
 

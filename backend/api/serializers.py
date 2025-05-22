@@ -8,7 +8,7 @@ from .models import *
 User = get_user_model()
 
 
-class RegisterSerializer(serializers.ModelSerializer):
+class SignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
 
     class Meta:
@@ -82,3 +82,24 @@ class ProductUploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['title', 'subtitle', 'category', 'description', 'sys_req', 'price', 'file', 'file_demo', 'screenshot']
+
+
+class LicenseSerializer(serializers.ModelSerializer):
+    license_id = serializers.IntegerField(source='id')
+    product_id = serializers.IntegerField(source='product.id')
+    product_title = serializers.CharField(source='product.title')
+
+    class Meta:
+        model = License
+        fields = ['license_id', 'product_id', 'product_title']
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_id = serializers.IntegerField(source='id')
+    product_title = serializers.CharField(source='product.title')
+    created_at = serializers.DateTimeField()
+    price = serializers.IntegerField()
+
+    class Meta:
+        model = License
+        fields = ['order_id', 'product_title', 'created_at', 'price']

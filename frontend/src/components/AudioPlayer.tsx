@@ -54,7 +54,7 @@ function AudioPlayer(props: {src: string, title: string }) {
                             if (audioRef.current) audioRef.current.currentTime = newTime * audioRef.current.duration;
                         }}
                     />
-                    <span>{secondsToString(audioRef.current ? audioRef.current.duration : 0)}</span>
+                    <span>{secondsToString(audioRef.current?.duration ? audioRef.current.duration : 0)}</span>
                 </div>
             </div>
 

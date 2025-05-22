@@ -1,5 +1,3 @@
-import os
-
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -53,7 +51,7 @@ class ScreenshotArea(models.Model):
     height = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
 
     def __str__(self):
-        return '%s: %s' % (self.product, self.title)
+        return '%s: %s (screenshot area)' % (self.product, self.title)
 
 
 class AudioDemo(models.Model):
@@ -63,4 +61,22 @@ class AudioDemo(models.Model):
     file = models.FileField(upload_to='products/audio/')
 
     def __str__(self):
-        return '%s: %s' % (self.product, self.title)
+        return '%s: %s (audio demo)' % (self.product, self.title)
+
+
+class License(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s has a license for %s' % (self.user, self.product)
+
+
+class Order(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s bought %s for %s cents at %s' % (self.user, self.product, self.price, self.created_at)

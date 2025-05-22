@@ -95,3 +95,31 @@ class AudioDemoAdmin(admin.ModelAdmin):
             'fields': ('file',)
         }),
     )
+
+
+@admin.register(License)
+class LicenseAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product')
+    list_filter = ('product',)
+
+    search_fields = ('user',)
+    ordering = ('user',)
+
+    fieldsets = (
+        (None, {'fields': ('user', 'product')}),
+    )
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'price', 'created_at')
+    list_filter = ('product',)
+
+    search_fields = ('user',)
+    ordering = ('user',)
+
+    fieldsets = (
+        (None, {'fields': ('user', 'product', 'price', 'created_at')}),
+    )
+
+    readonly_fields = ['created_at']
