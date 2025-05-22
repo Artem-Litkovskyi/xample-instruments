@@ -8,7 +8,7 @@ import HeaderAdditional from '../components/HeaderAdditional';
 import { get_products } from '../services/ProductService.ts';
 
 
-interface ProductsPageShortInfo {
+export interface ProductShortInfo {
     id: number;
     title: string;
     subtitle: string;
@@ -20,7 +20,7 @@ interface ProductsPageShortInfo {
 function ProductsPage() {
     const params = useParams();
 
-    const [products, setProducts] = useState<ProductsPageShortInfo[]>([]);
+    const [products, setProducts] = useState<ProductShortInfo[]>([]);
 
     useEffect(() => {
         get_products(params.category === 'all' ? '' : params.category)

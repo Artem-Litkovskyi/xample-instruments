@@ -17,12 +17,12 @@ function HomePage() {
                 <div className='content-grid small'>
                     <CategoryCard
                         title='Discover instruments'
-                        href='/products/instruments'
+                        href='/products/instrument'
                         image_url='logo512.png'
                     />
                     <CategoryCard
                         title='Discover audio effects'
-                        href='/products/effects'
+                        href='/products/effect'
                         image_url='/logo512.png'
                     />
                 </div>

@@ -1,4 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
@@ -133,4 +134,42 @@ def products_view(request, category=None):
         }
         for product in products
     ]
+    return Response(data)
+
+
+@api_view(['GET'])
+def product_view(request, product_id=None):
+    product = get_object_or_404(Product, id=product_id)
+    audio_demos = AudioDemo.objects.filter(product=product_id)
+    screenshot_areas = ScreenshotArea.objects.filter(product=product_id)
+
+    data = {
+        'title': product.title,
+        'subtitle': product.subtitle,
+        'description': product.description,
+        'sys_req': product.sys_req,
+        'price': product.price,
+        'file': 'http://0.0.0.0:8000' + product.file.url,  # Quick fix
+        'file_demo': 'http://0.0.0.0:8000' + product.file_demo.url,  # Quick fix
+        'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
+        'audio_demos': [
+            {
+                'title': i.title,
+                'file': 'http://0.0.0.0:8000' + i.file.url,  # Quick fix
+            }
+            for i in audio_demos
+        ],
+        'screenshot_areas': [
+            {
+                'title': i.title,
+                'description': i.description,
+                'x': i.x,
+                'y': i.y,
+                'width': i.width,
+                'height': i.height,
+            }
+            for i in screenshot_areas
+        ]
+    }
+
     return Response(data)
