@@ -1,27 +1,43 @@
 import json
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, AccountUpdateSerializer
 
 
+def format_serializer_errors(errors):
+    formated = {}
+
+    for field in errors:
+        message = ' '.join(errors[field])
+        formated[field] = message.capitalize().rstrip('.')
+
+    return formated
+
+
+# --- AUTHENTICATION ---
 @ensure_csrf_cookie
 def session_view(request):
     if not request.user.is_authenticated:
         return JsonResponse({'isAuthenticated': False})
     return JsonResponse({
         'isAuthenticated': True,
-        'username': request.user.username
+        'username': request.user.username,
+        'email': request.user.email,
     })
 
 
 def whoami_view(request):
     if not request.user.is_authenticated:
         return JsonResponse({'isAuthenticated': False})
-    return JsonResponse({'username': request.user.username})
+    return JsonResponse({
+        'username': request.user.username,
+        'email': request.user.email,
+    })
 
 
 @require_POST
@@ -56,14 +72,31 @@ def signup_view(request):
     serializer = RegisterSerializer(data=data)
 
     if not serializer.is_valid():
-        detail = {}
-
-        for field in serializer.errors:
-            message = ' '.join(serializer.errors[field])
-            detail[field] = message.capitalize().rstrip('.')
-
-        return JsonResponse({'detail': detail}, status=400)
+        return JsonResponse({'detail': format_serializer_errors(serializer.errors)}, status=400)
 
     serializer.save()
 
     return JsonResponse(serializer.data)
+
+
+# --- ACCOUNT INFO ---
+@require_POST
+@login_required
+def account_update_view(request):
+    data = json.loads(request.body)
+    serializer = AccountUpdateSerializer(
+        instance=request.user,
+        data=data,
+        context={'request': request},
+        partial=True  # Allow partial updates (e.g., just email)
+    )
+
+    if not serializer.is_valid():
+        return JsonResponse({'detail': format_serializer_errors(serializer.errors)}, status=400)
+
+    serializer.save()
+
+    # Ensure session remains active if password changed
+    if 'new_password' in data:
+        update_session_auth_hash(request, request.user)
+    return JsonResponse({'detail': 'Account updated successfully.'})

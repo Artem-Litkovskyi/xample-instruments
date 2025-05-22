@@ -1,5 +1,6 @@
 .panel {
     border-radius: var(--radius);
+    overflow: hidden;
 }
 
 .padded {

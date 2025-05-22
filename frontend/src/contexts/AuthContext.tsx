@@ -9,6 +9,7 @@ const cookies = new Cookies();
 interface AuthContextType {
     isAuthenticated: boolean;
     username: string;
+    email: string;
     getSession: () => void;
     whoami: () => void;
     login: (email: string, password: string) => void;
@@ -31,6 +32,7 @@ export function useAuth() {
 export default function AuthProvider(props: PropsWithChildren) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
         getSession();
@@ -44,6 +46,7 @@ export default function AuthProvider(props: PropsWithChildren) {
             .then((data) => {
                 setIsAuthenticated(data.isAuthenticated);
                 setUsername(data.username);
+                setEmail(data.email);
             })
             .catch((error) => {
                 throw error;
@@ -57,7 +60,7 @@ export default function AuthProvider(props: PropsWithChildren) {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log('You are logged in as: ' + data.username);
+                console.log('You are logged in as: ' + data.username + ' (' + data.email + ')');
             })
             .catch((error) => {
                 throw error;
@@ -122,7 +125,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, getSession, whoami, login, logout, signup }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, email, getSession, whoami, login, logout, signup }}>
             {props.children}
         </AuthContext.Provider>
     );

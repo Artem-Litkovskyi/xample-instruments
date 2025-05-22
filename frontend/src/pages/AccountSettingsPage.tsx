@@ -1,72 +1,106 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 import ValidatedInput from '../components/ValidatedInput';
-import {validateUsername, validateEmail, validatePassword} from '../services/UserService';
+import { validateUsername, validateEmail, validatePassword } from '../services/UserService';
+import ValidationError from '../errors/ValidationError.tsx';
+import { useAuth } from '../contexts/AuthContext.tsx';
+import { account_update } from '../services/UserService.ts';
 
 
 function AccountSettingsPage() {
+    const { username, email } = useAuth();
+    
     const [fields, setFields] = useState({
-        username:'',
-        email:'',
+        username:username,
+        email:email,
+        oldPassword:'',
         newPassword:'',
         repeatPassword:'',
-        password:'',
     });
 
-    const [states, setStates] = useState({
-        username: 'initial',
-        email:'initial',
-        newPassword:'initial',
-        repeatPassword:'initial',
-        password:'initial',
+    const [errors, setErrors] = useState({
+        username: '',
+        email:'',
+        oldPassword:'',
+        newPassword:'',
+        repeatPassword:'',
     });
 
     const validators = {
         username:validateUsername,
         email:validateEmail,
+        oldPassword:() => '',
         newPassword:validatePassword,
-        repeatPassword:(value: string) => value === fields.newPassword ? 0 : -1,
-        password:() => 0,  // Quick fix
+        repeatPassword:(value: string) => value === fields.newPassword ? '' : 'Passwords do not match',
     };
 
-    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [fetchError, setFetchError] = useState('');
 
 
     const handleChange = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
-        setFields(fields => ({...fields, [name]: value}));
-
-        if (name !== 'newPassword') return;
-
-        const validationResult = validators[name as keyof typeof states](value);
-        if (validationResult !== 0 && states[name as keyof typeof states] === 'initial') return;
-        setStates(states => (
-            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}));
+        setFields(prev => ({...prev, [name]: value}));
     }
 
     const handleBlur = (event: any) => {
         const name = event.target.name;
         const value = event.target.value;
 
-        if (name === 'newPassword') return;
+        const validationResult = validators[name as keyof typeof validators](value);
+        setErrors(prev => ({...prev, [name]: validationResult}))
 
-        const validationResult = validators[name as keyof typeof states](value);
-        setStates(states => (
-            {...states, [name]: validationResult === 0 ? 'valid' : 'invalid'}))
+        if (name === 'newPassword') {
+            if (fields.oldPassword === '') {
+                setErrors(prev => ({...prev, oldPassword: 'Password is required for this action'}))
+            }
 
-        if (name === 'email') {
-            if (validationResult === -1) setEmailErrorMessage('Incorrect email address')
-            else if (validationResult === -2) setEmailErrorMessage('This email is used by another user')
+            if (fields.repeatPassword === '') {
+                setErrors(prev => ({...prev, repeatPassword: 'Please repeat your new password'}))
+            }
         }
     }
 
-    const handleSubmit = (event: any) => {
+    async function handleSubmit(event: any) {
         event.preventDefault();
-        setStates(states => (
-            {...states, password: 'invalid'}));
-        alert(fields);
-        // TODO: send to server
+
+        try {
+            await account_update(fields.username, fields.email, fields.oldPassword, fields.newPassword);
+            alert('Account updated successfully.');
+        } catch (error) {
+            if (error instanceof ValidationError) {
+                setErrors(prev => ({
+                    ...prev,
+                    // @ts-ignore
+                    username: error.detail?.username || '',
+                    // @ts-ignore
+                    email: error.detail?.email || '',
+                    // @ts-ignore
+                    oldPassword: error.detail?.old_password || '',
+                    // @ts-ignore
+                    newPassword: error.detail?.new_password || '',
+                }));
+
+                return;
+            }
+
+            setFetchError('Oops, something went wrong...');
+            throw error;
+        }
+    }
+
+    function isDisabled() {
+        if (errors.username !== '' || errors.email !== '') {
+            return true;
+        }
+
+        if (fields.newPassword !== '' || fields.repeatPassword !== '') {
+            if (errors.oldPassword !== '' || errors.newPassword !== '' || errors.repeatPassword !== '') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
@@ -81,52 +115,47 @@ function AccountSettingsPage() {
                 <ValidatedInput
                     label='Username:' type='text' id='username' value={fields.username}
                     onChange={handleChange} onBlur={handleBlur}
-                    ruleMessage="Username can't be empty"
-                    alwaysShowRule={false}
-                    state={states.username}
+                    errorMessage={errors.username}
                 />
 
                 <ValidatedInput
                     label='Email:' type='text' id='email' value={fields.email}
                     onChange={handleChange} onBlur={handleBlur}
-                    ruleMessage={emailErrorMessage}
-                    alwaysShowRule={false}
-                    state={states.email}
-                />
-
-                <h2>Change password</h2>
-
-                <ValidatedInput
-                    label='New password:' type='password' id='newPassword' value={fields.newPassword}
-                    onChange={handleChange} onBlur={handleBlur}
-                    ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase, numbers and special symbols (!@#$%^&*)'
-                    alwaysShowRule={true}
-                    state={states.newPassword}
-                />
-
-                <ValidatedInput
-                    label='Repeat password:' type='password' id='repeatPassword' value={fields.repeatPassword}
-                    onChange={handleChange} onBlur={handleBlur}
-                    ruleMessage='Passwords do not match'
-                    alwaysShowRule={false}
-                    state={states.repeatPassword}
+                    errorMessage={errors.email}
                 />
 
                 <hr />
 
-                <h2>Confirm changes</h2>
+                <h2>Change password</h2>
 
                 <ValidatedInput
-                    label='Current password:' type='password' id='password' value={fields.password}
-                    onChange={handleChange}
-                    ruleMessage='Wrong password'
-                    alwaysShowRule={false}
-                    state={states.password}
+                    label='Current password:' type='password' id='oldPassword' value={fields.oldPassword}
+                    onChange={handleChange} onBlur={handleBlur}
+                    errorMessage={errors.oldPassword}
+                />
+
+                <ValidatedInput
+                    label='New password:' type='password' id='newPassword' value={fields.newPassword}
+                    onChange={handleChange} onBlur={handleBlur}
+                    ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase and numbers'
+                    errorMessage={errors.newPassword}
+                />
+
+                <ValidatedInput
+                    label='Repeat the new password:' type='password' id='repeatPassword' value={fields.repeatPassword}
+                    onChange={handleChange} onBlur={handleBlur}
+                    errorMessage={errors.repeatPassword}
                 />
 
                 <div>
-                    <p aria-hidden={true}></p>
-                    <button type='submit' className='button gray'>Save</button>
+                    <p className='invalid'>{fetchError}</p>
+                    <button
+                        type='submit'
+                        className='button gray'
+                        disabled={isDisabled()}
+                    >
+                        Save all
+                    </button>
                 </div>
             </form>
         </div>
