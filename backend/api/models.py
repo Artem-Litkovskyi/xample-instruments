@@ -21,8 +21,14 @@ class CustomUser(AbstractUser):
 
 
 class Product(models.Model):
+
+    class Category(models.TextChoices):
+        INSTRUMENT = 'INSTRUMENT', _('Instrument')
+        EFFECT = 'EFFECT', _('Effect')
+
     title = models.CharField(max_length=150, unique=True)
     subtitle = models.CharField(max_length=150)
+    category = models.CharField(choices=Category.choices)
     description = models.CharField(max_length=1000)
     sys_req = models.CharField(max_length=500)
     price = models.PositiveIntegerField()

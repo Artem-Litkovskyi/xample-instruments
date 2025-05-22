@@ -9,4 +9,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='api_logout'),
     path('signup/', views.signup_view, name='api_signup'),
     path('account_update/', views.account_update_view, name='api_account_update'),
+    path('products/', views.products_view, name='product-list'),
+    path('products/<str:category>/', views.products_view, name='product-list-by-category'),
 ]

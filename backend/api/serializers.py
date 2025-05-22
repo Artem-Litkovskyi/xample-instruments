@@ -81,4 +81,4 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
 class ProductUploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['title', 'subtitle', 'description', 'sys_req', 'price', 'file', 'file_demo', 'screenshot']
+        fields = ['title', 'subtitle', 'category', 'description', 'sys_req', 'price', 'file', 'file_demo', 'screenshot']

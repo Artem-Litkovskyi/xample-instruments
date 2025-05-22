@@ -6,7 +6,8 @@ from rest_framework.authentication import SessionAuthentication
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from .serializers import RegisterSerializer, AccountUpdateSerializer
+from .serializers import *
+from .models import *
 
 
 def format_serializer_errors(errors):
@@ -105,3 +106,31 @@ def account_update_view(request):
         'email': request.user.email,
         'detail': 'Account updated successfully.'
     })
+
+
+# --- PRODUCTS ---
+@api_view(['GET'])
+def products_view(request, category=None):
+    if category:
+        category = category.upper()
+        if category not in dict(Product.Category.choices):
+            return Response(
+                {'error': 'Invalid category'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        products = Product.objects.filter(category=category)
+    else:
+        products = Product.objects.all()
+
+    data = [
+        {
+            'id': product.id,
+            'title': product.title,
+            'subtitle': product.subtitle,
+            'price': product.price,
+            'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
+            # 'screenshot': request.build_absolute_uri(product.screenshot.url),
+        }
+        for product in products
+    ]
+    return Response(data)
