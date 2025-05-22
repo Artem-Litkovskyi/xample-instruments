@@ -54,3 +54,44 @@ class ProductAdmin(admin.ModelAdmin):
         form.base_fields['description'].widget = Textarea(attrs={'rows': 10, 'cols': 60})
         form.base_fields['sys_req'].widget = Textarea(attrs={'rows': 5, 'cols': 60})
         return form
+
+
+@admin.register(ScreenshotArea)
+class ScreenshotAreaAdmin(admin.ModelAdmin):
+    list_display = ('product', 'title')
+    list_filter = ('product',)
+
+    search_fields = ('title', 'description')
+    ordering = ('product',)
+
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('product', 'title', 'description')
+        }),
+        ('Position', {
+            'fields': ('x', 'y', 'width', 'height')
+        }),
+    )
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['description'].widget = Textarea(attrs={'rows': 10, 'cols': 60})
+        return form
+
+
+@admin.register(AudioDemo)
+class AudioDemoAdmin(admin.ModelAdmin):
+    list_display = ('product', 'title')
+    list_filter = ('product',)
+
+    search_fields = ('title',)
+    ordering = ('product',)
+
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('product', 'title')
+        }),
+        ('Files', {
+            'fields': ('file',)
+        }),
+    )

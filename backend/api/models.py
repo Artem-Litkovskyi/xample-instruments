@@ -1,4 +1,7 @@
+import os
+
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -17,7 +20,7 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return 'CustomUser (email=%s, username=%s)' % (self.email, self.username)
+        return self.email
 
 
 class Product(models.Model):
@@ -36,7 +39,28 @@ class Product(models.Model):
     file_demo = models.FileField(upload_to='products/demo/')
     screenshot = models.ImageField(upload_to='products/screenshots/')
 
-    REQUIRED_FIELDS = [title, subtitle, description, sys_req, price, file, file_demo, screenshot]
+    def __str__(self):
+        return self.title
+
+
+class ScreenshotArea(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=1000)
+    x = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    y = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    width = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    height = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
 
     def __str__(self):
-        return 'Product (title=%s, price=%s)' % (self.title, self.price)
+        return '%s: %s' % (self.product, self.title)
+
+
+class AudioDemo(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, unique=True)
+    description = models.CharField(max_length=1000)
+    file = models.FileField(upload_to='products/audio/')
+
+    def __str__(self):
+        return '%s: %s' % (self.product, self.title)
