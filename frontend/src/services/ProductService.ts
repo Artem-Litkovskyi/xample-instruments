@@ -69,3 +69,21 @@ export async function get_my_orders() {
 
     return data;
 }
+
+
+export async function buy(product_id: number | undefined) {
+    const response = await fetch(`/api/buy/${product_id}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': cookies.get('csrftoken'),
+        },
+        credentials: 'include',
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new ValidationError(response.statusText, data.detail);
+    }
+}

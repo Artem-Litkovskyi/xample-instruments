@@ -196,3 +196,27 @@ def product_view(request, product_id=None):
     }
 
     return Response(data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication])
+def buy_view(request, product_id=None):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response({'detail': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    if License.objects.filter(user=request.user, product=product).exists():
+        return Response({'detail': 'User already owns a license for this product'}, status=status.HTTP_200_OK)
+
+    new_license = License.objects.create(user=request.user, product=product)
+    new_order = Order.objects.create(user=request.user, product=product, price=product.price)
+
+    return Response({
+        'detail': 'License and order created successfully',
+        'license_id': new_license.id,
+        'order_id': new_order.id,
+        'price': product.price,
+        'created_at': new_order.created_at
+    }, status=status.HTTP_201_CREATED)
