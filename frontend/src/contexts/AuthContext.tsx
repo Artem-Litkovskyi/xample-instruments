@@ -11,7 +11,6 @@ interface AuthContextType {
     username: string;
     email: string;
     getSession: () => void;
-    whoami: () => void;
     login: (email: string, password: string) => void;
     logout: () => void;
     signup: (username: string, email: string, password: string) => void;
@@ -53,20 +52,6 @@ export default function AuthProvider(props: PropsWithChildren) {
             });
     }
 
-    function whoami() {
-        fetch('/api/whoami/', {
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log('You are logged in as: ' + data.username + ' (' + data.email + ')');
-            })
-            .catch((error) => {
-                throw error;
-            });
-    }
-
     async function login(email: string, password: string) {
         const response = await fetch('/api/login/', {
             method: 'POST',
@@ -86,10 +71,15 @@ export default function AuthProvider(props: PropsWithChildren) {
 
         setIsAuthenticated(true);
         setUsername(data.username);
+        setEmail(data.email);
     }
 
     async function logout() {
-        const response = await fetch('/api/logout', {
+        const response = await fetch('/api/logout/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': cookies.get('csrftoken'),
+            },
             credentials: 'include',
         });
 
@@ -101,6 +91,7 @@ export default function AuthProvider(props: PropsWithChildren) {
 
         setIsAuthenticated(false);
         setUsername('');
+        setEmail('');
     }
 
     async function signup(username: string, email: string, password: string) {
@@ -122,10 +113,11 @@ export default function AuthProvider(props: PropsWithChildren) {
 
         setIsAuthenticated(false);
         setUsername('');
+        setEmail('');
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, email, getSession, whoami, login, logout, signup }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, email, getSession, login, logout, signup }}>
             {props.children}
         </AuthContext.Provider>
     );
