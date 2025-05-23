@@ -6,7 +6,7 @@ import AudioPlayer from '../components/AudioPlayer.tsx';
 import GuiMap from '../components/GuiMap.tsx';
 import GuiMapArea from '../components/GuiMapArea.tsx';
 import { centsToString } from '../utils/utils';
-import { download_product_demo, get_product } from '../services/ProductService';
+import { download_product_demo, download_product, get_product } from '../services/ProductService';
 
 import '../assets/styles/pages/ProductPage.css';
 
@@ -17,6 +17,7 @@ export interface ProductFullInfo {
     description: string;
     sys_req: string;
     price: number;
+    purchased: boolean;
     file: string; // URL
     file_demo: string; // URL
     screenshot: string; // URL
@@ -57,6 +58,14 @@ function ProductPage() {
         }
     }
 
+    async function handleDownload() {
+        try {
+            await download_product(Number(params.id));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     if (!product) {
         return (<p>Loading...</p>)  // TODO: loader
     }
@@ -70,7 +79,13 @@ function ProductPage() {
                             <h1>{product.title}</h1>
                             <p>{product.subtitle}</p>
                         </div>
-                        <Link className='button dark' to={`/buy/${params.id}`}>Buy Now ${centsToString(product.price)}USD</Link>
+                        {product.purchased ? (
+                            <button className='dark' onClick={handleDownload}>Download</button>
+                        ) : (
+                            <Link className='button dark' to={`/buy/${params.id}`}>
+                                Buy Now ${centsToString(product.price)}USD
+                            </Link>
+                        )}
                     </div>
 
                     <div id='about-panel' className='panel dark padded'>

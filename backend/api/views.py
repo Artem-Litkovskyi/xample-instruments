@@ -85,7 +85,7 @@ def signup_view(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# --- ACCOUNT INFO ---
+# --- USER ---
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
@@ -132,6 +132,8 @@ def my_orders_view(request):
 
 # --- PRODUCTS ---
 @api_view(['GET'])
+@permission_classes([AllowAny])
+@authentication_classes([SessionAuthentication])
 def products_view(request, category=None):
     if category:
         category = category.upper()
@@ -144,12 +146,17 @@ def products_view(request, category=None):
     else:
         products = Product.objects.all()
 
+    purchased_products_ids = []
+    if request.user.is_authenticated:
+        purchased_products_ids.extend(map(lambda l: l.product.id, License.objects.filter(user=request.user)))
+
     data = [
         {
             'id': product.id,
             'title': product.title,
             'subtitle': product.subtitle,
             'price': product.price,
+            'purchased': product.id in purchased_products_ids,
             'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
             # 'screenshot': request.build_absolute_uri(product.screenshot.url),
         }
@@ -160,10 +167,16 @@ def products_view(request, category=None):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
+@authentication_classes([SessionAuthentication])
 def product_view(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)
     audio_demos = AudioDemo.objects.filter(product=product_id)
     screenshot_areas = ScreenshotArea.objects.filter(product=product_id)
+
+    purchased = False
+    if request.user.is_authenticated:
+        purchased = len(License.objects.filter(user=request.user, product=product)) > 0
 
     data = {
         'title': product.title,
@@ -171,6 +184,7 @@ def product_view(request, product_id=None):
         'description': product.description,
         'sys_req': product.sys_req,
         'price': product.price,
+        'purchased': purchased,
         'file': 'http://0.0.0.0:8000' + product.file.url,  # Quick fix
         'file_demo': 'http://0.0.0.0:8000' + product.file_demo.url,  # Quick fix
         'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
@@ -197,6 +211,7 @@ def product_view(request, product_id=None):
     return Response(data)
 
 
+# --- SHOP ---
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
@@ -221,6 +236,7 @@ def buy_view(request, product_id=None):
     }, status=status.HTTP_201_CREATED)
 
 
+# --- DOWNLOADS ---
 @api_view(['GET'])
 def download_product_demo_view(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)

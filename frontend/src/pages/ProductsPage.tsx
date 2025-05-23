@@ -13,6 +13,7 @@ export interface ProductShortInfo {
     title: string;
     subtitle: string;
     price: number;
+    purchased: boolean;
     screenshot: string;
 }
 
@@ -47,7 +48,7 @@ function ProductsPage() {
                             subtitle={product.subtitle}
                             price={product.price}
                             image_url={product.screenshot}
-                            purchased={false}
+                            purchased={product.purchased}
                         />
                     ))}
                 </div>
