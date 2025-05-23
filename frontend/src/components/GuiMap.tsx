@@ -4,7 +4,7 @@ import '../assets/styles/components/GuiMap.css';
 
 
 interface GuiMapProps {
-    image_url: string;
+    image_url: string | undefined;
     onClick: () => void;
 }
 

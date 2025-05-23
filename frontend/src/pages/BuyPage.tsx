@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import AuthRequired from './AuthRequired.tsx';
@@ -9,6 +9,7 @@ import { centsToString } from '../utils/utils.ts';
 
 
 function BuyPage() {
+    const navigate = useNavigate();
     const params = useParams();
     const productId = Number(params.id);
     const [product, setProduct] = useState<ProductShortInfo>();
@@ -19,6 +20,9 @@ function BuyPage() {
             .then((data: ProductShortInfo[]) => setProduct(
                 data.find((element) => element.id === productId)
             ))
+            .catch(() => {
+                navigate('/404');
+            })
     }, []);
 
     async function handlePurchase() {
