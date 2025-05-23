@@ -10,8 +10,8 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import AccountPage from './pages/AccountPage';
 import AccountSettingsPage from './pages/AccountSettingsPage';
-import MyProductsPage from './pages/MyProductsPage';
-import OrderHistoryPage from './pages/OrderHistoryPage';
+import MyLicensesPage from './pages/MyLicensesPage.tsx';
+import MyOrdersPage from './pages/MyOrdersPage.tsx';
 import ProductPage from './pages/ProductPage';
 import AuthProvider from './contexts/AuthContext.tsx';
 import BuyPage from './pages/BuyPage.tsx';
@@ -72,11 +72,11 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'products',
-                        element: <MyProductsPage />,
+                        element: <MyLicensesPage />,
                     },
                     {
                         path: 'history',
-                        element: <OrderHistoryPage />,
+                        element: <MyOrdersPage />,
                     },
                 ]
             },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { get_my_orders } from '../services/ProductService.ts';
+import { get_my_orders } from '../services/UserService.ts';
 import { centsToString } from '../utils/utils';
 
 
@@ -12,12 +12,12 @@ interface OrderInfo {
 }
 
 
-function OrderHistoryPage() {
+function MyOrdersPage() {
     const [orders, setOrders] = useState<OrderInfo[]>([]);
 
     useEffect(() => {
         get_my_orders()
-            .then((data) => setOrders(data))
+            .then((data: OrderInfo[]) => setOrders(data))
     }, []);
 
     return (
@@ -52,4 +52,4 @@ function OrderHistoryPage() {
 }
 
 
-export default OrderHistoryPage;
+export default MyOrdersPage;

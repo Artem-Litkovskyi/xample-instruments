@@ -1,3 +1,6 @@
+import os
+
+from django.http import FileResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -112,11 +115,9 @@ def account_update_view(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
-def my_products_view(request):
+def my_licenses_view(request):
     licenses = License.objects.filter(user=request.user)
-
     serializer = LicenseSerializer(licenses, many=True)
-
     return Response(serializer.data)
 
 
@@ -125,9 +126,7 @@ def my_products_view(request):
 @authentication_classes([SessionAuthentication])
 def my_orders_view(request):
     orders = Order.objects.filter(user=request.user)
-
     serializer = OrderSerializer(orders, many=True)
-
     return Response(serializer.data)
 
 
@@ -220,3 +219,34 @@ def buy_view(request, product_id=None):
         'price': product.price,
         'created_at': new_order.created_at
     }, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def download_product_demo_view(request, product_id=None):
+    product = get_object_or_404(Product, id=product_id)
+
+    try:
+        file_path = product.file_demo.path
+        file_name = os.path.split(file_path)[1]
+        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
+    except FileNotFoundError:
+        return Response({'detail': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication])
+def download_product_view(request, product_id=None):
+    product = get_object_or_404(Product, id=product_id)
+
+    try:
+        License.objects.get(user=request.user, product=product)
+    except Product.DoesNotExist:
+        return Response({'detail': 'User doesn\'t own a license for this product'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        file_path = product.file.path
+        file_name = os.path.split(file_path)[1]
+        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
+    except FileNotFoundError:
+        return Response({'detail': 'File not found'}, status=status.HTTP_404_NOT_FOUND)

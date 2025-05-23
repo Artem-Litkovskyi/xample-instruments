@@ -1,16 +1,12 @@
 import { createContext, useContext, useState, useEffect, type PropsWithChildren } from 'react';
-import Cookies from 'universal-cookie';
 
-import ValidationError from '../errors/ValidationError.tsx';
-
-const cookies = new Cookies();
+import { make_request } from '../services/BaseService.ts';
 
 
 interface AuthContextType {
     isAuthenticated: boolean;
     username: string;
     email: string;
-    getSession: () => void;
     login: (email: string, password: string) => void;
     logout: () => void;
     signup: (username: string, email: string, password: string) => void;
@@ -34,60 +30,24 @@ export default function AuthProvider(props: PropsWithChildren) {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        getSession();
-    }, []);
-
-    function getSession() {
-        fetch('/api/session/', {
-            credentials: 'include',
-        })
-            .then((res) => res.json())
+        make_request('/api/session/', 'GET')
             .then((data) => {
                 setIsAuthenticated(data.isAuthenticated);
                 setUsername(data.username);
                 setEmail(data.email);
-            })
-            .catch((error) => {
-                throw error;
             });
-    }
+    }, []);
 
     async function login(email: string, password: string) {
-        const response = await fetch('/api/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': cookies.get('csrftoken'),
-            },
-            credentials: 'include',
-            body: JSON.stringify({ email, password }),
-        });
+        const data = await make_request('/api/login/', 'POST', { email, password });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new ValidationError(response.statusText, data.detail);
-        }
-
-        setIsAuthenticated(true);
+        setIsAuthenticated(data.isAuthenticated);
         setUsername(data.username);
         setEmail(data.email);
     }
 
     async function logout() {
-        const response = await fetch('/api/logout/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': cookies.get('csrftoken'),
-            },
-            credentials: 'include',
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new ValidationError(response.statusText, data.detail);
-        }
+        await make_request('/api/logout/', 'POST');
 
         setIsAuthenticated(false);
         setUsername('');
@@ -95,29 +55,12 @@ export default function AuthProvider(props: PropsWithChildren) {
     }
 
     async function signup(username: string, email: string, password: string) {
-        const response = await fetch('/api/signup/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': cookies.get('csrftoken'),
-            },
-            credentials: 'include',
-            body: JSON.stringify({ username, email, password }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new ValidationError(response.statusText, data.detail);
-        }
-
-        setIsAuthenticated(false);
-        setUsername('');
-        setEmail('');
+        await make_request('/api/signup/', 'POST', { username, email, password });
+        await logout();
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, email, getSession, login, logout, signup }}>
+        <AuthContext.Provider value={{ isAuthenticated, username, email, login, logout, signup }}>
             {props.children}
         </AuthContext.Provider>
     );

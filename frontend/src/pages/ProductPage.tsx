@@ -6,7 +6,7 @@ import AudioPlayer from '../components/AudioPlayer.tsx';
 import GuiMap from '../components/GuiMap.tsx';
 import GuiMapArea from '../components/GuiMapArea.tsx';
 import { centsToString } from '../utils/utils';
-import { get_product } from '../services/ProductService';
+import { download_product_demo, get_product } from '../services/ProductService';
 
 import '../assets/styles/pages/ProductPage.css';
 
@@ -41,15 +41,21 @@ export interface ScreenshotArea {
 
 function ProductPage() {
     const params = useParams();
-
     const [product, setProduct] = useState<ProductFullInfo>();
+    const [activeGuiArea, setActiveGuiArea] = useState(-1);
 
     useEffect(() => {
         get_product(params.id)
             .then((data) => setProduct(data))
     }, []);
-    
-    const [activeGuiArea, setActiveGuiArea] = useState(-1);
+
+    async function handleDownloadDemo() {
+        try {
+            await download_product_demo(Number(params.id));
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     if (!product) {
         return (<p>Loading...</p>)  // TODO: loader
@@ -118,7 +124,7 @@ function ProductPage() {
                     <div id='demo-panel' className='panel dark padded'>
                         <h2>Try it out!</h2>
                         <p>The {product.title} demo is free but is limited to 20 minutes (per operation), and only includes minimal content. Saving is disabled in the demo.</p>
-                        <button className='light'>Download demo</button>
+                        <button className='light' onClick={handleDownloadDemo}>Download demo</button>
                     </div>
                 </div>
             </div>

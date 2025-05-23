@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
-import { validateUsername, validateEmail, validatePassword } from '../services/UserService';
-import ValidationError from "../errors/ValidationError.tsx";
-import { useAuth } from "../contexts/AuthContext.tsx";
+import { validateUsername, validateEmail, validatePassword } from '../utils/validators.ts';
+import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
+import { useAuth } from '../contexts/AuthContext.tsx';
 
 
 function SignUpPage() {
@@ -57,7 +57,7 @@ function SignUpPage() {
         try {
             await signup(fields.username, fields.email, fields.password);
         } catch (error) {
-            if (error instanceof ValidationError) {
+            if (error instanceof ResponseNotOkError) {
                 setErrors(prev => ({
                     ...prev,
                     // @ts-ignore

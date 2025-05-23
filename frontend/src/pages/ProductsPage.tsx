@@ -41,6 +41,7 @@ function ProductsPage() {
                 <div className='content-grid'>
                     {products.map((product) => (
                         <ProductCard
+                            key={product.id}
                             product_id={product.id}
                             title={product.title}
                             subtitle={product.subtitle}

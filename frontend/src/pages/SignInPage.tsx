@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router';
 import HeaderAndFooter from './HeaderAndFooter';
 import ValidatedInput from '../components/ValidatedInput';
 import { useAuth } from '../contexts/AuthContext';
-import ValidationError from '../errors/ValidationError.tsx';
+import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 
 
 function SignInPage() {
@@ -30,7 +30,7 @@ function SignInPage() {
         try {
             await login(fields.email, fields.password);
         } catch (error) {
-            if (error instanceof ValidationError) {
+            if (error instanceof ResponseNotOkError) {
                 setError('Wrong email or password');
                 return;
             }

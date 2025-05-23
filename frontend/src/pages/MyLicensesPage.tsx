@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { get_my_products } from '../services/ProductService.ts';
+
+import { get_my_licenses } from '../services/UserService.ts';
+import { download_product } from '../services/ProductService.ts';
 
 
 interface LicenseInfo {
@@ -9,13 +11,21 @@ interface LicenseInfo {
 }
 
 
-function MyProductsPage() {
+function MyLicensesPage() {
     const [licenses, setLicenses] = useState<LicenseInfo[]>([]);
 
     useEffect(() => {
-        get_my_products()
-            .then((data) => setLicenses(data))
+        get_my_licenses()
+            .then((data: LicenseInfo[]) => setLicenses(data))
     }, []);
+
+    async function handleDownload(product_id: number) {
+        try {
+            await download_product(product_id);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div className='panel dark padded'>
@@ -38,7 +48,14 @@ function MyProductsPage() {
                         <tr key={item.license_id}>
                             <td>{item.product_title}</td>
                             <td>{item.license_id}</td>
-                            <td><button className='gray'>Download</button></td>
+                            <td>
+                                <button
+                                    className='gray'
+                                    onClick={() => handleDownload(Number(item.product_id))}
+                                >
+                                    Download
+                                </button>
+                            </td>
                         </tr>
                     ))}
                     </tbody>
@@ -50,4 +67,4 @@ function MyProductsPage() {
 }
 
 
-export default MyProductsPage;
+export default MyLicensesPage;

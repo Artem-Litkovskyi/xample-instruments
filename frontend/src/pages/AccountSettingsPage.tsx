@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import ValidatedInput from '../components/ValidatedInput';
-import { validateUsername, validateEmail, validatePassword } from '../services/UserService';
-import ValidationError from '../errors/ValidationError.tsx';
+import { validateUsername, validateEmail, validatePassword } from '../utils/validators.ts';
+import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 import { useAuth } from '../contexts/AuthContext.tsx';
 import { account_update } from '../services/UserService.ts';
 
@@ -68,7 +68,7 @@ function AccountSettingsPage() {
             await account_update(fields.username, fields.email, fields.oldPassword, fields.newPassword);
             alert('Account updated successfully.');
         } catch (error) {
-            if (error instanceof ValidationError) {
+            if (error instanceof ResponseNotOkError) {
                 setErrors(prev => ({
                     ...prev,
                     // @ts-ignore
