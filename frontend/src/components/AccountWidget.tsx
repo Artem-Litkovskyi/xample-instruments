@@ -38,8 +38,8 @@ function AccountWidget() {
                     <div className='dropdown-content'>
                         <hr />
                         <Link to='/account/settings'>Account settings</Link><br />
-                        <Link to='/account/products'>My products</Link><br />
-                        <Link to='/account/history'>Order history</Link><br />
+                        <Link to='/account/licenses'>My products</Link><br />
+                        <Link to='/account/orders'>Order history</Link><br />
                         <hr />
                         <Link to='/' onClick={logout}>Log out</Link>
                     </div>

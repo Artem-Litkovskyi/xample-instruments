@@ -5,15 +5,13 @@ import HeaderAndFooter from './HeaderAndFooter';
 import AuthRequired from "./AuthRequired.tsx";
 
 
-function AccountPage() {
+function AdminPage() {
     return (
-        <AuthRequired>
+        <AuthRequired requireAdmin>
             <HeaderAndFooter additionalHeader={
                 <HeaderAdditional
                     navigation={[
-                        {name: 'Account settings', href: '/account/settings'},
-                        {name: 'My products', href: '/account/licenses'},
-                        {name: 'Order history', href: '/account/orders'},
+                        {name: 'Manage products', href: '/admin/products'},
                     ]}
                 />
             }>
@@ -26,4 +24,4 @@ function AccountPage() {
 }
 
 
-export default AccountPage;
+export default AdminPage;

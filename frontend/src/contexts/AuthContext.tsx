@@ -5,8 +5,10 @@ import { make_request } from '../services/BaseService.ts';
 
 interface AuthContextType {
     isAuthenticated: boolean;
+    isAdmin: boolean;
     username: string;
     email: string;
+    loading: boolean;
     login: (email: string, password: string) => void;
     logout: () => void;
     signup: (username: string, email: string, password: string) => void;
@@ -14,34 +16,29 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function useAuth() {
-    const context = useContext(AuthContext);
-
-    if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-
-    return context;
-}
-
 export default function AuthProvider(props: PropsWithChildren) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         make_request('/api/session/', 'GET')
             .then((data) => {
                 setIsAuthenticated(data.isAuthenticated);
-                setUsername(data.username);
-                setEmail(data.email);
-            });
+                setIsAdmin(data.isAuthenticated ? data.isAdmin : false);
+                setUsername(data.isAuthenticated ? data.username : '');
+                setEmail(data.isAuthenticated ? data.email : '');
+            })
+            .finally(() => setLoading(false));
     }, []);
 
     async function login(email: string, password: string) {
         const data = await make_request('/api/login/', 'POST', { email, password });
 
         setIsAuthenticated(data.isAuthenticated);
+        setIsAdmin(data.isAdmin);
         setUsername(data.username);
         setEmail(data.email);
     }
@@ -50,6 +47,7 @@ export default function AuthProvider(props: PropsWithChildren) {
         await make_request('/api/logout/', 'POST');
 
         setIsAuthenticated(false);
+        setIsAdmin(false);
         setUsername('');
         setEmail('');
     }
@@ -60,8 +58,19 @@ export default function AuthProvider(props: PropsWithChildren) {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, username, email, login, logout, signup }}>
+        <AuthContext.Provider value={{ isAuthenticated, isAdmin, username, email, loading, login, logout, signup }}>
             {props.children}
         </AuthContext.Provider>
     );
 };
+
+
+export function useAuth() {
+    const context = useContext(AuthContext);
+
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+
+    return context;
+}

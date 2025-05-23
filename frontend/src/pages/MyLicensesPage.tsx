@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { get_my_licenses } from '../services/UserService.ts';
+import { get_my_licenses, type LicenseInfo } from '../services/UserService.ts';
 import { download_product } from '../services/ProductService.ts';
-
-
-interface LicenseInfo {
-    license_id: string;
-    product_id: string;
-    product_title: string;
-}
 
 
 function MyLicensesPage() {

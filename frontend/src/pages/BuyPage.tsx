@@ -3,26 +3,27 @@ import { Link, useParams } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
 import AuthRequired from './AuthRequired.tsx';
-import type { ProductFullInfo } from './ProductPage.tsx';
-import { buy, get_product } from '../services/ProductService.ts';
+
+import { buy, get_products, type ProductShortInfo } from '../services/ProductService.ts';
 import { centsToString } from '../utils/utils.ts';
 
 
 function BuyPage() {
     const params = useParams();
-
-    const [product, setProduct] = useState<ProductFullInfo>();
-
+    const productId = Number(params.id);
+    const [product, setProduct] = useState<ProductShortInfo>();
     const [error, setError] = useState('');
 
     useEffect(() => {
-        get_product(params.id)
-            .then((data) => setProduct(data))
+        get_products('')
+            .then((data: ProductShortInfo[]) => setProduct(
+                data.find((element) => element.id === productId)
+            ))
     }, []);
 
     async function handlePurchase() {
         try {
-            await buy(Number(params.id));
+            await buy(productId);
             setError('');
             alert('Purchased successfully.');
         } catch (error) {

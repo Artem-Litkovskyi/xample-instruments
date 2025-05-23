@@ -5,17 +5,7 @@ import HeaderAndFooter from './HeaderAndFooter';
 import ProductCard from '../components/ProductCard';
 import HeaderAdditional from '../components/HeaderAdditional';
 
-import { get_products } from '../services/ProductService.ts';
-
-
-export interface ProductShortInfo {
-    id: number;
-    title: string;
-    subtitle: string;
-    price: number;
-    purchased: boolean;
-    screenshot: string;
-}
+import { get_products, type ProductShortInfo } from '../services/ProductService.ts';
 
 
 function ProductsPage() {

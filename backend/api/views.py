@@ -31,9 +31,12 @@ def format_serializer_errors(errors):
 @ensure_csrf_cookie
 def session_view(request):
     if not request.user.is_authenticated:
-        return Response({'isAuthenticated': False})
+        return Response({
+            'isAuthenticated': False,
+        })
     return Response({
         'isAuthenticated': True,
+        'isAdmin': request.user.is_staff,
         'username': request.user.username,
         'email': request.user.email,
     })
@@ -55,8 +58,10 @@ def login_view(request):
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
     login(request, user)
+
     return Response({
         'isAuthenticated': True,
+        'isAdmin': request.user.is_staff,
         'username': request.user.username,
         'email': request.user.email,
     })
@@ -69,7 +74,6 @@ def logout_view(request):
     logout(request)
     return Response({
         'isAuthenticated': False,
-        'detail': 'Successfully logged out'
     })
 
 
@@ -155,6 +159,7 @@ def products_view(request, category=None):
             'id': product.id,
             'title': product.title,
             'subtitle': product.subtitle,
+            'category': product.category,
             'price': product.price,
             'purchased': product.id in purchased_products_ids,
             'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
@@ -181,6 +186,7 @@ def product_view(request, product_id=None):
     data = {
         'title': product.title,
         'subtitle': product.subtitle,
+        'category': product.category,
         'description': product.description,
         'sys_req': product.sys_req,
         'price': product.price,

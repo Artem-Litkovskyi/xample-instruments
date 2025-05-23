@@ -5,16 +5,22 @@ import { createRoot } from 'react-dom/client'
 import Root from './pages/Root';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+
 import ProductsPage from './pages/ProductsPage';
+import ProductPage from './pages/ProductPage';
+import BuyPage from './pages/BuyPage.tsx';
+
+import AuthProvider from './contexts/AuthContext.tsx';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
+
 import AccountPage from './pages/AccountPage';
 import AccountSettingsPage from './pages/AccountSettingsPage';
 import MyLicensesPage from './pages/MyLicensesPage.tsx';
 import MyOrdersPage from './pages/MyOrdersPage.tsx';
-import ProductPage from './pages/ProductPage';
-import AuthProvider from './contexts/AuthContext.tsx';
-import BuyPage from './pages/BuyPage.tsx';
+
+import AdminPage from './pages/AdminPage.tsx';
+import ManageProductsPage from './pages/ManageProductsPage.tsx';
 
 import './index.css';
 import './assets/styles/basic/Buttons.css';
@@ -47,6 +53,10 @@ const router = createBrowserRouter([
                 element: <ProductsPage />,
             },
             {
+                path: 'product/:id',
+                element: <ProductPage />,
+            },
+            {
                 path: 'buy/:id',
                 element: <BuyPage />,
             },
@@ -71,19 +81,29 @@ const router = createBrowserRouter([
                         element: <AccountSettingsPage />,
                     },
                     {
-                        path: 'products',
+                        path: 'licenses',
                         element: <MyLicensesPage />,
                     },
                     {
-                        path: 'history',
+                        path: 'orders',
                         element: <MyOrdersPage />,
                     },
                 ]
             },
             {
-                path: 'product/:id',
-                element: <ProductPage />,
-            }
+                path: 'admin',
+                element: <AdminPage />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to='products' replace />,
+                    },
+                    {
+                        path: 'products',
+                        element: <ManageProductsPage />,
+                    },
+                ]
+            },
         ]
     }
 ]);

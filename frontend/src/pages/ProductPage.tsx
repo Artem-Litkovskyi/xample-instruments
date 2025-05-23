@@ -5,39 +5,11 @@ import HeaderAndFooter from './HeaderAndFooter';
 import AudioPlayer from '../components/AudioPlayer.tsx';
 import GuiMap from '../components/GuiMap.tsx';
 import GuiMapArea from '../components/GuiMapArea.tsx';
+
+import { download_product_demo, download_product, get_product, type ProductFullInfo } from '../services/ProductService';
 import { centsToString } from '../utils/utils';
-import { download_product_demo, download_product, get_product } from '../services/ProductService';
 
 import '../assets/styles/pages/ProductPage.css';
-
-
-export interface ProductFullInfo {
-    title: string;
-    subtitle: string;
-    description: string;
-    sys_req: string;
-    price: number;
-    purchased: boolean;
-    file: string; // URL
-    file_demo: string; // URL
-    screenshot: string; // URL
-    audio_demos: AudioDemo[];
-    screenshot_areas: ScreenshotArea[];
-}
-
-export interface AudioDemo {
-    title: string;
-    file: string; // URL
-}
-
-export interface ScreenshotArea {
-    title: string;
-    description: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
 
 
 function ProductPage() {

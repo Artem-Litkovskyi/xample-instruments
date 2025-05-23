@@ -1,15 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { get_my_orders } from '../services/UserService.ts';
+import { get_my_orders, type OrderInfo } from '../services/UserService.ts';
 import { centsToString } from '../utils/utils';
-
-
-interface OrderInfo {
-    order_id: number;
-    product_title: string;
-    created_at: string;
-    price: number;
-}
 
 
 function MyOrdersPage() {
