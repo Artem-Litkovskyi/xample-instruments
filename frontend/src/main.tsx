@@ -21,6 +21,7 @@ import MyOrdersPage from './pages/MyOrdersPage.tsx';
 
 import AdminPage from './pages/AdminPage.tsx';
 import ManageProductsPage from './pages/ManageProductsPage.tsx';
+import AddProductPage from './pages/AddProductPage.tsx';
 
 import './index.css';
 import './assets/styles/basic/Buttons.css';
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
                         element: <ManageProductsPage />,
                     },
                 ]
+            },
+            {
+                path: 'addproduct',
+                element: <AddProductPage />,
             },
         ]
     }

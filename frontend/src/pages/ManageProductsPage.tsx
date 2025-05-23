@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
 import { get_products, type ProductShortInfo } from '../services/ProductService.ts';
 
@@ -20,7 +21,7 @@ function ManageProductsPage() {
             <h2>All products</h2>
 
             {products.length === 0 ? (
-                <p>Nothing to show here</p>
+                <p>No products</p>
             ) : (
                 <table>
                     <thead>
@@ -50,6 +51,7 @@ function ManageProductsPage() {
                 </table>
             )}
 
+            <Link to='/addproduct' className='button light'>Add</Link>
         </div>
     )
 }

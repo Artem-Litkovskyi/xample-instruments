@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
-import ValidatedInput from '../components/ValidatedInput';
+import LabeledInput from '../components/LabeledInput.tsx';
 import { useAuth } from '../contexts/AuthContext';
 import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 
@@ -53,13 +53,13 @@ function SignInPage() {
                         onSubmit={handleSubmit}
                         onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                     >
-                        <ValidatedInput
+                        <LabeledInput
                             label='Email:' type='text' id='email' value={fields.email}
                             onChange={handleChange}
                             errorMessage={error}
                         />
 
-                        <ValidatedInput
+                        <LabeledInput
                             label='Password:' type='password' id='password' value={fields.password}
                             onChange={handleChange}
                             errorMessage={error}

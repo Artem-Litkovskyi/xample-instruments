@@ -13,6 +13,7 @@ function GuiMap(props: PropsWithChildren<GuiMapProps>) {
     return (
         <div className='gui-map'>
             <img
+                id='screenshot'
                  src={props.image_url}
                  alt='GUI screenshot'
                  onClick={props.onClick}

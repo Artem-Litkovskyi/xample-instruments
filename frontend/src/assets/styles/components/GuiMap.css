@@ -11,10 +11,14 @@
     box-sizing: border-box;
 }
 
+.gui-map:hover > :not(img) {
+    border: 2px solid gray;
+}
+
 .gui-map-area:hover {
-    border: 2px solid red;
+    border: 2px solid red !important;
 }
 
 .gui-map-area.active {
-    border: 2px solid red;
+    border: 2px solid red !important;
 }

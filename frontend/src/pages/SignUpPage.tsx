@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 
 import HeaderAndFooter from './HeaderAndFooter';
-import ValidatedInput from '../components/ValidatedInput';
+import LabeledInput from '../components/LabeledInput.tsx';
 import { validateUsername, validateEmail, validatePassword } from '../utils/validators.ts';
 import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -89,26 +89,26 @@ function SignUpPage() {
                     >
                         <h2>Sign up</h2>
 
-                        <ValidatedInput
+                        <LabeledInput
                             label='Username:' type='text' id='username' value={fields.username}
                             onChange={handleChange} onBlur={handleBlur}
                             errorMessage={errors.username}
                         />
 
-                        <ValidatedInput
+                        <LabeledInput
                             label='Email:' type='text' id='email' value={fields.email}
                             onChange={handleChange} onBlur={handleBlur}
                             errorMessage={errors.email}
                         />
 
-                        <ValidatedInput
+                        <LabeledInput
                             label='Password:' type='password' id='password' value={fields.password}
                             onChange={handleChange} onBlur={handleBlur}
                             ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase and numbers'
                             errorMessage={errors.password}
                         />
 
-                        <ValidatedInput
+                        <LabeledInput
                             label='Repeat password:' type='password' id='repeatPassword' value={fields.repeatPassword}
                             onChange={handleChange} onBlur={handleBlur}
                             errorMessage={errors.repeatPassword}

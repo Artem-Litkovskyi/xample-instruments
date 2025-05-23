@@ -22,7 +22,7 @@ form div {
 }
 
 /*Validation input styles*/
-.form-group input {
+.form-group input, .form-group textarea {
     border: none;
     border-radius: var(--radius);
     font-family: inherit; font-size: 1em;
@@ -74,7 +74,7 @@ form hr {
         grid-template-columns: 1fr;
     }
 
-    .form-group input {
+    .form-group input, .form-group textarea {
         grid-column-start: 1;
         grid-row-start: 2;
     }
