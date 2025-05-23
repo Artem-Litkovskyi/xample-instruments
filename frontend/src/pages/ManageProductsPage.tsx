@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { get_products, type ProductShortInfo } from '../services/ProductService.ts';
+import { get_products, type ProductShortInfo} from '../services/ProductService.ts';
+import { delete_product } from '../services/AdminService.ts';
 
 
 function ManageProductsPage() {
     const [products, setProducts] = useState<ProductShortInfo[]>([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         get_products('')
@@ -12,7 +14,14 @@ function ManageProductsPage() {
     }, []);
 
     async function handleRemove(product_id: number) {
-        console.log(product_id);
+        try {
+            await delete_product(product_id);
+            setError('');
+            alert('Removed successfully.');
+        } catch (error) {
+            setError('Oops, something went wrong...');
+            throw error;
+        }
     }
 
     return (
@@ -50,6 +59,7 @@ function ManageProductsPage() {
                 </table>
             )}
 
+            <p>{error}</p>
         </div>
     )
 }

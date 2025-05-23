@@ -3,7 +3,7 @@ import os
 from django.http import FileResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import SessionAuthentication
@@ -272,3 +272,12 @@ def download_product_view(request, product_id=None):
         return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
     except FileNotFoundError:
         return Response({'detail': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+# --- MANAGEMENT ---
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def delete_product_view(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    return Response({'detail': 'Product deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

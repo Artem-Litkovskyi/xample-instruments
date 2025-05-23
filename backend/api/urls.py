@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('download_product_demo/<int:product_id>/', views.download_product_demo_view, name='api_download_product_demo'),
     path('download_product/<int:product_id>/', views.download_product_view, name='api_download_product'),
+
+    path('delete_product/<int:product_id>/', views.delete_product_view, name='api_delete_product'),
 ]
