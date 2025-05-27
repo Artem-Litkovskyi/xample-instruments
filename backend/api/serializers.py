@@ -8,6 +8,36 @@ from .models import *
 User = get_user_model()
 
 
+def _get_image_url(obj, request, image_field_name):
+    image = getattr(obj, image_field_name)
+    if image and request:
+        return 'http://0.0.0.0:8000' + image.url  # Quick fix
+        # return request.build_absolute_uri(image.url)
+    return None
+
+
+class HomePageSerializer(serializers.ModelSerializer):
+    hero_image_url = serializers.SerializerMethodField()
+    category_instruments_image_url = serializers.SerializerMethodField()
+    category_effects_image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = HomePage
+        fields = (
+            'hero_title', 'hero_subtitle', 'hero_link', 'hero_image_url',
+            'category_instruments_image_url', 'category_effects_image_url',
+        )
+
+    def get_hero_image_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'hero_image')
+
+    def get_category_instruments_image_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'category_instruments_image')
+
+    def get_category_effects_image_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'category_effects_image')
+
+
 class SignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
 

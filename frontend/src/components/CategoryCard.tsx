@@ -3,11 +3,11 @@ import { Link } from 'react-router';
 import '../assets/styles/components/CategoryCard.css';
 
 
-function CategoryCard(params: { title: string, href: string, image_url: string }) {
+function CategoryCard(params: { title: string, href: string, image_url: string, alt: string }) {
     return (
         <div className='category-card panel light'>
             <Link to={params.href}>
-                <img src={params.image_url} alt='category' />
+                <img src={params.image_url} alt={params.alt} />
                 <p>{params.title}</p>
             </Link>
         </div>

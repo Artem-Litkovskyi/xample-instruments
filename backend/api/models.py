@@ -80,3 +80,16 @@ class Order(models.Model):
 
     def __str__(self):
         return '%s bought %s for %s cents at %s' % (self.user, self.product, self.price, self.created_at)
+
+
+class HomePage(models.Model):
+    hero_title = models.CharField(max_length=150)
+    hero_subtitle = models.CharField(max_length=150)
+    hero_link = models.CharField(max_length=150)
+    hero_image = models.ImageField(upload_to='home/')
+
+    category_instruments_image = models.ImageField(upload_to='home/')
+    category_effects_image = models.ImageField(upload_to='home/')
+
+    def __str__(self):
+        return self.hero_title

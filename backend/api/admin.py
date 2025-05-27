@@ -123,3 +123,17 @@ class OrderAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ['created_at']
+
+
+@admin.register(HomePage)
+class HomePageAdmin(admin.ModelAdmin):
+    list_display = ('hero_title', 'hero_subtitle')
+
+    fieldsets = (
+        ('Hero', {
+            'fields': ('hero_title', 'hero_subtitle', 'hero_link', 'hero_image')
+        }),
+        ('Categories', {
+            'fields': ('category_instruments_image', 'category_effects_image')
+        }),
+    )

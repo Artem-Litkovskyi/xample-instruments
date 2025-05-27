@@ -24,6 +24,17 @@ def format_serializer_errors(errors):
     return formated
 
 
+# --- HOME PAGE ---
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def home_page_view(request):
+    home_page = get_object_or_404(HomePage)
+
+    serializer = HomePageSerializer(home_page, context={'request': request})
+
+    return Response(serializer.data)
+
+
 # --- AUTHENTICATION ---
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication])
