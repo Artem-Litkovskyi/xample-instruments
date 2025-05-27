@@ -52,7 +52,7 @@ export async function getProduct(product_id: string | undefined) {
 
 
 export async function buyProduct(product_id: number | undefined) {
-    await makeRequest(`/api/buy/${product_id}/`, 'POST');
+    await makeRequest(`/api/buy_product/${product_id}/`, 'POST');
 }
 
 

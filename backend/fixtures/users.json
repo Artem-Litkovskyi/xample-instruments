@@ -1,0 +1,18 @@
+[
+  {
+    "model": "api.customuser",
+    "pk": 2,
+    "fields": {
+      "username": "Artem",
+      "email": "litkovskyi.artem@gmail.com",
+      "password": "pbkdf2_sha256$1000000$GZ8pAUbxOyEGuio4sHA1Oo$w3IJhH9TC7ki4KIzzLBx91OujTBS0Bfai1H3PpFO1O4=",
+      "last_login": "2025-05-27T12:54:48.671Z",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-05-27T12:54:34.724Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

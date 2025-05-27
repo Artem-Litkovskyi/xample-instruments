@@ -7,7 +7,7 @@ import '../../assets/styles/components/AccountWidget.css';
 
 
 function AccountWidget() {
-    const { isAuthenticated, username, logout } = useAuth();
+    const { isAuthenticated, isAdmin, username, logout } = useAuth();
     const location = useLocation();
 
     const widgetRef = useRef<HTMLDivElement | null>(null);
@@ -37,6 +37,9 @@ function AccountWidget() {
                     </button>
                     <div className='dropdown-content'>
                         <hr />
+                        {isAdmin && (
+                            <><Link to='/admin'>Admin page</Link><br /></>
+                        )}
                         <Link to='/account/settings'>Account settings</Link><br />
                         <Link to='/account/licenses'>My products</Link><br />
                         <Link to='/account/orders'>Order history</Link><br />

@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 15px 30px;
 }
 
 #product-title-panel p {
@@ -24,10 +24,16 @@
 #gui-panel {
     grid-row-start: 2;
     grid-column-start: 2;
+    text-align: center;
 }
 
-#gui-panel h2 {
-    text-align: center;
+#gui-panel .gui-panel-image {
+    background-color: black;
+    padding: 10px;
+}
+
+#gui-panel .image-map {
+    margin: 0 auto;
 }
 
 #demo-panel {

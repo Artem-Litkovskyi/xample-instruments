@@ -1,0 +1,56 @@
+[
+  {
+    "model": "api.audiodemo",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "title": "House (Foggy Morning)",
+      "file": "products/audio/foggy_morning.ogg"
+    }
+  },
+  {
+    "model": "api.audiodemo",
+    "pk": 2,
+    "fields": {
+      "product": 2,
+      "title": "House (Foggy Morning)",
+      "file": "products/audio/foggy_morning.ogg"
+    }
+  },
+  {
+    "model": "api.audiodemo",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "title": "Hip-Hop (Sunrays)",
+      "file": "products/audio/sunrays.ogg"
+    }
+  },
+  {
+    "model": "api.audiodemo",
+    "pk": 4,
+    "fields": {
+      "product": 3,
+      "title": "Hip-Hop (Sunrays)",
+      "file": "products/audio/sunrays.ogg"
+    }
+  },
+  {
+    "model": "api.audiodemo",
+    "pk": 5,
+    "fields": {
+      "product": 4,
+      "title": "House (Foggy Morning)",
+      "file": "products/audio/foggy_morning.ogg"
+    }
+  },
+  {
+    "model": "api.audiodemo",
+    "pk": 6,
+    "fields": {
+      "product": 4,
+      "title": "Hip-Hop (Sunrays)",
+      "file": "products/audio/sunrays.ogg"
+    }
+  }
+]

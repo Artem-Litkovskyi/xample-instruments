@@ -1,0 +1,10 @@
+[
+  {
+    "model": "api.license",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "product": 1
+    }
+  }
+]

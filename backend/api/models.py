@@ -43,7 +43,7 @@ class Product(models.Model):
 
 class ScreenshotArea(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, unique=True)
+    title = models.CharField(max_length=150)
     description = models.CharField(max_length=1000)
     x = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     y = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
@@ -56,8 +56,7 @@ class ScreenshotArea(models.Model):
 
 class AudioDemo(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, unique=True)
-    description = models.CharField(max_length=1000)
+    title = models.CharField(max_length=150)
     file = models.FileField(upload_to='products/audio/')
 
     def __str__(self):

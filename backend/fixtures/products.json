@@ -1,0 +1,62 @@
+[
+  {
+    "model": "api.product",
+    "pk": 1,
+    "fields": {
+      "title": "Soundhighlighter",
+      "subtitle": "Multiband upwards/downwards compressor",
+      "category": "EFFECT",
+      "description": "Soundhighlighter is a re-creation of a popular aggressive multiband upwards/downwards compressor setting used by many dubstep and electro producers. It's based on the Maximum soundprocess engine",
+      "sys_req": "Macintosh: macOS 10.11 or later\r\nWindows: Windows 7 SP1 or later\r\nVST or AudioUnit compatible host",
+      "price": 0,
+      "file": "products/full/Soundhighlighter.txt",
+      "file_demo": "products/demo/Soundhighlighter_demo.txt",
+      "screenshot": "products/screenshots/Soundhighlighter.webp"
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 2,
+    "fields": {
+      "title": "LiquidPlant",
+      "subtitle": "Advanced hybrid synthesizer",
+      "category": "INSTRUMENT",
+      "description": "LiquidPlant is a multi-award-winning, semi-modular wavetable synthesizer designed for music producers and sound designers who seek both top-quality sound and creative freedom. Create, import, edit, and morph wavetables, and manipulate them on playback in real-time. With limitless combinations of generators, modulators, effects, and an intuitive, fun approach, LiquidPlant makes sound design inspiring rather than tedious.",
+      "sys_req": "Macintosh: macOS 10.11 or later\r\nWindows: Windows 7 SP1 or later\r\nVST or AudioUnit compatible host",
+      "price": 24900,
+      "file": "products/full/LiquidPlant.txt",
+      "file_demo": "products/demo/LiquidPlant_demo.txt",
+      "screenshot": "products/screenshots/LiquidPlant.webp"
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 3,
+    "fields": {
+      "title": "Pacify2",
+      "subtitle": "Dynamic resonance suppressor",
+      "category": "EFFECT",
+      "description": "Pacify2 is an intelligent dynamic resonance suppressor that automatically detects and reduces harsh or problematic frequencies in real time. By applying precise, adaptive attenuation only when and where it's needed, it delivers a smoother, more balanced sound without the need for manual EQ notching. Nearby frequencies remain untouched, preserving the original character and timbre of the source, ensuring a clean and transparent result with minimal artifacts.",
+      "sys_req": "Macintosh: macOS 10.13 – 15\r\nWindows 7 - 11 (no ARM support)\r\nVST or AudioUnit compatible host",
+      "price": 20900,
+      "file": "products/full/Pacify2.txt",
+      "file_demo": "products/demo/Pacify2_demo.txt",
+      "screenshot": "products/screenshots/Pacify2.webp"
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 4,
+    "fields": {
+      "title": "Quieth1",
+      "subtitle": "Virtual analog synthesizer",
+      "category": "INSTRUMENT",
+      "description": "Quieth1 is a virtual analog VSTi synthesizer that redefines quality and performance in software synthesis. While few softsynths have matched the sonic excellence of hardware counterparts, Sylenth1 stands among the exceptions. Designed from a producer’s perspective, it’s crafted to deliver exceptional sound quality and musicality. Extensive research went into achieving its signature warmth and clarity, making it a powerful tool for professional production. Its intuitive graphical interface is designed for maximum usability, allowing you to focus on creativity and bring your ideas to life effortlessly.",
+      "sys_req": "Macintosh: macOS 10.9 or later\r\nWindows 7 or later\r\nVST or AudioUnit compatible host",
+      "price": 15700,
+      "file": "products/full/Quieth1.txt",
+      "file_demo": "products/demo/Quieth1_demo.txt",
+      "screenshot": "products/screenshots/Quieth1.webp"
+    }
+  }
+]

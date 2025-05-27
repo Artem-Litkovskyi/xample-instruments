@@ -1,0 +1,14 @@
+[
+  {
+    "model": "api.homepage",
+    "pk": 1,
+    "fields": {
+      "hero_title": "New plug-in: Quieth1",
+      "hero_subtitle": "A virtual analog synthesizer that takes the definitions of quality and performance to a higher level",
+      "hero_link": "/product/4/",
+      "hero_image": "home/Quieth1_banner_upscaled.webp",
+      "category_instruments_image": "home/Category_Instruments.webp",
+      "category_effects_image": "home/Category_Effects.webp"
+    }
+  }
+]

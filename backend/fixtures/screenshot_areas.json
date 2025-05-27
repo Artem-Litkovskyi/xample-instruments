@@ -1,0 +1,158 @@
+[
+  {
+    "model": "api.screenshotarea",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "title": "Knobs",
+      "description": "\"Depth\" controls amount of compression. \"Time\" controls attack/release times of all bands. The other two are Input and Output gain controls.",
+      "x": 5,
+      "y": 30,
+      "width": 90,
+      "height": 19
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "title": "Bands",
+      "description": "A visual display of input and gain reduction over the low/mid/high bands.",
+      "x": 5,
+      "y": 50,
+      "width": 90,
+      "height": 30
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "title": "Presets",
+      "description": "Select the preset to match your music by clicking and listening for the good stuff to happen.",
+      "x": 5,
+      "y": 82,
+      "width": 90,
+      "height": 17
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "title": "OSC, FX and Global tabs",
+      "description": "On the FX tab you can apply a large range of useful audio effects without leaving the LiquidPlant.",
+      "x": 15,
+      "y": 0,
+      "width": 25,
+      "height": 18
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 5,
+    "fields": {
+      "product": 2,
+      "title": "Oscillators",
+      "description": "Choose from regular waveforms, wavetables, samples, and noise for your source sounds.",
+      "x": 0,
+      "y": 18,
+      "width": 100,
+      "height": 35
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "title": "Modulation",
+      "description": "LiquidPlant's unique modular modulation section allows you to connect modulators and utilities in an infinite number of combinations for ultimate control, or ultimate chaos.",
+      "x": 0,
+      "y": 53,
+      "width": 100,
+      "height": 35
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "title": "Parameters",
+      "description": "Consists of the main, stereo, speed, quality, sidechain and output sections.",
+      "x": 0,
+      "y": 0,
+      "width": 31,
+      "height": 100
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 8,
+    "fields": {
+      "product": 3,
+      "title": "Frequency and reduction graph",
+      "description": "The blue area — shows the parts of the signal being reduced.\r\nThe white curve with colored EQ nodes — controls which frequency areas are processed.",
+      "x": 31,
+      "y": 0,
+      "width": 69,
+      "height": 100
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 9,
+    "fields": {
+      "product": 4,
+      "title": "Oscillators",
+      "description": "At its core Quieth1 houses 4 alias-free unison oscillators, which generate analog shaped waveforms.",
+      "x": 0,
+      "y": 0,
+      "width": 100,
+      "height": 21
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 10,
+    "fields": {
+      "product": 4,
+      "title": "Filters",
+      "description": "There are 2 state of the art, pure analog sounding filter sections.",
+      "x": 0,
+      "y": 21,
+      "width": 26,
+      "height": 37
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 11,
+    "fields": {
+      "product": 4,
+      "title": "Modulation",
+      "description": "Quieth1 offers many modulation options to sculpture the sound any way you like.",
+      "x": 0,
+      "y": 58,
+      "width": 100,
+      "height": 30
+    }
+  },
+  {
+    "model": "api.screenshotarea",
+    "pk": 12,
+    "fields": {
+      "product": 4,
+      "title": "Master FX",
+      "description": "A set of 7 professional quality sound effects, conveniently grouped into an LCD panel structure.",
+      "x": 26,
+      "y": 21,
+      "width": 48,
+      "height": 37
+    }
+  }
+]

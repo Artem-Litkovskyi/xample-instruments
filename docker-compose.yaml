@@ -24,8 +24,7 @@ services:
       - db
 
   frontend:
-    build:
-      context: frontend
+    build: ./frontend
     ports:
       - "3000:3000"
     volumes:

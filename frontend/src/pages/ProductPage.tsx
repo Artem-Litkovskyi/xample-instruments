@@ -85,22 +85,25 @@ function ProductPage() {
                         </div>
 
                         <div id='gui-panel' className='panel dark'>
-                            <ImageMap
-                                image_url={product?.screenshot}
-                                onClick={() => setActiveGuiArea(-1)}
-                            >
-                                {product?.screenshot_areas.map((item, i) => (
-                                    <ImageMapArea
-                                        position_x={item.x}
-                                        position_y={item.y}
-                                        width={item.width}
-                                        height={item.height}
-                                        onClick={() => setActiveGuiArea(i)}
-                                        key={i}
-                                        active={activeGuiArea === i}
-                                    />
-                                ))}
-                            </ImageMap>
+                            <div className='gui-panel-image'>
+                                <ImageMap
+                                    image_url={product?.screenshot}
+                                    alt='screenshot'
+                                    onClick={() => setActiveGuiArea(-1)}
+                                >
+                                    {product?.screenshot_areas.map((item, i) => (
+                                        <ImageMapArea
+                                            position_x={item.x}
+                                            position_y={item.y}
+                                            width={item.width}
+                                            height={item.height}
+                                            onClick={() => setActiveGuiArea(i)}
+                                            key={i}
+                                            active={activeGuiArea === i}
+                                        />
+                                    ))}
+                                </ImageMap>
+                            </div>
 
                             <div className='padded'>
                                 {activeGuiArea >= 0 && (

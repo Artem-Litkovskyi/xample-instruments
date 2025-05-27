@@ -1,20 +1,26 @@
 .image-map {
     position: relative;
+    width: fit-content;
 }
 
 .image-map img {
+    max-height: 600px;
     display: block;
 }
 
 .image-map-area {
+    border-radius: var(--radius);
     position: absolute;
     box-sizing: border-box;
 }
 
 .image-map-area:hover {
-    border: 2px solid red;
+    opacity: 0.25;
+    background-color: black;
+    /*border: 2px solid red;*/
 }
 
 .image-map-area.active {
-    border: 2px solid red;
+    opacity: 0.5;
+    background-color: black;
 }

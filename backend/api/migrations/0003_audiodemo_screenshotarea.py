@@ -16,8 +16,7 @@ class Migration(migrations.Migration):
             name='AudioDemo',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=150, unique=True)),
-                ('description', models.CharField(max_length=1000)),
+                ('title', models.CharField(max_length=150)),
                 ('file', models.FileField(upload_to='products/audio/')),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.product')),
             ],
@@ -26,7 +25,7 @@ class Migration(migrations.Migration):
             name='ScreenshotArea',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=150, unique=True)),
+                ('title', models.CharField(max_length=150)),
                 ('description', models.CharField(max_length=1000)),
                 ('x', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
                 ('y', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),

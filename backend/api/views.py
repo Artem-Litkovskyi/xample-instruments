@@ -75,7 +75,6 @@ def login_view(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
 def logout_view(request):
     logout(request)
@@ -219,7 +218,7 @@ def product_view(request, product_id=None):
 def delete_product_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
-    return Response('Product deleted successfully', status=status.HTTP_204_NO_CONTENT)
+    return Response('Product deleted successfully', status=status.HTTP_200_OK)
 
 
 # --- SHOP ---

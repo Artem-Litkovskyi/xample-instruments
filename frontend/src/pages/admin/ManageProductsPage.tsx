@@ -6,22 +6,29 @@ import { deleteProduct } from '../../services/AdminService.ts';
 
 function ManageProductsPage() {
     const [products, setProducts] = useState<ProductShortInfo[]>([]);
-    const [error, setError] = useState('');
+    const [fetchMessage, setFetchMessage] = useState('');
 
     useEffect(() => {
-        getProducts('')
-            .then((data) => setProducts(data))
+        fetchProducts();
     }, []);
+
+    function fetchProducts() {
+        getProducts('').then((data) => setProducts(data));
+    }
 
     async function handleRemove(product_id: number) {
         try {
             await deleteProduct(product_id);
-            setError('');
-            alert('Removed successfully.');
         } catch (error) {
-            setError('Oops, something went wrong...');
+            setFetchMessage('Oops, something went wrong...');
+            setTimeout(() => setFetchMessage(''), 2000);
             throw error;
         }
+
+        setFetchMessage('Removed successfully!');
+        setTimeout(() => setFetchMessage(''), 2000);
+
+        fetchProducts();
     }
 
     return (
@@ -60,7 +67,7 @@ function ManageProductsPage() {
                     </table>
                 )}
 
-                <p>{error}</p>
+                <p>{fetchMessage}</p>
             </div>
         </div>
     )

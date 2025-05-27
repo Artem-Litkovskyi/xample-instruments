@@ -31,7 +31,7 @@ function ProductCard(params: {
                 {params.purchased ? (
                     <p>Purchased</p>
                 ) : (
-                    <Link to={`/buy/${params.product_id}`} className='button light'>Buy</Link>
+                    <Link to={`/buy_product/${params.product_id}`} className='button light'>Buy</Link>
                 )}
             </div>
         </div>
