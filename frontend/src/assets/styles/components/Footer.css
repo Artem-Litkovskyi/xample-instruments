@@ -7,7 +7,15 @@
     background-color: var(--color-panel);
 }
 
-.footer * {
+.footer span, .footer svg {
     color: white;
     opacity: 0.5;
+}
+
+.footer span {
+    flex: 2;
+}
+
+.footer a {
+    padding: 0 10px;
 }

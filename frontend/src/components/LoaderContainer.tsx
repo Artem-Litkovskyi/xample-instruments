@@ -1,6 +1,6 @@
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
 
-import logo from '../assets/react.svg';
+import { BiLoaderAlt } from 'react-icons/bi';
 
 import '../assets/styles/components/LoaderContainer.css';
 
@@ -15,7 +15,7 @@ function LoaderContainer(props: PropsWithChildren<LoaderContainer>) {
     if (props.loading) {
         return (
             <div className='loader'>
-                {props.hide ? (<p></p>) : (<img src={logo} alt='logo' />)}
+                {props.hide ? (<p></p>) : (<BiLoaderAlt className='spinner' />)}
             </div>
         )
     }
