@@ -1,0 +1,46 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    text-align: center;
+}
+
+/*Card image*/
+.card .image-container {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.card .image-container img {
+    object-fit: cover;
+    transform: scale(1);
+    transition: all .2s;
+}
+
+.card:hover .image-container img {
+    transform: scale(1.2);
+    transition: all .2s;
+}
+
+/*Product card*/
+.card.product p {
+    opacity: 0.5;
+}
+
+.card.product span {
+    font-size: 1.5em;
+}
+
+.card.product div#price-and-buy {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    margin-bottom: 20px;
+}
+
+.card.product div#price-and-buy p {
+    margin: 0;
+}

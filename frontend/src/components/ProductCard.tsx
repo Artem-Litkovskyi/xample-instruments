@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 import { centsToString } from '../utils/utils';
 
-import '../assets/styles/components/ProductCard.css';
+import '../assets/styles/components/Cards.css';
 
 
 function ProductCard(params: {
@@ -14,9 +14,11 @@ function ProductCard(params: {
     purchased: boolean,
 }) {
     return (
-        <div className='product-card panel dark'>
+        <div className='card product panel dark'>
             <Link to={`/product/${params.product_id}`}>
-                <img src={params.image_url} alt='category' />
+                <div className='image-container'>
+                    <img src={params.image_url} alt={params.title} />
+                </div>
             </Link>
 
             <Link to={`/product/${params.product_id}`}>
