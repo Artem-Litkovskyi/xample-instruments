@@ -30,25 +30,24 @@ def format_serializer_errors(errors):
 @permission_classes([AllowAny])
 def home_page_view(request):
     home_page = get_object_or_404(HomePage)
-    serializer = HomePageReadSerializer(home_page, context={'request': request})
+    serializer = HomePageGetSerializer(home_page, context={'request': request})
     return Response(serializer.data)
 
 
 # --- AUTHENTICATION ---
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication])
 @permission_classes([AllowAny])
+@authentication_classes([SessionAuthentication])
 @ensure_csrf_cookie
 def session_view(request):
     if not request.user.is_authenticated:
-        return Response({
-            'isAuthenticated': False,
-        })
+        return Response({'isAuthenticated': False})
+
+    serializer = UserGetSerializer(request.user)
     return Response({
         'isAuthenticated': True,
         'isAdmin': request.user.is_staff,
-        'username': request.user.username,
-        'email': request.user.email,
+        **serializer.data
     })
 
 
@@ -58,22 +57,20 @@ def session_view(request):
 def login_view(request):
     email = request.data.get('email')
     password = request.data.get('password')
-
     if not email or not password:
         return Response('Please provide email and password', status=status.HTTP_400_BAD_REQUEST)
 
     user = authenticate(username=email, password=password)
-
     if user is None:
         return Response('Invalid credentials', status=status.HTTP_400_BAD_REQUEST)
 
     login(request, user)
-
+    
+    serializer = UserGetSerializer(request.user)
     return Response({
         'isAuthenticated': True,
         'isAdmin': request.user.is_staff,
-        'username': request.user.username,
-        'email': request.user.email,
+        **serializer.data,
     })
 
 
@@ -82,16 +79,14 @@ def login_view(request):
 @authentication_classes([SessionAuthentication])
 def logout_view(request):
     logout(request)
-    return Response({
-        'isAuthenticated': False,
-    })
+    return Response({'isAuthenticated': False})
 
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @authentication_classes([SessionAuthentication])
 def signup_view(request):
-    serializer = SignUpSerializer(data=request.data)
+    serializer = UserCreateSerializer(data=request.data)
     if not serializer.is_valid():
         return Response(format_serializer_errors(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
 
@@ -99,12 +94,12 @@ def signup_view(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# --- USER ---
+# --- ACCOUNT ---
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
 def account_update_view(request):
-    serializer = AccountUpdateSerializer(
+    serializer = UserUpdateSerializer(
         instance=request.user,
         data=request.data,
         context={'request': request},
@@ -119,10 +114,8 @@ def account_update_view(request):
     if 'new_password' in request.data:
         update_session_auth_hash(request, request.user)
 
-    return Response({
-        'username': request.user.username,
-        'email': request.user.email,
-    })
+    serializer = UserGetSerializer(request.user)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -148,6 +141,7 @@ def my_orders_view(request):
 @permission_classes([AllowAny])
 @authentication_classes([SessionAuthentication])
 def products_view(request, category=None):
+    # Apply category filter
     if category:
         category = category.upper()
         if category not in dict(Product.Category.choices):
@@ -156,22 +150,18 @@ def products_view(request, category=None):
     else:
         products = Product.objects.all()
 
+    # Get info about purchased products
     purchased_products_ids = []
     if request.user.is_authenticated:
         purchased_products_ids.extend(map(lambda l: l.product.id, License.objects.filter(user=request.user)))
 
+    serializer = ProductGetShortSerializer(products, context={'request': request}, many=True)
     data = [
         {
-            'id': product.id,
-            'title': product.title,
-            'subtitle': product.subtitle,
-            'category': product.category,
-            'price': product.price,
-            'purchased': product.id in purchased_products_ids,
-            'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
-            # 'screenshot': request.build_absolute_uri(product.screenshot.url),
+            **product,
+            'purchased': product['id'] in purchased_products_ids
         }
-        for product in products
+        for product in serializer.data
     ]
 
     return Response(data)
@@ -221,6 +211,15 @@ def product_view(request, product_id=None):
     }
 
     return Response(data)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+@authentication_classes([SessionAuthentication])
+def delete_product_view(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    return Response('Product deleted successfully', status=status.HTTP_204_NO_CONTENT)
 
 
 # --- SHOP ---
@@ -287,20 +286,12 @@ def update_home_page_view(request):
     home_page = HomePage.objects.first()
 
     if home_page:
-        serializer = HomePageWriteSerializer(home_page, data=request.data, partial=True)
+        serializer = HomePageUpdateSerializer(home_page, data=request.data, partial=True)
     else:
-        serializer = HomePageWriteSerializer(data=request.data)
+        serializer = HomePageUpdateSerializer(data=request.data)
 
     if not serializer.is_valid():
         return Response(format_serializer_errors(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
 
     serializer.save()
     return Response(serializer.data, status=status.HTTP_200_OK if home_page else status.HTTP_201_CREATED)
-
-
-@api_view(['DELETE'])
-@permission_classes([IsAdminUser])
-def delete_product_view(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    product.delete()
-    return Response('Product deleted successfully', status=status.HTTP_204_NO_CONTENT)

@@ -16,7 +16,14 @@ def _get_image_url(obj, request, image_field_name):
     return None
 
 
-class SignUpSerializer(serializers.ModelSerializer):
+# --- USER ---
+class UserGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
 
     class Meta:
@@ -42,7 +49,7 @@ class SignUpSerializer(serializers.ModelSerializer):
         return user
 
 
-class AccountUpdateSerializer(serializers.ModelSerializer):
+class UserUpdateSerializer(serializers.ModelSerializer):
     old_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
     new_password = serializers.CharField(write_only=True, required=False, allow_blank=True)
 
@@ -51,7 +58,6 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
         fields = ['username', 'email', 'old_password', 'new_password']
 
     def validate(self, data):
-        # Get the existing user
         user = self.context['request'].user
 
         old_password = data.get('old_password')
@@ -86,12 +92,19 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ProductUploadSerializer(serializers.ModelSerializer):
+# --- PRODUCT ---
+class ProductGetShortSerializer(serializers.ModelSerializer):
+    screenshot_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
-        fields = ['title', 'subtitle', 'category', 'description', 'sys_req', 'price', 'file', 'file_demo', 'screenshot']
+        fields = ['id', 'title', 'subtitle', 'category', 'price', 'screenshot_url']
+
+    def get_screenshot_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'screenshot')
 
 
+# --- LICENSE ---
 class LicenseSerializer(serializers.ModelSerializer):
     license_id = serializers.IntegerField(source='id')
     product_id = serializers.IntegerField(source='product.id')
@@ -102,6 +115,7 @@ class LicenseSerializer(serializers.ModelSerializer):
         fields = ['license_id', 'product_id', 'product_title']
 
 
+# --- ORDER ---
 class OrderSerializer(serializers.ModelSerializer):
     order_id = serializers.IntegerField(source='id')
     product_title = serializers.CharField(source='product.title')
@@ -113,7 +127,8 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ['order_id', 'product_title', 'created_at', 'price']
 
 
-class HomePageReadSerializer(serializers.ModelSerializer):
+# --- HOME PAGE ---
+class HomePageGetSerializer(serializers.ModelSerializer):
     hero_image_url = serializers.SerializerMethodField()
     category_instruments_image_url = serializers.SerializerMethodField()
     category_effects_image_url = serializers.SerializerMethodField()
@@ -135,7 +150,7 @@ class HomePageReadSerializer(serializers.ModelSerializer):
         return _get_image_url(obj, self.context.get('request'), 'category_effects_image')
 
 
-class HomePageWriteSerializer(serializers.ModelSerializer):
+class HomePageUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = HomePage
         fields = '__all__'

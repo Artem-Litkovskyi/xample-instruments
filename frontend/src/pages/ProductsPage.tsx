@@ -45,7 +45,7 @@ function ProductsPage() {
                                 title={product.title}
                                 subtitle={product.subtitle}
                                 price={product.price}
-                                image_url={product.screenshot}
+                                image_url={product.screenshot_url}
                                 purchased={product.purchased}
                             />
                         ))}

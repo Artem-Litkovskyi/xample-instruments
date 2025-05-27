@@ -8,7 +8,7 @@ export interface ProductShortInfo {
     category: string;
     price: number;
     purchased: boolean;
-    screenshot: string;
+    screenshot_url: string;
 }
 
 export interface ProductFullInfo {
