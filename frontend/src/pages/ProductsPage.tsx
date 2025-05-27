@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
-import HeaderAdditional from '../components/HeaderAdditional';
+import HeaderAndFooter from '../components/header/HeaderAndFooter.tsx';
+import HeaderAdditional from '../components/header/HeaderAdditional.tsx';
 import ProductCard from '../components/ProductCard';
 import LoaderContainer from '../components/LoaderContainer.tsx';
 
-import { get_products, type ProductShortInfo } from '../services/ProductService.ts';
+import { getProducts, type ProductShortInfo } from '../services/ProductService.ts';
 
 
 function ProductsPage() {
@@ -16,7 +16,7 @@ function ProductsPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        get_products(params.category === 'all' ? '' : params.category)
+        getProducts(params.category === 'all' ? '' : params.category)
             .then((data) => setProducts(data))
             .catch(() => {
                 navigate('/404');

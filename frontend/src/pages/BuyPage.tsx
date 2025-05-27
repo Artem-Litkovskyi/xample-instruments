@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
+import HeaderAndFooter from '../components/header/HeaderAndFooter.tsx';
 import AuthRequired from './AuthRequired.tsx';
 
-import { buy, get_products, type ProductShortInfo } from '../services/ProductService.ts';
+import { buyProduct, getProducts, type ProductShortInfo } from '../services/ProductService.ts';
 import { centsToString } from '../utils/utils.ts';
 
 
@@ -16,7 +16,7 @@ function BuyPage() {
     const [fetchMessage, setFetchMessage] = useState('');
 
     useEffect(() => {
-        get_products('')
+        getProducts('')
             .then((data: ProductShortInfo[]) => setProduct(
                 data.find((element) => element.id === productId)
             ))
@@ -27,7 +27,7 @@ function BuyPage() {
 
     async function handlePurchase() {
         try {
-            await buy(productId);
+            await buyProduct(productId);
             navigate('/account/licenses/');
         } catch (error) {
             setFetchMessage('Oops, something went wrong...');

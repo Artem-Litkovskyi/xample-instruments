@@ -1,4 +1,4 @@
-import { make_request } from './BaseService.ts';
+import { makeRequest } from './BaseService.ts';
 
 
 export interface ProductShortInfo {
@@ -41,26 +41,26 @@ export interface ScreenshotArea {
 }
 
 
-export async function get_products(category: string | undefined) {
-    return await make_request(`/api/products/${category}`, 'GET');
+export async function getProducts(category: string | undefined) {
+    return await makeRequest(`/api/products/${category}`, 'GET');
 }
 
 
-export async function get_product(product_id: string | undefined) {
-    return await make_request(`/api/product/${product_id}`, 'GET');
+export async function getProduct(product_id: string | undefined) {
+    return await makeRequest(`/api/product/${product_id}`, 'GET');
 }
 
 
-export async function buy(product_id: number | undefined) {
-    await make_request(`/api/buy/${product_id}/`, 'POST');
+export async function buyProduct(product_id: number | undefined) {
+    await makeRequest(`/api/buy/${product_id}/`, 'POST');
 }
 
 
-export async function download_product_demo(product_id: number | undefined) {
-    await make_request(`/api/download_product_demo/${product_id}/`, 'GET');
+export async function downloadProductDemo(product_id: number | undefined) {
+    await makeRequest(`/api/download_product_demo/${product_id}/`, 'GET');
 }
 
 
-export async function download_product(product_id: number | undefined) {
-    await make_request(`/api/download_product/${product_id}/`, 'GET');
+export async function downloadProductFull(product_id: number | undefined) {
+    await makeRequest(`/api/download_product_full/${product_id}/`, 'GET');
 }

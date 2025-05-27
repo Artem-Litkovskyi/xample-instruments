@@ -1,4 +1,4 @@
-import { make_request } from './BaseService.ts';
+import { makeRequest } from './BaseService.ts';
 
 
 export interface LicenseInfo {
@@ -15,16 +15,16 @@ export interface OrderInfo {
 }
 
 
-export async function account_update(username: string, email: string, old_password: string, new_password: string) {
-    await make_request('/api/account_update/', 'POST', { username, email, old_password, new_password });
+export async function updateAccount(username: string, email: string, old_password: string, new_password: string) {
+    await makeRequest('/api/update_account/', 'POST', { username, email, old_password, new_password });
 }
 
 
-export async function get_my_licenses() {
-    return await make_request(`/api/my_licenses/`, 'GET');
+export async function getMyLicenses() {
+    return await makeRequest(`/api/my_licenses/`, 'GET');
 }
 
 
-export async function get_my_orders() {
-    return await make_request(`/api/my_orders/`, 'GET');
+export async function getMyOrders() {
+    return await makeRequest(`/api/my_orders/`, 'GET');
 }

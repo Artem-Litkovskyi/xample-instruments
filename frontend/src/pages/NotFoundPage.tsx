@@ -1,4 +1,4 @@
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
+import HeaderAndFooter from '../components/header/HeaderAndFooter.tsx';
 import NotFound from '../components/NotFound';
 
 

@@ -1,9 +1,10 @@
-function GuiMapArea(props: {
+function ImageMapArea(props: {
     position_x: number, position_y: number, width: number, height: number,
-    onClick: () => void, active: boolean}) {
+    onClick: () => void, active: boolean
+}) {
     return (
         <div
-            className={props.active ? 'gui-map-area active' : 'gui-map-area'}
+            className={props.active ? 'image-map-area active' : 'image-map-area'}
             style={{
                 position: 'absolute',
                 left: `${props.position_x}%`,
@@ -21,4 +22,4 @@ function GuiMapArea(props: {
 }
 
 
-export default GuiMapArea;
+export default ImageMapArea;

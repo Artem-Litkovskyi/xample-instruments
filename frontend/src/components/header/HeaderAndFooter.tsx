@@ -2,7 +2,7 @@ import { type PropsWithChildren, useEffect } from 'react';
 import { useLocation } from 'react-router';
 
 import Header from './Header.tsx';
-import Footer from './Footer.tsx';
+import Footer from '../Footer.tsx';
 
 
 interface HeaderAndFooterProps {

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router';
 
-import '../assets/styles/components/NavBar.css';
+import '../../assets/styles/components/NavBar.css';
 
 
 interface NavBarItem {

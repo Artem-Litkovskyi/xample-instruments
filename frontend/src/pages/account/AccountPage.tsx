@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router';
 
-import HeaderAdditional from '../components/HeaderAdditional';
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
-import AuthRequired from "./AuthRequired.tsx";
+import HeaderAdditional from '../../components/header/HeaderAdditional.tsx';
+import HeaderAndFooter from '../../components/header/HeaderAndFooter.tsx';
+import AuthRequired from '../AuthRequired.tsx';
 
 
 function AccountPage() {

@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
+import HeaderAndFooter from '../components/header/HeaderAndFooter.tsx';
 import LoaderContainer from '../components/LoaderContainer.tsx';
 import Hero from '../components/Hero';
 import CategoryCard from '../components/CategoryCard';
-import { type HomePageInfo, get_home_page, defaultHomePageInfo } from '../services/HomePageService.ts';
+import { type HomePageInfo, getHomePage, defaultHomePageInfo } from '../services/HomePageService.ts';
 
 
 function HomePage() {
@@ -12,7 +12,7 @@ function HomePage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        get_home_page()
+        getHomePage()
             .then((data) => setHomePage(data))
             .finally(() => setLoading(false));
         return () => {setLoading(true)}

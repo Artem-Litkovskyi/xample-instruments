@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router';
 
-import { useAuth } from '../contexts/AuthContext.tsx';
+import { useAuth } from '../../contexts/AuthContext.tsx';
 
-import '../assets/styles/components/AccountWidget.css';
+import '../../assets/styles/components/AccountWidget.css';
 
 
 function AccountWidget() {

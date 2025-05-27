@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router';
 
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
-import LabeledInput from '../components/LabeledInput.tsx';
+import HeaderAndFooter from '../components/header/HeaderAndFooter.tsx';
+import LabeledInput from '../components/inputs/LabeledInput.tsx';
 import { useAuth } from '../contexts/AuthContext';
 import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 

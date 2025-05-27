@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import { secondsToString } from '../utils/utils';
+import { secondsToString } from '../../utils/utils.ts';
 
 import { FaPlay, FaPause } from 'react-icons/fa';
 
-import '../assets/styles/components/AudioPlayer.css';
+import '../../assets/styles/components/AudioPlayer.css';
 
 
 function AudioPlayer(props: {src: string, title: string }) {

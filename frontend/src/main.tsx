@@ -14,10 +14,10 @@ import AuthProvider from './contexts/AuthContext.tsx';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 
-import AccountPage from './pages/AccountPage';
-import AccountSettingsPage from './pages/AccountSettingsPage';
-import MyLicensesPage from './pages/MyLicensesPage.tsx';
-import MyOrdersPage from './pages/MyOrdersPage.tsx';
+import AccountPage from './pages/account/AccountPage.tsx';
+import AccountSettingsPage from './pages/account/AccountSettingsPage.tsx';
+import MyLicensesPage from './pages/account/MyLicensesPage.tsx';
+import MyOrdersPage from './pages/account/MyOrdersPage.tsx';
 
 import AdminPage from './pages/admin/AdminPage.tsx';
 import ManageHomePage from './pages/admin/ManageHomePage.tsx';
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 element: <ProductPage />,
             },
             {
-                path: 'buy/:id',
+                path: 'buyProduct/:id',
                 element: <BuyPage />,
             },
             {

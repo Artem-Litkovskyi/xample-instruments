@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import Hero from '../../components/Hero.tsx';
 import CategoryCard from '../../components/CategoryCard.tsx';
 import LoaderContainer from '../../components/LoaderContainer.tsx';
-import { get_home_page, type HomePageInfo } from '../../services/HomePageService.ts';
-import LabeledInput from "../../components/LabeledInput.tsx";
+import { getHomePage, type HomePageInfo } from '../../services/HomePageService.ts';
+import LabeledInput from "../../components/inputs/LabeledInput.tsx";
 import ResponseNotOkError from "../../errors/ResponseNotOkError.tsx";
-import FileInput from "../../components/FileInput.tsx";
-import {update_home_page} from "../../services/AdminService.ts";
+import FileInput from "../../components/inputs/FileInput.tsx";
+import {updateHomePage} from "../../services/AdminService.ts";
 import PagePreview from "../../components/PagePreview.tsx";
 
 
@@ -42,7 +42,7 @@ function ManageHomePage() {
 
     // Load current home page info
     useEffect(() => {
-        get_home_page()
+        getHomePage()
             .then((data: HomePageInfo) => {
                 setFields(prev => ({
                     ...prev,
@@ -101,7 +101,7 @@ function ManageHomePage() {
 
         // Send request
         try {
-            await update_home_page(data);
+            await updateHomePage(data);
         } catch (error) {
             if (error instanceof ResponseNotOkError) {
                 setErrors(prev => ({

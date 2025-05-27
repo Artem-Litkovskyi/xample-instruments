@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { get_products, type ProductShortInfo} from '../../services/ProductService.ts';
-import { delete_product } from '../../services/AdminService.ts';
+import { getProducts, type ProductShortInfo} from '../../services/ProductService.ts';
+import { deleteProduct } from '../../services/AdminService.ts';
 
 
 function ManageProductsPage() {
@@ -9,13 +9,13 @@ function ManageProductsPage() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        get_products('')
+        getProducts('')
             .then((data) => setProducts(data))
     }, []);
 
     async function handleRemove(product_id: number) {
         try {
-            await delete_product(product_id);
+            await deleteProduct(product_id);
             setError('');
             alert('Removed successfully.');
         } catch (error) {

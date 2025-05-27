@@ -227,7 +227,7 @@ def product_view(request, product_id=None):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
-def buy_view(request, product_id=None):
+def buy_product_view(request, product_id=None):
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
@@ -263,7 +263,7 @@ def download_product_demo_view(request, product_id=None):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
-def download_product_view(request, product_id=None):
+def download_product_full_view(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)
 
     try:

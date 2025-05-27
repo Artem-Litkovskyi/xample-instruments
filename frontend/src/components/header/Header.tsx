@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
 
-import NavBar from './NavBar';
-import AccountWidget from './AccountWidget';
+import NavBar from './NavBar.tsx';
+import AccountWidget from './AccountWidget.tsx';
 
-import '../assets/styles/components/Header.css';
+import '../../assets/styles/components/Header.css';
 
 
 function Header() {

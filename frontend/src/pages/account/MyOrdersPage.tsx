@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { get_my_orders, type OrderInfo } from '../services/UserService.ts';
-import { centsToString } from '../utils/utils';
+import { getMyOrders, type OrderInfo } from '../../services/UserService.ts';
+import { centsToString } from '../../utils/utils.ts';
 
 
 function MyOrdersPage() {
     const [orders, setOrders] = useState<OrderInfo[]>([]);
 
     useEffect(() => {
-        get_my_orders()
+        getMyOrders()
             .then((data: OrderInfo[]) => setOrders(data))
     }, []);
 

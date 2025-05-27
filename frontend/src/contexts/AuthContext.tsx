@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, type PropsWithChildren } from 'react';
 
-import { make_request } from '../services/BaseService.ts';
+import { makeRequest } from '../services/BaseService.ts';
 
 
 interface AuthContextType {
@@ -24,7 +24,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        make_request('/api/session/', 'GET')
+        makeRequest('/api/session/', 'GET')
             .then((data) => {
                 setIsAuthenticated(data.isAuthenticated);
                 setIsAdmin(data.isAuthenticated ? data.isAdmin : false);
@@ -35,7 +35,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     }, []);
 
     async function login(email: string, password: string) {
-        const data = await make_request('/api/login/', 'POST', { email, password });
+        const data = await makeRequest('/api/login/', 'POST', { email, password });
 
         setIsAuthenticated(data.isAuthenticated);
         setIsAdmin(data.isAdmin);
@@ -44,7 +44,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     }
 
     async function logout() {
-        await make_request('/api/logout/', 'POST');
+        await makeRequest('/api/logout/', 'POST');
 
         setIsAuthenticated(false);
         setIsAdmin(false);
@@ -53,7 +53,7 @@ export default function AuthProvider(props: PropsWithChildren) {
     }
 
     async function signup(username: string, email: string, password: string) {
-        await make_request('/api/signup/', 'POST', { username, email, password });
+        await makeRequest('/api/signup/', 'POST', { username, email, password });
         await logout();
     }
 

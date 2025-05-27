@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import {centsToString} from '../utils/utils';
+import { centsToString } from '../utils/utils';
 
 import '../assets/styles/components/ProductCard.css';
 

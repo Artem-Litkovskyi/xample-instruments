@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 
-import { get_my_licenses, type LicenseInfo } from '../services/UserService.ts';
-import { download_product } from '../services/ProductService.ts';
+import { getMyLicenses, type LicenseInfo } from '../../services/UserService.ts';
+import { downloadProductFull } from '../../services/ProductService.ts';
 
 
 function MyLicensesPage() {
     const [licenses, setLicenses] = useState<LicenseInfo[]>([]);
 
     useEffect(() => {
-        get_my_licenses()
+        getMyLicenses()
             .then((data: LicenseInfo[]) => setLicenses(data))
     }, []);
 
     async function handleDownload(product_id: number) {
         try {
-            await download_product(product_id);
+            await downloadProductFull(product_id);
         } catch (error) {
             console.error(error);
         }

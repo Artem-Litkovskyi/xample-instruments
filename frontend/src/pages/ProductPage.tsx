@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 
-import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
-import AudioPlayer from '../components/AudioPlayer.tsx';
-import GuiMap from '../components/GuiMap.tsx';
-import GuiMapArea from '../components/GuiMapArea.tsx';
+import HeaderAndFooter from '../components/header/HeaderAndFooter.tsx';
+import AudioPlayer from '../components/product/AudioPlayer.tsx';
+import ImageMap from '../components/product/ImageMap.tsx';
+import ImageMapArea from '../components/product/ImageMapArea.tsx';
 import LoaderContainer from '../components/LoaderContainer.tsx';
 
-import { download_product_demo, download_product, get_product, type ProductFullInfo } from '../services/ProductService';
+import { downloadProductDemo, downloadProductFull, getProduct, type ProductFullInfo } from '../services/ProductService';
 import { centsToString } from '../utils/utils';
 
 import '../assets/styles/pages/ProductPage.css';
@@ -21,7 +21,7 @@ function ProductPage() {
     const [activeGuiArea, setActiveGuiArea] = useState(-1);
 
     useEffect(() => {
-        get_product(params.id)
+        getProduct(params.id)
             .then((data) => {
                 setProduct(data);
             })
@@ -34,7 +34,7 @@ function ProductPage() {
 
     async function handleDownloadDemo() {
         try {
-            await download_product_demo(Number(params.id));
+            await downloadProductDemo(Number(params.id));
         } catch (error) {
             console.error(error);
         }
@@ -42,7 +42,7 @@ function ProductPage() {
 
     async function handleDownload() {
         try {
-            await download_product(Number(params.id));
+            await downloadProductFull(Number(params.id));
         } catch (error) {
             console.error(error);
         }
@@ -61,7 +61,7 @@ function ProductPage() {
                             {product?.purchased ? (
                                 <button className='dark' onClick={handleDownload}>Download</button>
                             ) : (
-                                <Link className='button dark' to={`/buy/${params.id}`}>
+                                <Link className='button dark' to={`/buyProduct/${params.id}`}>
                                     Buy Now ${product ? centsToString(product?.price) : ''}USD
                                 </Link>
                             )}
@@ -85,12 +85,12 @@ function ProductPage() {
                         </div>
 
                         <div id='gui-panel' className='panel dark'>
-                            <GuiMap
+                            <ImageMap
                                 image_url={product?.screenshot}
                                 onClick={() => setActiveGuiArea(-1)}
                             >
                                 {product?.screenshot_areas.map((item, i) => (
-                                    <GuiMapArea
+                                    <ImageMapArea
                                         position_x={item.x}
                                         position_y={item.y}
                                         width={item.width}
@@ -100,7 +100,7 @@ function ProductPage() {
                                         active={activeGuiArea === i}
                                     />
                                 ))}
-                            </GuiMap>
+                            </ImageMap>
 
                             <div className='padded'>
                                 {activeGuiArea >= 0 && (

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import LabeledInput from '../components/LabeledInput.tsx';
-import { validateUsername, validateEmail, validatePassword } from '../utils/validators.ts';
-import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
-import { useAuth } from '../contexts/AuthContext.tsx';
-import { account_update } from '../services/UserService.ts';
+import LabeledInput from '../../components/inputs/LabeledInput.tsx';
+import { validateUsername, validateEmail, validatePassword } from '../../utils/validators.ts';
+import { useAuth } from '../../contexts/AuthContext.tsx';
+import { updateAccount } from '../../services/UserService.ts';
+import ResponseNotOkError from '../../errors/ResponseNotOkError.tsx';
 
 
 function AccountSettingsPage() {
@@ -65,7 +65,7 @@ function AccountSettingsPage() {
         event.preventDefault();
 
         try {
-            await account_update(fields.username, fields.email, fields.oldPassword, fields.newPassword);
+            await updateAccount(fields.username, fields.email, fields.oldPassword, fields.newPassword);
         } catch (error) {
             if (error instanceof ResponseNotOkError) {
                 setErrors(prev => ({

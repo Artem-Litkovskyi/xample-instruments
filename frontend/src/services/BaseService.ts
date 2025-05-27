@@ -6,7 +6,7 @@ import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 const cookies = new Cookies();
 
 
-export async function make_request(
+export async function makeRequest(
     url: string,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     body?: any

@@ -1,4 +1,4 @@
-import NavBar from './NavBar';
+import NavBar from './header/NavBar.tsx';
 
 import '../assets/styles/components/NotFound.css';
 

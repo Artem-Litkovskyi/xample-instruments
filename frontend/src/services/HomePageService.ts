@@ -1,4 +1,4 @@
-import { make_request } from './BaseService.ts';
+import { makeRequest } from './BaseService.ts';
 
 
 export interface HomePageInfo {
@@ -21,6 +21,6 @@ export const defaultHomePageInfo: HomePageInfo = {
 };
 
 
-export async function get_home_page() {
-    return await make_request(`/api/home_page/`, 'GET');
+export async function getHomePage() {
+    return await makeRequest(`/api/home_page/`, 'GET');
 }
