@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
-import HeaderAndFooter from './HeaderAndFooter';
+import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
 import HeaderAdditional from '../components/HeaderAdditional';
 import ProductCard from '../components/ProductCard';
 import LoaderContainer from '../components/LoaderContainer.tsx';

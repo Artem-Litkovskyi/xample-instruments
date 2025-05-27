@@ -16,28 +16,6 @@ def _get_image_url(obj, request, image_field_name):
     return None
 
 
-class HomePageSerializer(serializers.ModelSerializer):
-    hero_image_url = serializers.SerializerMethodField()
-    category_instruments_image_url = serializers.SerializerMethodField()
-    category_effects_image_url = serializers.SerializerMethodField()
-
-    class Meta:
-        model = HomePage
-        fields = (
-            'hero_title', 'hero_subtitle', 'hero_link', 'hero_image_url',
-            'category_instruments_image_url', 'category_effects_image_url',
-        )
-
-    def get_hero_image_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'hero_image')
-
-    def get_category_instruments_image_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'category_instruments_image')
-
-    def get_category_effects_image_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'category_effects_image')
-
-
 class SignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
 
@@ -133,3 +111,31 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = License
         fields = ['order_id', 'product_title', 'created_at', 'price']
+
+
+class HomePageReadSerializer(serializers.ModelSerializer):
+    hero_image_url = serializers.SerializerMethodField()
+    category_instruments_image_url = serializers.SerializerMethodField()
+    category_effects_image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = HomePage
+        fields = (
+            'hero_title', 'hero_subtitle', 'hero_link', 'hero_image_url',
+            'category_instruments_image_url', 'category_effects_image_url',
+        )
+
+    def get_hero_image_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'hero_image')
+
+    def get_category_instruments_image_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'category_instruments_image')
+
+    def get_category_effects_image_url(self, obj):
+        return _get_image_url(obj, self.context.get('request'), 'category_effects_image')
+
+
+class HomePageWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HomePage
+        fields = '__all__'

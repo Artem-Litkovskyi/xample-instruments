@@ -1,21 +1,14 @@
 import {useEffect, useState} from 'react';
 
-import HeaderAndFooter from './HeaderAndFooter';
+import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
 import LoaderContainer from '../components/LoaderContainer.tsx';
 import Hero from '../components/Hero';
 import CategoryCard from '../components/CategoryCard';
-import { type HomePageInfo, get_home_page } from '../services/HomePageService.ts';
+import { type HomePageInfo, get_home_page, defaultHomePageInfo } from '../services/HomePageService.ts';
 
 
 function HomePage() {
-    const [homePage, setHomePage] = useState<HomePageInfo>({
-        hero_title: '',
-        hero_subtitle: '',
-        hero_link: '',
-        hero_image_url: '',  // URL
-        category_instruments_image_url: '',  // URL
-        category_effects_image_url: '',  // URL
-    });
+    const [homePage, setHomePage] = useState<HomePageInfo>(defaultHomePageInfo);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

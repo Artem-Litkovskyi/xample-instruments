@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 
-import HeaderAndFooter from './HeaderAndFooter';
+import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
 import AuthRequired from './AuthRequired.tsx';
 
 import { buy, get_products, type ProductShortInfo } from '../services/ProductService.ts';
@@ -13,7 +13,7 @@ function BuyPage() {
     const params = useParams();
     const productId = Number(params.id);
     const [product, setProduct] = useState<ProductShortInfo>();
-    const [error, setError] = useState('');
+    const [fetchMessage, setFetchMessage] = useState('');
 
     useEffect(() => {
         get_products('')
@@ -28,10 +28,10 @@ function BuyPage() {
     async function handlePurchase() {
         try {
             await buy(productId);
-            setError('');
-            alert('Purchased successfully.');
+            navigate('/account/licenses/');
         } catch (error) {
-            setError('Oops, something went wrong...');
+            setFetchMessage('Oops, something went wrong...');
+            setTimeout(() => setFetchMessage(''), 2000);
             throw error;
         }
     }
@@ -62,7 +62,7 @@ function BuyPage() {
                         </table>
 
                         <button className='light' onClick={handlePurchase}>Purchase</button>
-                        <p>{error}</p>
+                        <p>{fetchMessage}</p>
                     </div>
                 </div>
             </HeaderAndFooter>

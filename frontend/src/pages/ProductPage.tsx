@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 
-import HeaderAndFooter from './HeaderAndFooter';
+import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
 import AudioPlayer from '../components/AudioPlayer.tsx';
 import GuiMap from '../components/GuiMap.tsx';
 import GuiMapArea from '../components/GuiMapArea.tsx';

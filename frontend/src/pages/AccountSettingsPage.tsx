@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ValidatedInput from '../components/ValidatedInput';
+import LabeledInput from '../components/LabeledInput.tsx';
 import { validateUsername, validateEmail, validatePassword } from '../utils/validators.ts';
 import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 import { useAuth } from '../contexts/AuthContext.tsx';
@@ -8,7 +8,7 @@ import { account_update } from '../services/UserService.ts';
 
 
 function AccountSettingsPage() {
-    const { username, email } = useAuth();
+    const { username, email,  } = useAuth();
     
     const [fields, setFields] = useState({
         username:username,
@@ -34,7 +34,7 @@ function AccountSettingsPage() {
         repeatPassword:(value: string) => value === fields.newPassword ? '' : 'Passwords do not match',
     };
 
-    const [fetchError, setFetchError] = useState('');
+    const [fetchMessage, setFetchMessage] = useState('');
 
 
     const handleChange = (event: any) => {
@@ -66,7 +66,6 @@ function AccountSettingsPage() {
 
         try {
             await account_update(fields.username, fields.email, fields.oldPassword, fields.newPassword);
-            alert('Account updated successfully.');
         } catch (error) {
             if (error instanceof ResponseNotOkError) {
                 setErrors(prev => ({
@@ -84,9 +83,13 @@ function AccountSettingsPage() {
                 return;
             }
 
-            setFetchError('Oops, something went wrong...');
+            setFetchMessage('Oops, something went wrong...');
+            setTimeout(() => setFetchMessage(''), 2000);
             throw error;
         }
+
+        setFetchMessage('Account updated successfully!');
+        setTimeout(() => setFetchMessage(''), 2000);
     }
 
     function isDisabled() {
@@ -112,13 +115,13 @@ function AccountSettingsPage() {
             >
                 <h2>Personal information</h2>
 
-                <ValidatedInput
+                <LabeledInput
                     label='Username:' type='text' id='username' value={fields.username}
                     onChange={handleChange} onBlur={handleBlur}
                     errorMessage={errors.username}
                 />
 
-                <ValidatedInput
+                <LabeledInput
                     label='Email:' type='text' id='email' value={fields.email}
                     onChange={handleChange} onBlur={handleBlur}
                     errorMessage={errors.email}
@@ -128,27 +131,27 @@ function AccountSettingsPage() {
 
                 <h2>Change password</h2>
 
-                <ValidatedInput
+                <LabeledInput
                     label='Current password:' type='password' id='oldPassword' value={fields.oldPassword}
                     onChange={handleChange} onBlur={handleBlur}
                     errorMessage={errors.oldPassword}
                 />
 
-                <ValidatedInput
+                <LabeledInput
                     label='New password:' type='password' id='newPassword' value={fields.newPassword}
                     onChange={handleChange} onBlur={handleBlur}
                     ruleMessage='Use at least 8 characters with a mix of uppercase, lowercase and numbers'
                     errorMessage={errors.newPassword}
                 />
 
-                <ValidatedInput
+                <LabeledInput
                     label='Repeat the new password:' type='password' id='repeatPassword' value={fields.repeatPassword}
                     onChange={handleChange} onBlur={handleBlur}
                     errorMessage={errors.repeatPassword}
                 />
 
                 <div>
-                    <p className='invalid'>{fetchError}</p>
+                    <p>{fetchMessage}</p>
                     <button
                         type='submit'
                         className='button gray'

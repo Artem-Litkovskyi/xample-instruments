@@ -19,8 +19,9 @@ import AccountSettingsPage from './pages/AccountSettingsPage';
 import MyLicensesPage from './pages/MyLicensesPage.tsx';
 import MyOrdersPage from './pages/MyOrdersPage.tsx';
 
-import AdminPage from './pages/AdminPage.tsx';
-import ManageProductsPage from './pages/ManageProductsPage.tsx';
+import AdminPage from './pages/admin/AdminPage.tsx';
+import ManageHomePage from './pages/admin/ManageHomePage.tsx';
+import ManageProductsPage from './pages/admin/ManageProductsPage.tsx';
 
 import './index.css';
 import './assets/styles/basic/Buttons.css';
@@ -96,7 +97,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <Navigate to='products' replace />,
+                        element: <Navigate to='home' replace />,
+                    },
+                    {
+                        path: 'home',
+                        element: <ManageHomePage />,
                     },
                     {
                         path: 'products',

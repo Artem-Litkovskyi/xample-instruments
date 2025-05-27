@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router';
 
-import HeaderAndFooter from './HeaderAndFooter';
-import ValidatedInput from '../components/ValidatedInput';
+import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
+import LabeledInput from '../components/LabeledInput.tsx';
 import { useAuth } from '../contexts/AuthContext';
 import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 
@@ -14,7 +14,7 @@ function SignInPage() {
 
     const [fields, setFields] = useState({ email:'', password:'' });
     const [error, setError] = useState('');
-    const [fetchError, setFetchError] = useState('');
+    const [fetchMessage, setFetchMessage] = useState('');
 
 
     const handleChange = (event: any) => {
@@ -35,7 +35,8 @@ function SignInPage() {
                 return;
             }
 
-            setFetchError('Oops, something went wrong...');
+            setFetchMessage('Oops, something went wrong...');
+            setTimeout(() => setFetchMessage(''), 2000);
             throw error;
         }
 
@@ -53,20 +54,20 @@ function SignInPage() {
                         onSubmit={handleSubmit}
                         onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                     >
-                        <ValidatedInput
+                        <LabeledInput
                             label='Email:' type='text' id='email' value={fields.email}
                             onChange={handleChange}
                             errorMessage={error}
                         />
 
-                        <ValidatedInput
+                        <LabeledInput
                             label='Password:' type='password' id='password' value={fields.password}
                             onChange={handleChange}
                             errorMessage={error}
                         />
 
                         <div>
-                            <p className='invalid'>{fetchError}</p>
+                            <p className='invalid'>{fetchMessage}</p>
                             <button type='submit' className='button gray'>Sign in</button>
                         </div>
 

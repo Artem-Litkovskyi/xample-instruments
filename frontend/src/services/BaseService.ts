@@ -6,10 +6,17 @@ import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 const cookies = new Cookies();
 
 
-export async function make_request(url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', json_body?: object) {
+export async function make_request(
+    url: string,
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    body?: any
+) {
+    const isFormData = body instanceof FormData;
+
+    // Set headers
     const headers: HeadersInit = {};
 
-    if (json_body) {
+    if (body && !isFormData) {
         headers['Content-Type'] = 'application/json';
     }
 
@@ -17,18 +24,20 @@ export async function make_request(url: string, method: 'GET' | 'POST' | 'PUT' |
         headers['X-CSRFToken'] = cookies.get('csrftoken');
     }
 
+    // Fetch
     const response = await fetch(url, {
         method,
         headers,
-        body: json_body ? JSON.stringify(json_body) : undefined,
         credentials: 'include',
+        body: body ? (isFormData ? body : JSON.stringify(body)) : undefined,
     });
 
     if (!response.ok) {
         const data = await response.json();
-        throw new ResponseNotOkError(response.statusText, data.detail);
+        throw new ResponseNotOkError(response.statusText, data);
     }
 
+    // Process the response
     const contentType = response.headers.get('Content-Type') || '';
 
     if (contentType.includes('application/json')) {

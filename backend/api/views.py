@@ -1,8 +1,9 @@
 import os
 
 from django.http import FileResponse
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes, parser_classes
 from rest_framework.generics import get_object_or_404
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
@@ -29,9 +30,7 @@ def format_serializer_errors(errors):
 @permission_classes([AllowAny])
 def home_page_view(request):
     home_page = get_object_or_404(HomePage)
-
-    serializer = HomePageSerializer(home_page, context={'request': request})
-
+    serializer = HomePageReadSerializer(home_page, context={'request': request})
     return Response(serializer.data)
 
 
@@ -61,12 +60,12 @@ def login_view(request):
     password = request.data.get('password')
 
     if not email or not password:
-        return Response({'detail': 'Please provide email and password'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response('Please provide email and password', status=status.HTTP_400_BAD_REQUEST)
 
     user = authenticate(username=email, password=password)
 
     if user is None:
-        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response('Invalid credentials', status=status.HTTP_400_BAD_REQUEST)
 
     login(request, user)
 
@@ -94,7 +93,7 @@ def logout_view(request):
 def signup_view(request):
     serializer = SignUpSerializer(data=request.data)
     if not serializer.is_valid():
-        return Response({'detail': format_serializer_errors(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(format_serializer_errors(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
 
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -113,7 +112,7 @@ def account_update_view(request):
     )
 
     if not serializer.is_valid():
-        return Response({'detail': format_serializer_errors(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(format_serializer_errors(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
 
     serializer.save()
 
@@ -123,7 +122,6 @@ def account_update_view(request):
     return Response({
         'username': request.user.username,
         'email': request.user.email,
-        'detail': 'Account updated successfully.'
     })
 
 
@@ -153,10 +151,7 @@ def products_view(request, category=None):
     if category:
         category = category.upper()
         if category not in dict(Product.Category.choices):
-            return Response(
-                {'error': 'Invalid category'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response('Invalid category', status=status.HTTP_400_BAD_REQUEST)
         products = Product.objects.filter(category=category)
     else:
         products = Product.objects.all()
@@ -236,16 +231,15 @@ def buy_view(request, product_id=None):
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
-        return Response({'detail': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response('Product not found', status=status.HTTP_404_NOT_FOUND)
 
     if License.objects.filter(user=request.user, product=product).exists():
-        return Response({'detail': 'User already owns a license for this product'}, status=status.HTTP_200_OK)
+        return Response('User already owns a license for this product', status=status.HTTP_200_OK)
 
     new_license = License.objects.create(user=request.user, product=product)
     new_order = Order.objects.create(user=request.user, product=product, price=product.price)
 
     return Response({
-        'detail': 'License and order created successfully',
         'license_id': new_license.id,
         'order_id': new_order.id,
         'price': product.price,
@@ -263,7 +257,7 @@ def download_product_demo_view(request, product_id=None):
         file_name = os.path.split(file_path)[1]
         return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
     except FileNotFoundError:
-        return Response({'detail': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response('File not found', status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET'])
@@ -275,20 +269,38 @@ def download_product_view(request, product_id=None):
     try:
         License.objects.get(user=request.user, product=product)
     except Product.DoesNotExist:
-        return Response({'detail': 'User doesn\'t own a license for this product'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response('User doesn\'t own a license for this product', status=status.HTTP_400_BAD_REQUEST)
 
     try:
         file_path = product.file.path
         file_name = os.path.split(file_path)[1]
         return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
     except FileNotFoundError:
-        return Response({'detail': 'File not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response('File not found', status=status.HTTP_404_NOT_FOUND)
 
 
 # --- MANAGEMENT ---
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+@parser_classes([MultiPartParser, FormParser])
+def update_home_page_view(request):
+    home_page = HomePage.objects.first()
+
+    if home_page:
+        serializer = HomePageWriteSerializer(home_page, data=request.data, partial=True)
+    else:
+        serializer = HomePageWriteSerializer(data=request.data)
+
+    if not serializer.is_valid():
+        return Response(format_serializer_errors(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_200_OK if home_page else status.HTTP_201_CREATED)
+
+
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def delete_product_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
-    return Response({'detail': 'Product deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    return Response('Product deleted successfully', status=status.HTTP_204_NO_CONTENT)

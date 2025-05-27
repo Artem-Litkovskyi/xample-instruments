@@ -1,8 +1,8 @@
 import { type PropsWithChildren, useEffect } from 'react';
 import { useLocation } from 'react-router';
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from './Header.tsx';
+import Footer from './Footer.tsx';
 
 
 interface HeaderAndFooterProps {

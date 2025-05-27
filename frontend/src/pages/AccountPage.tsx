@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
 
 import HeaderAdditional from '../components/HeaderAdditional';
-import HeaderAndFooter from './HeaderAndFooter';
+import HeaderAndFooter from '../components/HeaderAndFooter.tsx';
 import AuthRequired from "./AuthRequired.tsx";
 
 

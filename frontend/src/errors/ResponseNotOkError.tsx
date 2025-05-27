@@ -3,7 +3,7 @@ export default class ResponseNotOkError extends Error {
 
     constructor(message: string, detail?: object | string | undefined) {
         super(message);
-        this.name = 'ValidationError';
+        this.name = 'ResponseNotOkError';
         this.detail = detail;
         Object.setPrototypeOf(this, ResponseNotOkError.prototype);
     }

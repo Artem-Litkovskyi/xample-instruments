@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router';
 
-import HeaderAdditional from '../components/HeaderAdditional';
-import HeaderAndFooter from './HeaderAndFooter';
-import AuthRequired from "./AuthRequired.tsx";
+import HeaderAdditional from '../../components/HeaderAdditional.tsx';
+import HeaderAndFooter from '../../components/HeaderAndFooter.tsx';
+import AuthRequired from "../AuthRequired.tsx";
 
 
 function AdminPage() {
@@ -11,13 +11,12 @@ function AdminPage() {
             <HeaderAndFooter additionalHeader={
                 <HeaderAdditional
                     navigation={[
+                        {name: 'Manage home page', href: '/admin/home'},
                         {name: 'Manage products', href: '/admin/products'},
                     ]}
                 />
             }>
-                <div className='content narrow'>
-                    <Outlet />
-                </div>
+                <Outlet />
             </HeaderAndFooter>
         </AuthRequired>
     )
