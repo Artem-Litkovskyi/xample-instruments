@@ -22,8 +22,10 @@ function ProductCard(params: {
             </Link>
 
             <Link to={`/product/${params.product_id}`}>
-                <h2>{params.title}</h2>
-                <p>{params.subtitle}</p>
+                <div className='text-container'>
+                    <h2>{params.title}</h2>
+                    <p>{params.subtitle}</p>
+                </div>
             </Link>
 
             <div id='price-and-buy'>

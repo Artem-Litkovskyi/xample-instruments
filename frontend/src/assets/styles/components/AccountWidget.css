@@ -1,3 +1,4 @@
+/*Dropdown button*/
 .account-widget {
     height: 100%;
     position: relative;
@@ -24,8 +25,10 @@
 
 .dropdown button:hover {
     background-color: var(--color-bg);
+    transform: translate(0, 0);
 }
 
+/*Dropdown content*/
 .dropdown .dropdown-content {
     display: none;
     position: absolute;
@@ -56,4 +59,12 @@
 
 .dropdown-content a:hover {
     background-color: var(--color-bg);
+}
+
+.dropdown-content a#admin-link {
+    color: var(--color-yellow);
+}
+
+.dropdown-content a#logout-link {
+    color: var(--color-red);
 }

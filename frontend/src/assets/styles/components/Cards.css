@@ -10,7 +10,6 @@
 
 .card:hover {
     transform: scale(1.01);
-    transition: all .2s;
     box-shadow: 0 0 30px black;
 }
 
@@ -28,8 +27,12 @@
 }
 
 .card:hover .image-container img {
-    transform: scale(1.1);
-    transition: all .2s;
+    transform: scale(1.05);
+}
+
+/*Card text*/
+.card .text-container {
+    padding: 0 10px;
 }
 
 /*Product card*/
@@ -46,7 +49,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0 50px;
+    padding: 0 10%;
     margin-bottom: 20px;
 }
 

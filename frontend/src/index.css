@@ -1,7 +1,34 @@
 :root {
   --color-bg: #303030;
+
   --color-panel: #252525;
-  --radius: 5px;
+  --color-panel-grad1: #282828;
+  --color-panel-grad2: #151515;
+  --color-panel-border: #454545;
+
+  --color-panel-light: #d9d9d9;
+
+  --color-shadow: rgba(0, 0, 0, 0.25);
+
+  --color-red: #dc5e4e;
+  --color-red-light: #59231b;
+  --color-red-dark: #4a1a13;
+  --color-red-glow: rgba(244, 67, 42, 0.15);
+
+  --color-green: #3CC837;
+  --color-green-light: #61e15c;
+  --color-green-dark: #024023;
+
+  --color-blue: #519cd8;
+  --color-blue-light: #184459;
+  --color-blue-dark: #0e2f3e;
+  --color-blue-glow: rgba(40, 180, 246, 0.15);
+
+  --color-yellow: #E8B931;
+  --color-yellow-light: #f4d367;
+  --color-yellow-dark: #975102;
+
+  --radius: 6px;
 }
 
 body {
@@ -31,7 +58,7 @@ body {
 }
 
 .content {
-  padding: 5% 10%;
+  padding: 7vh 10%;
   flex-grow: 1;  /*Make it expand to fill the empty space*/
   background-color: var(--color-bg);
 }
@@ -60,7 +87,7 @@ hr {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
   .content-grid {
     display: grid;
     gap: 25px;

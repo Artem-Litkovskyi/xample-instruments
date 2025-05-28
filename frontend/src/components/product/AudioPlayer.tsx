@@ -62,7 +62,7 @@ function AudioPlayer(props: {src: string, title: string }) {
 
     return (
         <div className='audio-player'>
-            <button onClick={togglePlay}>
+            <button onClick={togglePlay} className={audioRef.current?.paused ? undefined : 'active'}>
                 {audioRef.current?.paused ? <FaPlay /> : <FaPause />}
             </button>
 

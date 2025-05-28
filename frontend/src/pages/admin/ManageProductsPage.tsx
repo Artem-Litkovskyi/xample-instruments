@@ -55,7 +55,7 @@ function ManageProductsPage() {
                                 <td>{item.category}</td>
                                 <td>
                                     <button
-                                        className='gray'
+                                        className='red'
                                         onClick={() => handleRemove(Number(item.id))}
                                     >
                                         Remove

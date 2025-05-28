@@ -3,11 +3,11 @@
     height: auto;
     overflow: hidden;
     position: relative;
-    background-color: white;
-    color: white;
+    background-image: linear-gradient(to top, var(--color-panel-light), white);
 }
 
 .hero img {
+    display: block;
     width: 100%;
 }
 
@@ -21,6 +21,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: left;
+    color: white;
 }
 
 .hero h1 {
@@ -32,6 +33,13 @@
     .hero div {
         position: relative;
         left: 0;
-        margin: 25px 10%;
+        width: auto;
+        margin: 15px 10%;
+        color: black;
+    }
+
+    .hero a.button.light {
+        color: white;
+        background-color: black;
     }
 }

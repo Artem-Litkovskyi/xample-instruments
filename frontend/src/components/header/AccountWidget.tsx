@@ -38,13 +38,13 @@ function AccountWidget() {
                     <div className='dropdown-content'>
                         <hr />
                         {isAdmin && (
-                            <><Link to='/admin'>Admin page</Link><br /></>
+                            <><Link to='/admin' id='admin-link'>Admin page</Link><br /></>
                         )}
                         <Link to='/account/settings'>Account settings</Link><br />
                         <Link to='/account/licenses'>My products</Link><br />
                         <Link to='/account/orders'>Order history</Link><br />
                         <hr />
-                        <Link to='/' onClick={logout}>Log out</Link>
+                        <Link to='/' id='logout-link' onClick={logout}>Log out</Link>
                     </div>
                 </div>
             ) : (

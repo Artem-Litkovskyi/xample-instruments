@@ -59,9 +59,9 @@ function ProductPage() {
                                 <p>{product?.subtitle}</p>
                             </div>
                             {product?.purchased ? (
-                                <button className='dark' onClick={handleDownload}>Download</button>
+                                <button className='yellow' onClick={handleDownload}>Download</button>
                             ) : (
-                                <Link className='button dark' to={`/buyProduct/${params.id}`}>
+                                <Link className='button green' to={`/buyProduct/${params.id}`}>
                                     Buy Now ${product ? centsToString(product?.price) : ''}USD
                                 </Link>
                             )}
@@ -121,7 +121,7 @@ function ProductPage() {
                         <div id='demo-panel' className='panel dark padded'>
                             <h2>Try it out!</h2>
                             <p>The {product?.title} demo is free but is limited to 20 minutes (per operation), and only includes minimal content. Saving is disabled in the demo.</p>
-                            <button className='light' onClick={handleDownloadDemo}>Download demo</button>
+                            <button className='blue' onClick={handleDownloadDemo}>Download demo</button>
                         </div>
                     </div>
                 </LoaderContainer>
