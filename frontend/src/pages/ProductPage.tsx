@@ -61,7 +61,7 @@ function ProductPage() {
                             {product?.purchased ? (
                                 <button className='yellow' onClick={handleDownload}>Download</button>
                             ) : (
-                                <Link className='button green' to={`/buyProduct/${params.id}`}>
+                                <Link className='button green' to={`/buy_product/${params.id}`}>
                                     Buy Now ${product ? centsToString(product?.price) : ''}USD
                                 </Link>
                             )}
