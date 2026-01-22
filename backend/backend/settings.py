@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -17,9 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # The secret key
-SECRET_KEY = 'django-insecure-3_q$9@2mhq3d^2)n!zp4c#9nup#2jsnnzv7pcb^g%0*r95h-ij'
-DEBUG = True
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'backend']
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3_q$9@2mhq3d^2)n!zp4c#9nup#2jsnnzv7pcb^g%0*r95h-ij')
+DEBUG = bool(os.environ.get('DEBUG', default=1))
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '0.0.0.0,localhost,127.0.0.1,backend').split(',')
 
 
 # Application definition
@@ -76,11 +77,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+        'PORT': int(os.environ.get('POSTGRES_PORT', '5432')),
     }
 }
 
@@ -130,19 +131,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Security settings
 CSRF_COOKIE_SAMESITE = 'Strict'
 SESSION_COOKIE_SAMESITE = 'Strict'
-CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = False  # Should be True in production
 SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-]
+CSRF_COOKIE_SECURE = bool(os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 0))
+SESSION_COOKIE_SECURE = bool(os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 0))
+CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', 'http://localhost:3000').split(',')
 
 
 # CORS
-CORS_ALLOWED_ORIGINS=[
-    'http://localhost:3000',
-]
+CORS_ALLOWED_ORIGINS = os.environ.get('DJANGO_CORS_ALLOWED_ORIGINS', 'http://localhost:3000').split(',')
 
 CORS_ALLOW_CREDENTIALS = True
 
