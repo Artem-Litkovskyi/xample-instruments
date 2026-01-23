@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE ${PORT:-8000}
 
 RUN chmod +x entrypoint.sh
 CMD ["./entrypoint.sh"]

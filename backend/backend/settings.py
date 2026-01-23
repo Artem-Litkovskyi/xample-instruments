@@ -19,9 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # The secret key
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3_q$9@2mhq3d^2)n!zp4c#9nup#2jsnnzv7pcb^g%0*r95h-ij')
-DEBUG = bool(os.environ.get('DEBUG', default=1))
+DEBUG = os.environ.get('DJANGO_DEV', '1') == '1'
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '0.0.0.0,localhost,127.0.0.1,backend').split(',')
 
+
+# Database type
+USE_SQLITE = os.environ.get('USE_SQLITE', '0') == '1'
 
 # Application definition
 
@@ -38,8 +41,7 @@ INSTALLED_APPS = [
     'api'
 ]
 
-_use_sqlite = bool(os.environ.get('USE_SQLITE', default=0))
-if not _use_sqlite:
+if not USE_SQLITE:
     INSTALLED_APPS.append('django.contrib.postgres')
 
 MIDDLEWARE = [
@@ -50,7 +52,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -88,7 +91,7 @@ DATABASES = {
     }
 }
 
-if _use_sqlite:
+if USE_SQLITE:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
@@ -130,6 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -138,13 +143,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Security settings
-CSRF_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_SAMESITE = 'Strict'
-CSRF_COOKIE_HTTPONLY = False  # Should be True in production
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SECURE = bool(os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 0))
-SESSION_COOKIE_SECURE = bool(os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 0))
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
 CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', 'http://localhost:3000').split(',')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # CORS
@@ -158,5 +165,9 @@ AUTH_USER_MODEL = 'api.CustomUser'
 
 
 # Media
-MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Tell WhiteNoise to also serve the media directory
+if not DEBUG:
+    WHITENOISE_INDEX_FILE = True

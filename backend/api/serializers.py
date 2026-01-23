@@ -10,9 +10,8 @@ User = get_user_model()
 
 def _get_image_url(obj, request, image_field_name):
     image = getattr(obj, image_field_name)
-    if image and request:
-        return 'http://0.0.0.0:8000' + image.url  # Quick fix
-        # return request.build_absolute_uri(image.url)
+    if image:
+        return image.url
     return None
 
 

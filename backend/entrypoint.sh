@@ -20,5 +20,16 @@ python manage.py loaddata fixtures/homepage.json
 echo "Importing media..."
 python import_media.py
 
+echo "Collecting static files..."
+python manage.py collectstatic --noinput
+
 echo "All done. Starting server..."
-exec python manage.py runserver 0.0.0.0:8000
+if [ "$DJANGO_DEV" = "1" ]; then
+    echo "Running in Development Mode (runserver)"
+    exec python manage.py runserver 0.0.0.0:${PORT:-8000}
+else
+    echo "Running in Production Mode (gunicorn)"
+    exec gunicorn backend.wsgi:application --bind 0.0.0.0:${PORT:-8000}
+fi
+
+exec "$@"
