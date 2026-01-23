@@ -32,12 +32,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres',
     'rest_framework',
     'corsheaders',
     'django_cleanup.apps.CleanupConfig',
     'api'
 ]
+
+_use_sqlite = bool(os.environ.get('USE_SQLITE', default=0))
+if not _use_sqlite:
+    INSTALLED_APPS.append('django.contrib.postgres')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -84,6 +87,12 @@ DATABASES = {
         'PORT': int(os.environ.get('POSTGRES_PORT', '5432')),
     }
 }
+
+if _use_sqlite:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
 
 # Password validation
