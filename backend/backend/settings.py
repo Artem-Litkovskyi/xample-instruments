@@ -165,7 +165,7 @@ AUTH_USER_MODEL = 'api.CustomUser'
 
 
 # Media
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Tell WhiteNoise to also serve the media directory
