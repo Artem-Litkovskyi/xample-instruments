@@ -186,13 +186,13 @@ def product_view(request, product_id=None):
         'sys_req': product.sys_req,
         'price': product.price,
         'purchased': purchased,
-        'file': 'http://0.0.0.0:8000' + product.file.url,  # Quick fix
-        'file_demo': 'http://0.0.0.0:8000' + product.file_demo.url,  # Quick fix
-        'screenshot': 'http://0.0.0.0:8000' + product.screenshot.url,  # Quick fix
+        'file_url': product.file.url,
+        'file_demo_url': product.file_demo.url,
+        'screenshot_url': product.screenshot.url,
         'audio_demos': [
             {
                 'title': i.title,
-                'file': 'http://0.0.0.0:8000' + i.file.url,  # Quick fix
+                'file_url': i.file.url,
             }
             for i in audio_demos
         ],

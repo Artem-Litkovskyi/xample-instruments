@@ -21,7 +21,7 @@ function ProductPage() {
     const [activeGuiArea, setActiveGuiArea] = useState(-1);
 
     useEffect(() => {
-        getProduct(params.id)
+        getProduct(params.id ? params.id : '0')
             .then((data) => {
                 setProduct(data);
             })

@@ -8,13 +8,6 @@ from .models import *
 User = get_user_model()
 
 
-def _get_image_url(obj, request, image_field_name):
-    image = getattr(obj, image_field_name)
-    if image:
-        return image.url
-    return None
-
-
 # --- USER ---
 class UserGetSerializer(serializers.ModelSerializer):
     class Meta:
@@ -100,7 +93,7 @@ class ProductGetShortSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'subtitle', 'category', 'price', 'screenshot_url']
 
     def get_screenshot_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'screenshot')
+        return obj.screenshot.url
 
 
 # --- LICENSE ---
@@ -140,13 +133,13 @@ class HomePageGetSerializer(serializers.ModelSerializer):
         )
 
     def get_hero_image_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'hero_image')
+        return obj.hero_image.url
 
     def get_category_instruments_image_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'category_instruments_image')
+        return obj.category_instruments_image.url
 
     def get_category_effects_image_url(self, obj):
-        return _get_image_url(obj, self.context.get('request'), 'category_effects_image')
+        return obj.category_effects_image.url
 
 
 class HomePageUpdateSerializer(serializers.ModelSerializer):
