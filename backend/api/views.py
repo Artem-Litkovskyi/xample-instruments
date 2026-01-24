@@ -72,11 +72,13 @@ def login_view(request):
         return Response('Invalid credentials', status=status.HTTP_400_BAD_REQUEST)
 
     login(request, user)
+    new_csrf_token = get_token(request)
     
     serializer = UserGetSerializer(request.user)
     return Response({
         'isAuthenticated': True,
         'isAdmin': request.user.is_staff,
+        'csrfToken': new_csrf_token,
         **serializer.data,
     })
 

@@ -30,11 +30,7 @@ export default function AuthProvider(props: PropsWithChildren) {
         makeRequest('/api/session/', 'GET')
             .then((data) => {
                 if (data.csrfToken) {
-                    cookies.set('csrftoken', data.csrfToken, {
-                        path: '/',
-                        sameSite: 'lax'
-                    });
-                    console.log('CSRF Token synchronized via Session');
+                    setCsrfTokenCookie(data.csrfToken);
                 }
 
                 setIsAuthenticated(data.isAuthenticated);
@@ -48,6 +44,10 @@ export default function AuthProvider(props: PropsWithChildren) {
 
     async function login(email: string, password: string) {
         const data = await makeRequest('/api/login/', 'POST', { email, password });
+
+        if (data.csrfToken) {
+            setCsrfTokenCookie(data.csrfToken);
+        }
 
         setIsAuthenticated(data.isAuthenticated);
         setIsAdmin(data.isAdmin);
@@ -67,6 +67,14 @@ export default function AuthProvider(props: PropsWithChildren) {
     async function signup(username: string, email: string, password: string) {
         await makeRequest('/api/signup/', 'POST', { username, email, password });
         await logout();
+    }
+
+    function setCsrfTokenCookie(token: string) {
+        cookies.set('csrftoken', token, {
+            path: '/',
+            sameSite: 'lax'
+        });
+        console.log('CSRF Token synchronized');
     }
 
     return (
