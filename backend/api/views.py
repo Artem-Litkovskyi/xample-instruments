@@ -1,6 +1,7 @@
 import os
 
 from django.http import FileResponse
+from django.middleware.csrf import get_token
 from rest_framework.decorators import api_view, permission_classes, authentication_classes, parser_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -40,13 +41,19 @@ def home_page_view(request):
 @authentication_classes([SessionAuthentication])
 @ensure_csrf_cookie
 def session_view(request):
+    csrf_token = get_token(request)
+
     if not request.user.is_authenticated:
-        return Response({'isAuthenticated': False})
+        return Response({
+            'isAuthenticated': False,
+            'csrfToken': csrf_token
+        })
 
     serializer = UserGetSerializer(request.user)
     return Response({
         'isAuthenticated': True,
         'isAdmin': request.user.is_staff,
+        'csrfToken': csrf_token,
         **serializer.data
     })
 

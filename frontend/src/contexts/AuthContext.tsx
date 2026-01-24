@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, type PropsWithChildren } from 'react';
+import Cookies from 'universal-cookie';
 
 import { makeRequest } from '../services/BaseService.ts';
 
@@ -16,6 +17,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const cookies = new Cookies();
+
 export default function AuthProvider(props: PropsWithChildren) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -26,11 +29,20 @@ export default function AuthProvider(props: PropsWithChildren) {
     useEffect(() => {
         makeRequest('/api/session/', 'GET')
             .then((data) => {
+                if (data.csrfToken) {
+                    cookies.set('csrftoken', data.csrfToken, {
+                        path: '/',
+                        sameSite: 'lax'
+                    });
+                    console.log('CSRF Token synchronized via Session');
+                }
+
                 setIsAuthenticated(data.isAuthenticated);
                 setIsAdmin(data.isAuthenticated ? data.isAdmin : false);
                 setUsername(data.isAuthenticated ? data.username : '');
                 setEmail(data.isAuthenticated ? data.email : '');
             })
+            .catch((err) => console.error('Session check failed: ', err))
             .finally(() => setLoading(false));
     }, []);
 
