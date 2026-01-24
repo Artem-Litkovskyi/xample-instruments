@@ -3,11 +3,18 @@ import Cookies from 'universal-cookie';
 import ResponseNotOkError from '../errors/ResponseNotOkError.tsx';
 
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
+
+export function getFullBackendUrl(path: string) {
+    return `${BACKEND_URL}${path}`;
+}
+
+
 const cookies = new Cookies();
 
 
 export async function makeRequest(
-    url: string,
+    path: string,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     body?: any
 ) {
@@ -25,7 +32,7 @@ export async function makeRequest(
     }
 
     // Fetch
-    const response = await fetch(url, {
+    const response = await fetch(getFullBackendUrl(path), {
         method,
         headers,
         credentials: 'include',

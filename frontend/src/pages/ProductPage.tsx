@@ -73,7 +73,7 @@ function ProductPage() {
 
                             <h2>Audio Demos</h2>
                             {product?.audio_demos.map((item, i) => (
-                                <AudioPlayer src={item.file} title={item.title} key={i} />
+                                <AudioPlayer src={item.file_url} title={item.title} key={i} />
                             ))}
 
                             <h2>System Requirements</h2>
@@ -87,7 +87,7 @@ function ProductPage() {
                         <div id='gui-panel' className='panel dark'>
                             <div className='gui-panel-image'>
                                 <ImageMap
-                                    image_url={product?.screenshot}
+                                    image_url={product?.screenshot_url}
                                     alt='screenshot'
                                     onClick={() => setActiveGuiArea(-1)}
                                 >

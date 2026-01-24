@@ -1,13 +1,13 @@
-import { makeRequest } from './BaseService.ts';
+import { getFullBackendUrl, makeRequest } from './BaseService.ts';
 
 
 export interface HomePageInfo {
     hero_title: string;
     hero_subtitle: string;
     hero_link: string;
-    hero_image_url: string;  // URL
-    category_instruments_image_url: string;  // URL
-    category_effects_image_url: string;  // URL
+    hero_image_url: string;
+    category_instruments_image_url: string;
+    category_effects_image_url: string;
 }
 
 
@@ -22,5 +22,11 @@ export const defaultHomePageInfo: HomePageInfo = {
 
 
 export async function getHomePage() {
-    return await makeRequest(`/api/home_page/`, 'GET');
+    const data = await makeRequest(`/api/home_page/`, 'GET');
+
+    data.hero_image_url = getFullBackendUrl(data.hero_image_url);
+    data.category_instruments_image_url = getFullBackendUrl(data.category_instruments_image_url);
+    data.category_effects_image_url = getFullBackendUrl(data.category_effects_image_url);
+
+    return data;
 }
