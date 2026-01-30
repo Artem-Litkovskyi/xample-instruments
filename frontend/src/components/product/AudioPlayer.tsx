@@ -11,6 +11,7 @@ function AudioPlayer(props: {src: string, title: string }) {
     const [playerTime, setPlayerTime] = useState(0);  // normalized: 0-1
     const [seekTime, setSeekTime] = useState(0);  // normalized: 0-1
     const [isSeeking, setIsSeeking] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     function togglePlay() {
         const audio = audioRef.current;
@@ -54,16 +55,26 @@ function AudioPlayer(props: {src: string, title: string }) {
             }
         };
 
+        const setPlaying = () => setIsPlaying(true);
+        const setPaused = () => setIsPlaying(false);
+
         audio.addEventListener('timeupdate', handleTimeUpdate);
+        audio.addEventListener('play', setPlaying);
+        audio.addEventListener('pause', setPaused);
+        audio.addEventListener('ended', setPaused);
+
         return () => {
             audio.removeEventListener('timeupdate', handleTimeUpdate);
+            audio.removeEventListener('play', setPlaying);
+            audio.removeEventListener('pause', setPaused);
+            audio.removeEventListener('ended', setPaused);
         };
     }, [isSeeking]);
 
     return (
         <div className='audio-player'>
-            <button onClick={togglePlay} className={audioRef.current?.paused ? undefined : 'active'}>
-                {audioRef.current?.paused ? <FaPlay /> : <FaPause />}
+            <button onClick={togglePlay} className={isPlaying ? 'active' : undefined}>
+                {isPlaying ? <FaPause /> : <FaPlay />}
             </button>
 
             <div>
