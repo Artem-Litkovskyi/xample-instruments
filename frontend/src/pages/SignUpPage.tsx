@@ -76,6 +76,7 @@ function SignUpPage() {
             throw error;
         }
 
+        alert('Account created successfully! Please sign in.');
         navigate('/signin', { state: { returnToUrl: location?.state?.returnToUrl } });
     }
 

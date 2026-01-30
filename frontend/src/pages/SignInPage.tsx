@@ -40,8 +40,9 @@ function SignInPage() {
             throw error;
         }
 
-        const returnToUrl = location?.state?.returnToUrl;
-        navigate(returnToUrl ? returnToUrl : '/home');
+        let returnToUrl: string = location?.state?.returnToUrl ?? '/home';
+        if (returnToUrl === '/signin' || returnToUrl === '/signup') returnToUrl = '/home';
+        navigate(returnToUrl);
     }
 
     return (
