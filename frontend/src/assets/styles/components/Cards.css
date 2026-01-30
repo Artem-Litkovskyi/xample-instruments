@@ -5,12 +5,12 @@
     height: 100%;
     text-align: center;
     transform: scale(1);
-    transition: all .2s;
+    transition: all .4s;
 }
 
 .card:hover {
     transform: scale(1.01);
-    box-shadow: 0 0 30px black;
+    box-shadow: 0 0 var(--radius-shadow) var(--color-shadow);
 }
 
 /*Card image*/
@@ -23,7 +23,7 @@
     aspect-ratio: 4 / 3;
     object-fit: cover;
     transform: scale(1);
-    transition: all .2s;
+    transition: all .6s ease-out;
 }
 
 .card:hover .image-container img {

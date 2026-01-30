@@ -6,6 +6,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: black;
+    box-shadow: 0 0 var(--radius-shadow) var(--color-shadow);
 }
 
 .logo-container {

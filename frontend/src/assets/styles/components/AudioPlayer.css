@@ -25,7 +25,7 @@
 }
 
 .audio-player button.active {
-    background-color: var(--color-panel-light);
+    background-color: var(--color-panel-light-grad2);
     transform: scale(0.975) translate(0, 0);
 }
 

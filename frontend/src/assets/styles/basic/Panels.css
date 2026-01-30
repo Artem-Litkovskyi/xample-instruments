@@ -8,8 +8,8 @@
 }
 
 .panel.light {
-    background-image: linear-gradient(to top, var(--color-panel-light), white);
-    border: 1px solid var(--color-panel-border);
+    background-image: linear-gradient(to top, var(--color-panel-light-grad2), var(--color-panel-light-grad1));
+    border: 1px solid var(--color-panel-light-grad1);
 }
 
 .panel.light h1, .panel.light h2, .panel.light p, .panel.light span, .panel.light label, .panel.light li, .panel.light table {

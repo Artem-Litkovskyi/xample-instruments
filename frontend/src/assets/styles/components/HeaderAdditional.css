@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: var(--color-panel-light-grad1);
+    box-shadow: 0 0 30px var(--color-shadow);
 }
 
 .header-additional nav a {

@@ -3,7 +3,7 @@
     height: auto;
     overflow: hidden;
     position: relative;
-    background-image: linear-gradient(to top, var(--color-panel-light), white);
+    background-image: linear-gradient(to top, var(--color-panel-light-grad2), var(--color-panel-light-grad1));
 }
 
 .hero img {
@@ -34,12 +34,14 @@
         position: relative;
         left: 0;
         width: auto;
-        margin: 15px 10%;
+        margin: 20px 10%;
         color: black;
     }
 
     .hero a.button.light {
         color: white;
+        background-image: unset;
+        border: unset;
         background-color: black;
     }
 }

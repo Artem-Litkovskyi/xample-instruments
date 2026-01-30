@@ -10,7 +10,7 @@ button {
     margin: 0.3em 0;
     padding: 0.25em 1.5em;
     transform: translate(0, 0);
-    transition: all 0.2s;
+    transition: all 0.4s;
 }
 
 a.button {
@@ -20,11 +20,12 @@ a.button {
     margin: 0.3em 0;
     padding: 0.25em 1.5em;
     transform: translate(0, 0);
-    transition: all 0.2s;
+    transition: all 0.4s;
 }
 
 button:hover, a.button:hover {
-    transform: translate(0, -1px);
+    transform: translate(0, -2px);
+    box-shadow: 0 3px var(--radius-shadow-small) var(--color-shadow-small);
 }
 
 /*Grayscale*/
@@ -33,17 +34,10 @@ button.dark, a.button.dark {
     color: white;
 }
 
-button.dark:hover, a.button.dark:hover {
-    box-shadow: 0 3px 10px var(--color-shadow);
-}
-
 button.light, a.button.light {
-    background-color: white;
+    background-image: linear-gradient(to top, var(--color-panel-light-grad2), white);
     color: black;
-}
-
-button.light:hover, a.button.light:hover {
-    box-shadow: 0 3px 10px var(--color-shadow);
+    border: solid 1px white;
 }
 
 button.gray, a.button.gray {
@@ -51,53 +45,51 @@ button.gray, a.button.gray {
     color: white;
 }
 
-button.gray:hover, a.button.gray:hover {
-    box-shadow: 0 3px 10px var(--color-shadow);
-}
-
 /*Colorful*/
 button.red, a.button.red {
     background-color: var(--color-red-dark);
     color: var(--color-red);
-    border: solid 2px var(--color-red);
+    border: solid 2px var(--color-red-medium);
 }
 
 button.red:hover, a.button.red:hover {
     background-color: var(--color-red-light);
-    box-shadow: 0 3px 10px var(--color-red-glow);
+    box-shadow: 0 3px var(--radius-shadow-small) var(--color-red-glow);
 }
 
 button.green, a.button.green {
     background-color: var(--color-green);
     color: var(--color-green-dark);
-    border: solid 2px var(--color-green-dark);
-    box-shadow: 0 3px 10px var(--color-green);
+    border: solid 2px var(--color-green-medium);
+    box-shadow: 0 3px var(--radius-shadow-small) var(--color-green);
 }
 
 button.green:hover, a.button.green:hover {
     background-color: var(--color-green-light);
+    border-color: var(--color-green);
 }
 
 button.blue, a.button.blue {
     background-color: var(--color-blue-dark);
     color: var(--color-blue);
-    border: solid 2px var(--color-blue);
+    border: solid 2px var(--color-blue-medium);
 }
 
 button.blue:hover, a.button.blue:hover {
     background-color: var(--color-blue-light);
-    box-shadow: 0 3px 10px var(--color-blue-glow);
+    box-shadow: 0 3px var(--radius-shadow-small) var(--color-blue-glow);
 }
 
 button.yellow, a.button.yellow {
     background-color: var(--color-yellow);
     color: var(--color-yellow-dark);
-    border: solid 2px var(--color-yellow-dark);
-    box-shadow: 0 3px 10px var(--color-yellow);
+    border: solid 2px var(--color-yellow-medium);
+    box-shadow: 0 3px var(--radius-shadow-small) var(--color-yellow);
 }
 
 button.yellow:hover, a.button.yellow:hover {
     background-color: var(--color-yellow-light);
+    border-color: var(--color-yellow);
 }
 
 button:disabled, button[disabled] {
