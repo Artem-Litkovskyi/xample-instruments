@@ -1,12 +1,12 @@
 import NavBar from './header/NavBar.tsx';
 
-import '../assets/styles/components/NotFound.css';
+import '../assets/styles/components/ErrorBox.css';
 
 
-function NotFound() {
+function ErrorBox(props: { message?: string }) {
     return (
-        <div className='not-found panel light'>
-            <h1>404 Not Found</h1>
+        <div className='error-box panel light'>
+            <h1>{props.message ?? '404 Page Not Found'}</h1>
             <NavBar
                 navigation={[
                     {name: 'Home', href: '/'},
@@ -19,4 +19,4 @@ function NotFound() {
 }
 
 
-export default NotFound;
+export default ErrorBox;

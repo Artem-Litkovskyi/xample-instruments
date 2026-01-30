@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client'
 import Root from './pages/Root';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import NotImplementedPage from './pages/NotImplementedPage.tsx';
 
 import ProductsPage from './pages/ProductsPage';
 import ProductPage from './pages/ProductPage';
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: 'buy_product/:id',
                 element: <BuyPage />,
+            },
+            {
+                path: 'support',
+                element: <NotImplementedPage />,
             },
             {
                 path: 'signin',

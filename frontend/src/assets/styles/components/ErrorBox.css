@@ -1,22 +1,22 @@
-.not-found {
+.error-box {
     padding: 50px 10%;
     margin: auto 0;
     text-align: left;
 }
 
-.not-found nav {
+.error-box nav {
     width: fit-content;
 }
 
-.not-found nav li {
+.error-box nav li {
     display: block;
     width: fit-content;
 }
 
-.not-found nav li + li {
+.error-box nav li + li {
     margin-left: 0;
 }
 
-.not-found nav span {
+.error-box nav span {
     background-color: black;
 }
