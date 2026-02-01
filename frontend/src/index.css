@@ -70,7 +70,7 @@ body {
   padding: 6vh 10%;
   flex-grow: 1;  /*Make it expand to fill the empty space*/
   background-color: var(--color-bg);
-  background-image: url('/background.png');
+  background-image: url('assets/images/background.png');
 }
 
 .content.narrow {
