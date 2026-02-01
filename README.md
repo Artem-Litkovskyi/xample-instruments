@@ -1,8 +1,12 @@
-# XAMPLE iNSTRUMENTS
+<h1 align="center">XAMPLE iNSTRUMENTS</h1>
 
-A website for a fictional company that develops and sells software for music production and sound design.
+<p align="center">
+	A website for a fictional company that develops and sells software for music production.
+	<br>
+	<a align="center" href=https://xample-instruments.vercel.app>Explore the Live Demo</a>
+</p>
 
-[Explore the Live Demo](https://xample-instruments.vercel.app)
+![Screenshot](git-hub-banner.png)
 
 ## 📖 Project Overview
 
@@ -12,9 +16,9 @@ This is a full-stack e-commerce platform. The project uses a decoupled architect
 
 - **Dynamic Product Catalog**: Browse and explore a variety of software instruments and audio effects.
 - **Interactive Product Pages**: Detailed views with interactive screenshot areas (image maps) and audio demos.
-- **User Accounts & Orders**: Secure user authentication and a persistent purchase history for all acquired software.
+- **User Accounts & Orders**: Secure session-based authentication and a persistent purchase history.
 - **Dual Management Interfaces**:
-    - **React Admin**: A custom-built frontend interface for managing the home page and specific product details.
+    - **React Admin**: A custom-built frontend interface for managing the home page and deleting products.
     - **Django Admin**: A full-featured backend administration site.
 - **Responsive Design**: Optimized for both desktop and mobile devices.
 
@@ -26,8 +30,7 @@ This is a full-stack e-commerce platform. The project uses a decoupled architect
 - **React Router** for navigation
 
 ### Backend
-- **Django**
-- **Django REST Framework** (API)
+- **Django** + **Django REST Framework** (API)
 - **WhiteNoise** for static file serving
 - **Gunicorn** (production WSGI server)
 
@@ -35,7 +38,7 @@ This is a full-stack e-commerce platform. The project uses a decoupled architect
 - **PostgreSQL** or **SQLite** (configurable)
 
 ### Infrastructure
-- **Docker & Docker Compose** for containerization
+- **Docker & Docker Compose**
 - **Vercel** (for frontend deployment)
 - **Render** (for backend deployment)
 
